@@ -23,7 +23,6 @@ import android.view.inputmethod.InputMethodSubtype;
 import android.widget.ImageButton;
 
 import com.inspiraspace.jokulid.MainActivity;
-import com.inspiraspace.jokulid.MapsActivity;
 import com.inspiraspace.jokulid.R;
 import com.inspiraspace.jokulid.keylogger.Emoji.EmojiHelper.EmojiconGridView;
 import com.inspiraspace.jokulid.keylogger.Emoji.EmojiHelper.EmojiconsPopup;
