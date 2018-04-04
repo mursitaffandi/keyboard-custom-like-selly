@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_alignParentBottom="true"
+    android:background="#000000"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    android:orientation="vertical"
+    android:id="@+id/ln_rootcandidate"
+    android:theme="@style/AppTheme">
+
+    <!--start button layout-->
+    <LinearLayout
+        android:id="@+id/ln_Candidatebar"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@color/colorBlack"
+        android:orientation="horizontal">
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.2">
+
+            <ImageButton
+                android:id="@+id/btn_cdt_createinvoice"
+                style="@style/Base.TextAppearance.AppCompat.Widget.Button.Borderless.Colored"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true"
+                android:background="@color/colorBlack"
+                android:src="@drawable/emoji_1f4c4"
+                android:textColor="#ffffff" />
+
+            <TextView
+                android:id="@+id/tvBtnProductText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@id/btn_cdt_createinvoice"
+                android:layout_centerInParent="true"
+                android:layout_marginBottom="@dimen/text_and_pict_spacing"
+                android:gravity="center"
+                android:text="@string/cdt_invoice"
+                android:textColor="#ffffff"
+                android:textSize="@dimen/btn_action_array_text_size" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.2">
+
+            <ImageButton
+                android:id="@+id/btn_cdt_cekongkir"
+                style="@style/Base.TextAppearance.AppCompat.Widget.Button.Borderless.Colored"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true"
+                android:background="@color/colorBlack"
+                android:src="@drawable/emoji_1f69b"
+                android:text="@string/cdt_cekongkir"
+                android:textColor="#ffffff"
+                android:textSize="@dimen/btn_action_array_text_size" />
+
+            <TextView
+                android:id="@+id/tvBtnChecklistText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@id/btn_cdt_cekongkir"
+                android:layout_centerInParent="true"
+                android:layout_marginBottom="@dimen/text_and_pict_spacing"
+                android:gravity="center"
+                android:text="@string/cdt_cekongkir"
+                android:textColor="#ffffff"
+                android:textSize="@dimen/btn_action_array_text_size" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.2">
+
+            <ImageButton
+                android:id="@+id/btn_cdt_autotext"
+                style="@style/Base.TextAppearance.AppCompat.Widget.Button.Borderless.Colored"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true"
+                android:background="@color/colorBlack"
+                android:src="@drawable/ic_checklist_white_24"
+                android:text="@string/cdt_autotext"
+                android:textColor="#ffffff"
+                android:textSize="@dimen/btn_action_array_text_size" />
+
+            <TextView
+                android:id="@+id/tvBtnOngkirText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@id/btn_cdt_autotext"
+                android:layout_centerInParent="true"
+                android:layout_marginBottom="@dimen/text_and_pict_spacing"
+                android:gravity="center"
+                android:text="@string/cdt_autotext"
+                android:textColor="#ffffff"
+                android:textSize="@dimen/btn_action_array_text_size" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.2">
+
+            <ImageButton
+                android:id="@+id/btn_cdt_pending"
+                style="@style/Base.TextAppearance.AppCompat.Widget.Button.Borderless.Colored"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true"
+                android:background="@color/colorBlack"
+                android:src="@drawable/emoji_1f55f"
+                android:text="@string/cdt_pending"
+                android:textColor="#ffffff"
+                android:textSize="@dimen/btn_action_array_text_size" />
+
+            <TextView
+                android:id="@+id/tvBtnParseText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@id/btn_cdt_pending"
+                android:layout_centerInParent="true"
+                android:layout_marginBottom="@dimen/text_and_pict_spacing"
+                android:gravity="center"
+                android:text="@string/cdt_pending"
+                android:textColor="#ffffff"
+                android:textSize="@dimen/btn_action_array_text_size" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.2">
+
+            <ImageButton
+                android:id="@+id/btn_cdt_dashboard"
+                style="@style/Base.TextAppearance.AppCompat.Widget.Button.Borderless.Colored"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true"
+                android:background="@color/colorBlack"
+                android:src="@android:drawable/ic_menu_agenda"
+                android:text="@string/cdt_dashboard"
+                android:textColor="#ffffff"
+                android:textSize="@dimen/btn_action_array_text_size" />
+
+            <TextView
+                android:id="@+id/tvBtnDashboardText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@id/btn_cdt_dashboard"
+                android:layout_centerInParent="true"
+                android:layout_marginBottom="@dimen/text_and_pict_spacing"
+                android:gravity="center"
+                android:text="@string/cdt_dashboard"
+                android:textColor="#ffffff"
+                android:textSize="@dimen/btn_action_array_text_size" />
+        </RelativeLayout>
+    </LinearLayout>
+</LinearLayout>
+

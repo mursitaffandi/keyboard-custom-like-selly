@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_transactions"
+            android:title="@string/navtittle_statustransaction" />
+        <item
+            android:id="@+id/nav_shippment"
+            android:title="@string/navtittle_shippment" />
+        <item
+            android:id="@+id/nav_report"
+            android:title="@string/navtittle_transactionreport" />
+        <item
+            android:id="@+id/nav_customers"
+            android:title="@string/navtittle_customers" />
+        <item
+            android:id="@+id/nav_transactionachieve"
+            android:title="@string/navtittle_transactionachieve" />
+        <item
+            android:id="@+id/nav_gratis"
+            android:title="@string/navtittle_gratis" />
+    </group>
+
+    <item android:title="">
+        <menu>
+            <item
+                android:id="@+id/nav_settings"
+                android:title="@string/navtittle_settings" />
+            <item
+                android:id="@+id/nav_help"
+                android:title="@string/navtittle_help" />
+        </menu>
+    </item>
+
+</menu>
