@@ -9,7 +9,9 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-        buildConfigField "String", "BASE_URL", "\"http://192.168.10.168/jokul_id/\""
+        buildConfigField "String", "BASE_URL_MAIN", "\"http://192.168.10.168/jokul_id/\""
+        buildConfigField "String", "BASE_URL_INSPIRALOCAL", "\"http://inspiralocal.id:3000\""
+        buildConfigField "String", "BASE_URL_RAJAONGKIR", "\"https://pro.rajaongkir.com\""
 
     }
     buildTypes {
@@ -36,6 +38,12 @@ dependencies {
     implementation 'com.android.support:cardview-v7:26.1.0'
     implementation 'com.squareup.retrofit2:retrofit:2.3.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.0.0'
+    // stetho
+    implementation 'com.facebook.stetho:stetho:1.4.2'
+
+// for OkHttp3, if you're using an older version,
+// check the stetho website
+    implementation 'com.facebook.stetho:stetho-okhttp3:1.4.2'
     implementation 'com.jakewharton:butterknife:8.8.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
     testImplementation 'junit:junit:4.12'

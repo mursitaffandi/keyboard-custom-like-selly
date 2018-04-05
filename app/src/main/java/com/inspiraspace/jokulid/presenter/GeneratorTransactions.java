@@ -2,8 +2,8 @@ package com.inspiraspace.jokulid.presenter;
 
 import com.inspiraspace.jokulid.utils.Constant;
 import com.inspiraspace.jokulid.model.Transaction;
-import com.inspiraspace.jokulid.network.ClientCall;
-import com.inspiraspace.jokulid.network.PulseTransactions;
+import com.inspiraspace.jokulid.network.ClientMainCall;
+import com.inspiraspace.jokulid.network.PulseMainServer;
 
 import java.util.List;
 
@@ -16,26 +16,33 @@ import retrofit2.Response;
  */
 
 public class GeneratorTransactions {
-    PulseTransactions pulseTransactions;
-    ClientCall clientCall = new ClientCall();
+    PulseMainServer pulseMainServer;
+    ClientMainCall clientMainCall = new ClientMainCall();
     private Call<Transaction> apiCall;
     private List<com.inspiraspace.jokulid.model.Response> listTransaction;
     int code_status_transaction;
 
-    public GeneratorTransactions(PulseTransactions pulseTransactions) {
-       this.pulseTransactions = pulseTransactions;
+    public GeneratorTransactions(PulseMainServer pulseMainServer) {
+       this.pulseMainServer = pulseMainServer;
     }
 
     public void getTransactios(int code_status_transaction) {
         switch (code_status_transaction) {
             case 0:
-                apiCall = clientCall.getService().getTransaction_pendings(Constant.USER_ID);
+                apiCall = clientMainCall.getService().getTransaction_pendings(Constant.USER_ID);
                 break;
             case 1:
-                apiCall = clientCall.getService().getTransaction_paids(Constant.USER_ID);
+                apiCall = clientMainCall.getService().getTransaction_paids(Constant.USER_ID);
                 break;
             case 2:
-                apiCall = clientCall.getService().getTransaction_shippeds(Constant.USER_ID);
+                apiCall = clientMainCall.getService().getTransaction_shippeds(Constant.USER_ID);
+                break;
+
+            case 3:
+                apiCall = clientMainCall.getService().getTransaction_done(Constant.USER_ID);
+                break;
+            case 4:
+                apiCall = clientMainCall.getService().getTransaction_cancel(Constant.USER_ID);
                 break;
             default:
                 return;
@@ -44,12 +51,12 @@ public class GeneratorTransactions {
             @Override
             public void onResponse(Call<Transaction> call, Response<Transaction> response) {
                 listTransaction = response.body().getResponse();
-                pulseTransactions.onSuccessGetTransactions(listTransaction);
+                pulseMainServer.onSuccessGetTransactions(listTransaction);
             }
 
             @Override
             public void onFailure(Call<Transaction> call, Throwable t) {
-                pulseTransactions.onFailOccureTransactions(t.getMessage());
+                pulseMainServer.onFailOccureTransactions(t.getMessage());
             }
         });
     }

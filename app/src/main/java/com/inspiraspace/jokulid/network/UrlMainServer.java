@@ -13,7 +13,7 @@ import retrofit2.http.Query;
  * Created by mursitaffandi on 4/2/18.
  */
 
-public interface UrlEndpoint {
+public interface UrlMainServer {
     @GET("transaction_pending.php")
     Call<Transaction> getTransaction_pendings(@Query("user_id") String id_user);
 
@@ -28,5 +28,4 @@ public interface UrlEndpoint {
 
     @GET("transaction_cancel.php")
     Call<Transaction> getTransaction_cancel(@Query("user_id") String id_user);
-
 }

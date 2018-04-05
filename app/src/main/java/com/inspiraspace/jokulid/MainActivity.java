@@ -12,16 +12,23 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.inspiraspace.jokulid.fragment.CustomersFragment;
+import com.inspiraspace.jokulid.fragment.GratisFragment;
+import com.inspiraspace.jokulid.fragment.HelpFragment;
 import com.inspiraspace.jokulid.fragment.MainFragment;
+import com.inspiraspace.jokulid.fragment.ReportFragment;
+import com.inspiraspace.jokulid.fragment.SettingsFragment;
+import com.inspiraspace.jokulid.fragment.ShippmentFeeFragment;
+import com.inspiraspace.jokulid.fragment.TransactionsAchieveFragment;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-    private int MAP = 2;
-    private Fragment fragment = null;
+    private Fragment fragment;
     private FragmentManager fragmentManager;
+
     @BindView(R.id.drawer_layout)
     DrawerLayout drawer;
 
@@ -38,7 +45,7 @@ public class MainActivity extends AppCompatActivity
         ButterKnife.bind(this);
         setSupportActionBar(toolbar);
 
-        fragment = new MainFragment();
+        fragment = new MainFragment().newInstance(0);
         fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction()
                 .add(R.id.frame_container, fragment).commit();
@@ -63,7 +70,7 @@ public class MainActivity extends AppCompatActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
+//        getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
 
@@ -75,9 +82,9 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
+//        if (id == R.id.action_settings) {
+//            return true;
+//        }
 
         return super.onOptionsItemSelected(item);
     }
@@ -89,21 +96,21 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_transactions) {
-            fragment = new MainFragment();
+            fragment = new MainFragment().newInstance(0);
         } else if (id == R.id.nav_shippment) {
-
+            fragment = new ShippmentFeeFragment();
         } else if (id == R.id.nav_report) {
-
+            fragment = new ReportFragment();
         } else if (id == R.id.nav_customers) {
-
+            fragment = new CustomersFragment();
         } else if (id == R.id.nav_transactionachieve) {
-
+            fragment = new MainFragment().newInstance(1);
         } else if (id == R.id.nav_gratis) {
-
+            fragment = new GratisFragment();
         } else if (id == R.id.nav_settings) {
-
+            fragment = new SettingsFragment();
         } else if (id == R.id.nav_help) {
-
+            fragment = new HelpFragment();
         }
 
         fragmentManager.beginTransaction()

@@ -20,16 +20,23 @@ import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputConnection;
 import android.view.inputmethod.InputMethodManager;
 import android.view.inputmethod.InputMethodSubtype;
+import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.inspiraspace.jokulid.MainActivity;
 import com.inspiraspace.jokulid.R;
+import com.inspiraspace.jokulid.fragment.ShippmentFeeFragment;
 import com.inspiraspace.jokulid.keylogger.Emoji.EmojiHelper.EmojiconGridView;
 import com.inspiraspace.jokulid.keylogger.Emoji.EmojiHelper.EmojiconsPopup;
 import com.inspiraspace.jokulid.keylogger.Emoji.Emojicon;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 
 /**
@@ -75,6 +82,14 @@ public class SoftKeyboard extends InputMethodService
 
     private String mWordSeparators;
 
+    LinearLayout layout_candidatebar_main;
+    LinearLayout layout_subcdt_content;
+    View layout_subcdt_createinvoice;
+    View layout_subcdt_shippmentFee;
+    View layout_subcdt_autotext;
+    View layout_subcdt_pending;
+
+TextView tv_title_toobar_subcdt;
     /**
      * Main initialization of the input method component.  Be sure to call
      * to super class.
@@ -140,7 +155,102 @@ public class SoftKeyboard extends InputMethodService
                 emojiPopup.dismiss();
             }
         });
+
         return mInputView;
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.btn_toolbar_back_subcdt_content:
+                showCandidateBar();
+                break;
+
+            case R.id.btn_cdt_createinvoice:
+                showSubCreateInvoice();
+                break;
+
+            case R.id.btn_cdt_cekongkir:
+                showSubShippmentfee();
+                break;
+            case R.id.btn_cdt_autotext:
+                showSubAutotext();
+                break;
+
+            case R.id.btn_cdt_pending:
+                showSubPending();
+                break;
+            case R.id.btn_cdt_dashboard:
+                Intent dialogIntent = new Intent(this, MainActivity.class);
+                dialogIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(dialogIntent);
+                break;
+            default:
+                break;
+        }
+
+    }
+
+    private void showCandidateBar() {
+        layout_candidatebar_main.setVisibility(View.VISIBLE);
+        layout_subcdt_content.setVisibility(View.GONE);
+        layout_subcdt_createinvoice.setVisibility(View.GONE);
+        layout_subcdt_shippmentFee.setVisibility(View.GONE);
+        layout_subcdt_autotext.setVisibility(View.GONE);
+        layout_subcdt_pending.setVisibility(View.GONE);
+        tv_title_toobar_subcdt.setText(null);
+    }
+
+    private void showSubCreateInvoice() {
+        layout_subcdt_createinvoice.setVisibility(View.VISIBLE);
+        layout_subcdt_content.setVisibility(View.VISIBLE);
+
+        layout_subcdt_shippmentFee.setVisibility(View.GONE);
+        layout_subcdt_autotext.setVisibility(View.GONE);
+        layout_subcdt_pending.setVisibility(View.GONE);
+
+        layout_candidatebar_main.setVisibility(View.GONE);
+        tv_title_toobar_subcdt.setText(getString(R.string.title_subcdt_toolbar_createinvoice));
+
+    }
+
+    private void showSubShippmentfee() {
+        layout_subcdt_shippmentFee.setVisibility(View.VISIBLE);
+        layout_subcdt_content.setVisibility(View.VISIBLE);
+
+        layout_subcdt_createinvoice.setVisibility(View.GONE);
+        layout_subcdt_autotext.setVisibility(View.GONE);
+        layout_subcdt_pending.setVisibility(View.GONE);
+
+        layout_candidatebar_main.setVisibility(View.GONE);
+        tv_title_toobar_subcdt.setText(getString(R.string.title_subcdt_toolbar_countshippmentfee));
+
+    }
+
+    private void showSubAutotext() {
+        layout_subcdt_autotext.setVisibility(View.VISIBLE);
+        layout_subcdt_content.setVisibility(View.VISIBLE);
+
+        layout_subcdt_createinvoice.setVisibility(View.GONE);
+        layout_subcdt_shippmentFee.setVisibility(View.GONE);
+        layout_subcdt_pending.setVisibility(View.GONE);
+
+        layout_candidatebar_main.setVisibility(View.GONE);
+        tv_title_toobar_subcdt.setText(getString(R.string.title_subcdt_toolbar_autotext));
+
+
+    }
+
+    private void showSubPending() {
+        layout_subcdt_pending.setVisibility(View.VISIBLE);
+        layout_subcdt_content.setVisibility(View.VISIBLE);
+
+        layout_subcdt_createinvoice.setVisibility(View.GONE);
+        layout_subcdt_shippmentFee.setVisibility(View.GONE);
+        layout_subcdt_autotext.setVisibility(View.GONE);
+
+        layout_candidatebar_main.setVisibility(View.GONE);
+        tv_title_toobar_subcdt.setText(getString(R.string.title_subcdt_toolbar_pending));
     }
 
     private void setLatinKeyboard(LatinKeyboard nextKeyboard) {
@@ -150,20 +260,35 @@ public class SoftKeyboard extends InputMethodService
         mInputView.setKeyboard(nextKeyboard);
     }
 
+
     /**
      * Called by the framework when your view for showing candidates needs to
      * be generated, like {@link #onCreateInputView}.
      */
     @Override
     public View onCreateCandidatesView() {
-       /* mCandidateView = new CandidateView(this);
-        mCandidateView.setService(this);
-        return mCandidateView;*/
         LayoutInflater li = (LayoutInflater) getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View wordBar = li.inflate(R.layout.candidatebar, null);
 
+        ImageButton btntoolbar_back_subcdt_content = wordBar.findViewById(R.id.btn_toolbar_back_subcdt_content);
         ImageButton btn_cdt_makeinvoice = wordBar.findViewById(R.id.btn_cdt_createinvoice);
+        ImageButton btn_cdt_shippmentfee = wordBar.findViewById(R.id.btn_cdt_cekongkir);
+        ImageButton btn_cdt_autotext = wordBar.findViewById(R.id.btn_cdt_autotext);
+        ImageButton btn_cdt_pending = wordBar.findViewById(R.id.btn_cdt_pending);
         ImageButton btn_cdt_dashboard = wordBar.findViewById(R.id.btn_cdt_dashboard);
+        tv_title_toobar_subcdt = wordBar.findViewById(R.id.tv_title_toobar_subcdt);
+        layout_candidatebar_main = wordBar.findViewById(R.id.ln_candidatebar_main);
+        layout_subcdt_content = wordBar.findViewById(R.id.ln_subcdt_content);
+        layout_subcdt_createinvoice = wordBar.findViewById(R.id.layout_subcdt_createinvoice);
+        layout_subcdt_shippmentFee = wordBar.findViewById(R.id.layout_subcdt_shipmentfee);
+        layout_subcdt_autotext = wordBar.findViewById(R.id.layout_subcdt_autotext);
+        layout_subcdt_pending = wordBar.findViewById(R.id.layout_subcdt_pending);
+
+        btntoolbar_back_subcdt_content.setOnClickListener(this);
+        btn_cdt_makeinvoice.setOnClickListener(this);
+        btn_cdt_shippmentfee.setOnClickListener(this);
+        btn_cdt_autotext.setOnClickListener(this);
+        btn_cdt_pending.setOnClickListener(this);
         btn_cdt_dashboard.setOnClickListener(this);
 
         mCandidateView = new CandidateView(this);
@@ -292,7 +417,9 @@ public class SoftKeyboard extends InputMethodService
         // a particular editor, to avoid popping the underlying application
         // up and down if the user is entering text into the bottom of
         // its window.
-        setCandidatesViewShown(false);
+
+//        This Line make me crazy so i comment, i not remove coz i need to memorize this WTF moment
+//        setCandidatesViewShown(false);
 
         mCurKeyboard = mQwertyKeyboard;
         if (mInputView != null) {
@@ -772,18 +899,5 @@ public class SoftKeyboard extends InputMethodService
     public void onRelease(int primaryCode) {
     }
 
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.btn_cdt_dashboard:
-                Intent dialogIntent = new Intent(this, MainActivity.class);
-                dialogIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(dialogIntent);
-                break;
 
-            default:
-                break;
-        }
-
-    }
 }

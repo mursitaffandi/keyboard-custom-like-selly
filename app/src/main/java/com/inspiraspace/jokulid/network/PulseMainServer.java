@@ -8,7 +8,7 @@ import java.util.List;
  * Created by mursitaffandi on 4/2/18.
  */
 
-public interface PulseTransactions {
+public interface PulseMainServer {
     void onSuccessGetTransactions(List<Response> transaction);
     void onFailOccureTransactions(String errmsg);
 }

@@ -67,4 +67,12 @@
     <string name="cdt_dashboard">Dashboard</string>
     <string name="title_activity_create_transaction">CreateTransactionActivity</string>
     <string name="title_activity_detail_transaction">Detail Transaction</string>
+    <string name="label_tab_done">Done</string>
+    <string name="label_tab_cancel">Cancel</string>
+    <string name="incdt_ongkir_title">Shippment Fee</string>
+    <string name="btn_subcdt_shippmentfee_action">Count Shippment Fee</string>
+    <string name="title_subcdt_toolbar_createinvoice">Create Invoice</string>
+    <string name="title_subcdt_toolbar_countshippmentfee">Count Shippment Fee</string>
+    <string name="title_subcdt_toolbar_autotext">Auto Text</string>
+    <string name="title_subcdt_toolbar_pending">Pending</string>
 </resources>

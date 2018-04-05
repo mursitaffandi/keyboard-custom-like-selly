@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/ln_rootcandidate"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_alignParentBottom="true"
@@ -7,12 +9,75 @@
     android:focusable="true"
     android:focusableInTouchMode="true"
     android:orientation="vertical"
-    android:id="@+id/ln_rootcandidate"
     android:theme="@style/AppTheme">
 
-    <!--start button layout-->
     <LinearLayout
-        android:id="@+id/ln_Candidatebar"
+        android:id="@+id/ln_subcdt_content"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:visibility="gone"
+        android:orientation="vertical">
+
+        <android.support.design.widget.AppBarLayout
+            android:id="@+id/appBarLayoutOngkir"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:theme="@style/AppTheme.AppBarOverlay">
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbarOngkir"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="?attr/colorPrimary"
+                app:popupTheme="@style/AppTheme.PopupOverlay">
+
+                <ImageButton
+                    android:id="@+id/btn_toolbar_back_subcdt_content"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:background="@android:color/transparent"
+                    android:src="@drawable/ic_navigate_before_white_24dp" />
+
+                <TextView
+                    android:id="@+id/tv_title_toobar_subcdt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="@style/TextAppearance.AppCompat"
+                    android:textColor="@color/colorWhite" />
+
+            </android.support.v7.widget.Toolbar>
+
+        </android.support.design.widget.AppBarLayout>
+
+        <include
+            android:id="@+id/layout_subcdt_createinvoice"
+            android:visibility="gone"
+            layout="@layout/subcdt_createinvoice" />
+
+
+        <include
+            android:id="@+id/layout_subcdt_shipmentfee"
+            android:visibility="gone"
+            layout="@layout/subcdt_shippmentfee" />
+
+        <ScrollView
+            android:id="@+id/layout_subcdt_autotext"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone">
+
+            <include
+                layout="@layout/subcdt_autotext" />
+        </ScrollView>
+
+        <include
+            android:id="@+id/layout_subcdt_pending"
+            layout="@layout/subcdt_pending"
+            android:visibility="gone" />
+    </LinearLayout>
+    <!--start menu candidatebar-->
+    <LinearLayout
+        android:id="@+id/ln_candidatebar_main"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:background="@color/colorBlack"

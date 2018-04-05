@@ -19,7 +19,7 @@ import com.inspiraspace.jokulid.subactivities.CreateTransactionActivity;
 import com.inspiraspace.jokulid.R;
 import com.inspiraspace.jokulid.adapter.AdapterTransactions;
 import com.inspiraspace.jokulid.model.Response;
-import com.inspiraspace.jokulid.network.PulseTransactions;
+import com.inspiraspace.jokulid.network.PulseMainServer;
 import com.inspiraspace.jokulid.presenter.GeneratorTransactions;
 
 import java.util.ArrayList;
@@ -32,7 +32,7 @@ import butterknife.Unbinder;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class PendingsFragment extends Fragment implements PulseTransactions {
+public class ListTransactionFragment extends Fragment implements PulseMainServer {
     private static final String TRANSACTION_LIST_STATE = "1";
     private Context context;
     private Unbinder unbinder;
@@ -51,15 +51,15 @@ public class PendingsFragment extends Fragment implements PulseTransactions {
     GeneratorTransactions presenterTransactions;
 
     // newInstance constructor for creating fragment with arguments
-    public static PendingsFragment newInstance(int page) {
+    public static ListTransactionFragment newInstance(int page) {
         Bundle args = new Bundle();
         args.putInt(ARG_PAGE, page);
-        PendingsFragment fragment = new PendingsFragment();
+        ListTransactionFragment fragment = new ListTransactionFragment();
         fragment.setArguments(args);
         return fragment;
     }
 
-    public PendingsFragment() {
+    public ListTransactionFragment() {
     }
 
     @Override

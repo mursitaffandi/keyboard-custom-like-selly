@@ -48,5 +48,6 @@ http://developer.android.com/guide/topics/appwidgets/index.html#CreatingLayout
     <!--custom button on keyboard-->
     <dimen name="text_and_pict_spacing">8dp</dimen>
     <dimen name="btn_action_array_text_size">8sp</dimen>
+    <dimen name="button_subcdt_content_action">48dp</dimen>
 
 </resources>
