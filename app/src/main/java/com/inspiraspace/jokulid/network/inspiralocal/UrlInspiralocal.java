@@ -1,4 +1,4 @@
-package com.inspiraspace.jokulid.network;
+package com.inspiraspace.jokulid.network.inspiralocal;
 
 import com.inspiraspace.jokulid.model.rajaongkir.Rajaongkir;
 import com.inspiraspace.jokulid.model.searchsubdistrict.Findings;

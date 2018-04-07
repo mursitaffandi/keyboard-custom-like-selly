@@ -5,7 +5,7 @@
     <!--
          The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
          Google Maps Android API v2, but you must specify either coarse or fine
-         location permissions for the 'MyLocation' functionality. 
+         location permissions for the 'MyLocation' functionality.
     -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -13,12 +13,12 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
+        android:name=".JokulidApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:name=".JokulidApplication"
         android:theme="@style/AppTheme">
         <activity
             android:name=".MainActivity"
@@ -43,7 +43,8 @@
                 android:resource="@xml/method" />
         </service>
 
-        <activity android:name=".subactivities.DetailTransaction"
+        <activity
+            android:name=".subactivities.DetailTransaction"
             android:label="@string/title_activity_detail_transaction"
             android:parentActivityName=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar">

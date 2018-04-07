@@ -66,21 +66,25 @@
                 android:keyWidth="15%p" android:keyEdgeFlags="right"
                 android:isRepeatable="true"/>
     </Row>
-    
-    <Row android:rowEdgeFlags="bottom">
-        <Key android:codes="-3" android:keyIcon="@drawable/sym_keyboard_done" 
-                android:keyWidth="15%p" android:keyEdgeFlags="left" />
+
+
+    <Row  android:rowEdgeFlags="bottom">
+        <!--This for Hidding keyboard, no need-->
+        <!--<Key android:codes="-3" android:keyIcon="@drawable/sym_keyboard_done"
+                android:keyWidth="15%p" android:keyEdgeFlags="left" />-->
         <Key android:codes="-2" android:keyLabel="ABC" android:keyWidth="10%p" />
+        <Key android:keyWidth="15%p" android:codes="146" android:keyIcon="@drawable/ic_smiley_white_happy_24" />
         <!--
             android:codes: -101 is not a framework-defined key code but a key code that is
             privately defined in com.example.android.softkeyboard.LatinKeyboardView.
         -->
         <Key android:codes="-101" android:keyIcon="@drawable/sym_keyboard_language_switch"
-                android:keyWidth="10%p" />
-        <Key android:codes="32" android:keyIcon="@drawable/sym_keyboard_space" android:keyWidth="30%p" 
-                android:isRepeatable="true"/>
-        <Key android:codes="8230" android:keyLabel="…" android:keyWidth="15%p" />
+            android:keyWidth="10%p" />
+        <Key android:codes="32" android:keyIcon="@drawable/sym_keyboard_space" android:keyWidth="30%p"
+            android:isRepeatable="true"/>
+        <Key android:codes="44" android:keyLabel="," android:keyWidth="15%p" />
         <Key android:codes="10" android:keyIcon="@drawable/sym_keyboard_return"
-                android:keyWidth="20%p" android:keyEdgeFlags="right" />
+            android:keyWidth="20%p" android:keyEdgeFlags="right"
+            />
     </Row>
 </Keyboard>

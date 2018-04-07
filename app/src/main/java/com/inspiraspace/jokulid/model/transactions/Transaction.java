@@ -1,16 +1,14 @@
 
-package com.inspiraspace.jokulid.model;
-
-import android.os.Parcel;
-import android.os.Parcelable;
-
-import com.google.gson.annotations.Expose;
-import com.google.gson.annotations.SerializedName;
+package com.inspiraspace.jokulid.model.transactions;
 
 import java.util.ArrayList;
 import java.util.List;
+import android.os.Parcel;
+import android.os.Parcelable;
+import android.os.Parcelable.Creator;
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 
-@SuppressWarnings("unused")
 public class Transaction implements Parcelable
 {
 
@@ -21,7 +19,7 @@ public class Transaction implements Parcelable
 
 
         @SuppressWarnings({
-                "unchecked"
+            "unchecked"
         })
         public Transaction createFromParcel(Parcel in) {
             return new Transaction(in);
@@ -32,21 +30,21 @@ public class Transaction implements Parcelable
         }
 
     }
-            ;
+    ;
 
     protected Transaction(Parcel in) {
-        in.readList(this.response, (Response.class.getClassLoader()));
+        in.readList(this.response, (com.inspiraspace.jokulid.model.transactions.Response.class.getClassLoader()));
     }
 
     /**
      * No args constructor for use in serialization
-     *
+     * 
      */
     public Transaction() {
     }
 
     /**
-     *
+     * 
      * @param response
      */
     public Transaction(List<Response> response) {
@@ -67,7 +65,7 @@ public class Transaction implements Parcelable
     }
 
     public int describeContents() {
-        return 0;
+        return  0;
     }
 
 }

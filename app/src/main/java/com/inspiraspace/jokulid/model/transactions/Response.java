@@ -1,13 +1,14 @@
 
-package com.inspiraspace.jokulid.model;
+package com.inspiraspace.jokulid.model.transactions;
 
+import java.util.ArrayList;
+import java.util.List;
 import android.os.Parcel;
 import android.os.Parcelable;
-
+import android.os.Parcelable.Creator;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-@SuppressWarnings("unused")
 public class Response implements Parcelable
 {
 
@@ -22,7 +23,7 @@ public class Response implements Parcelable
     private String transactionTrAddrDestination;
     @SerializedName("transaction_note")
     @Expose
-    private Object transactionNote;
+    private String transactionNote;
     @SerializedName("transaction_status")
     @Expose
     private String transactionStatus;
@@ -77,6 +78,9 @@ public class Response implements Parcelable
     @SerializedName("customer_customer_addr")
     @Expose
     private Object customerCustomerAddr;
+    @SerializedName("customer_customer_chatapp_id")
+    @Expose
+    private String customerCustomerChatappId;
     @SerializedName("chatapp_name")
     @Expose
     private String chatappName;
@@ -92,11 +96,17 @@ public class Response implements Parcelable
     @SerializedName("total")
     @Expose
     private String total;
+    @SerializedName("item")
+    @Expose
+    private List<Item> item = new ArrayList<Item>();
+    @SerializedName("log")
+    @Expose
+    private List<Log> log = new ArrayList<Log>();
     public final static Parcelable.Creator<Response> CREATOR = new Creator<Response>() {
 
 
         @SuppressWarnings({
-                "unchecked"
+            "unchecked"
         })
         public Response createFromParcel(Parcel in) {
             return new Response(in);
@@ -107,13 +117,13 @@ public class Response implements Parcelable
         }
 
     }
-            ;
+    ;
 
     protected Response(Parcel in) {
         this.transactionUserbyUserId = ((String) in.readValue((String.class.getClassLoader())));
         this.transactionId = ((String) in.readValue((String.class.getClassLoader())));
         this.transactionTrAddrDestination = ((String) in.readValue((String.class.getClassLoader())));
-        this.transactionNote = ((Object) in.readValue((Object.class.getClassLoader())));
+        this.transactionNote = ((String) in.readValue((String.class.getClassLoader())));
         this.transactionStatus = ((String) in.readValue((String.class.getClassLoader())));
         this.bankAccountBankAccountNumber = ((String) in.readValue((String.class.getClassLoader())));
         this.bankAccountBankAccountName = ((String) in.readValue((String.class.getClassLoader())));
@@ -132,22 +142,25 @@ public class Response implements Parcelable
         this.customerCustomerTotalspent = ((Object) in.readValue((Object.class.getClassLoader())));
         this.customerCustomerCreatedat = ((String) in.readValue((String.class.getClassLoader())));
         this.customerCustomerAddr = ((Object) in.readValue((Object.class.getClassLoader())));
+        this.customerCustomerChatappId = ((String) in.readValue((String.class.getClassLoader())));
         this.chatappName = ((String) in.readValue((String.class.getClassLoader())));
         this.tokoTokoName = ((String) in.readValue((String.class.getClassLoader())));
         this.tokoTokoNoHp = ((String) in.readValue((String.class.getClassLoader())));
         this.tokoTokoUrl = ((Object) in.readValue((Object.class.getClassLoader())));
         this.total = ((String) in.readValue((String.class.getClassLoader())));
+        in.readList(this.item, (com.inspiraspace.jokulid.model.transactions.Item.class.getClassLoader()));
+        in.readList(this.log, (com.inspiraspace.jokulid.model.transactions.Log.class.getClassLoader()));
     }
 
     /**
      * No args constructor for use in serialization
-     *
+     * 
      */
     public Response() {
     }
 
     /**
-     *
+     * 
      * @param total
      * @param courierFlovour
      * @param bankBankName
@@ -162,21 +175,24 @@ public class Response implements Parcelable
      * @param shipmentResi
      * @param bankAccountBankUserId
      * @param customerCustomerName
+     * @param customerCustomerChatappId
      * @param shipmentDayeta
      * @param transactionStatus
      * @param shipmentAddrFrom
      * @param tokoTokoName
      * @param bankAccountBankAccountName
+     * @param log
      * @param chatappName
      * @param transactionNote
      * @param customerCustomerNohp
      * @param shipmentAddrDestination
      * @param transactionTrAddrDestination
      * @param courierCompany
+     * @param item
      * @param customerCustomerTotalspent
      * @param tokoTokoNoHp
      */
-    public Response(String transactionUserbyUserId, String transactionId, String transactionTrAddrDestination, Object transactionNote, String transactionStatus, String bankAccountBankAccountNumber, String bankAccountBankAccountName, String bankAccountBankUserId, String bankBankName, String shipmentWeight, String shipmentAddrFrom, String shipmentAddrDestination, String shipmentDayeta, Object shipmentResi, String shipmentOngkir, String courierCompany, String courierFlovour, String customerCustomerName, String customerCustomerNohp, Object customerCustomerTotalspent, String customerCustomerCreatedat, Object customerCustomerAddr, String chatappName, String tokoTokoName, String tokoTokoNoHp, Object tokoTokoUrl, String total) {
+    public Response(String transactionUserbyUserId, String transactionId, String transactionTrAddrDestination, String transactionNote, String transactionStatus, String bankAccountBankAccountNumber, String bankAccountBankAccountName, String bankAccountBankUserId, String bankBankName, String shipmentWeight, String shipmentAddrFrom, String shipmentAddrDestination, String shipmentDayeta, Object shipmentResi, String shipmentOngkir, String courierCompany, String courierFlovour, String customerCustomerName, String customerCustomerNohp, Object customerCustomerTotalspent, String customerCustomerCreatedat, Object customerCustomerAddr, String customerCustomerChatappId, String chatappName, String tokoTokoName, String tokoTokoNoHp, Object tokoTokoUrl, String total, List<Item> item, List<Log> log) {
         super();
         this.transactionUserbyUserId = transactionUserbyUserId;
         this.transactionId = transactionId;
@@ -200,11 +216,14 @@ public class Response implements Parcelable
         this.customerCustomerTotalspent = customerCustomerTotalspent;
         this.customerCustomerCreatedat = customerCustomerCreatedat;
         this.customerCustomerAddr = customerCustomerAddr;
+        this.customerCustomerChatappId = customerCustomerChatappId;
         this.chatappName = chatappName;
         this.tokoTokoName = tokoTokoName;
         this.tokoTokoNoHp = tokoTokoNoHp;
         this.tokoTokoUrl = tokoTokoUrl;
         this.total = total;
+        this.item = item;
+        this.log = log;
     }
 
     public String getTransactionUserbyUserId() {
@@ -231,11 +250,11 @@ public class Response implements Parcelable
         this.transactionTrAddrDestination = transactionTrAddrDestination;
     }
 
-    public Object getTransactionNote() {
+    public String getTransactionNote() {
         return transactionNote;
     }
 
-    public void setTransactionNote(Object transactionNote) {
+    public void setTransactionNote(String transactionNote) {
         this.transactionNote = transactionNote;
     }
 
@@ -383,6 +402,14 @@ public class Response implements Parcelable
         this.customerCustomerAddr = customerCustomerAddr;
     }
 
+    public String getCustomerCustomerChatappId() {
+        return customerCustomerChatappId;
+    }
+
+    public void setCustomerCustomerChatappId(String customerCustomerChatappId) {
+        this.customerCustomerChatappId = customerCustomerChatappId;
+    }
+
     public String getChatappName() {
         return chatappName;
     }
@@ -423,6 +450,22 @@ public class Response implements Parcelable
         this.total = total;
     }
 
+    public List<Item> getItem() {
+        return item;
+    }
+
+    public void setItem(List<Item> item) {
+        this.item = item;
+    }
+
+    public List<Log> getLog() {
+        return log;
+    }
+
+    public void setLog(List<Log> log) {
+        this.log = log;
+    }
+
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeValue(transactionUserbyUserId);
         dest.writeValue(transactionId);
@@ -446,15 +489,18 @@ public class Response implements Parcelable
         dest.writeValue(customerCustomerTotalspent);
         dest.writeValue(customerCustomerCreatedat);
         dest.writeValue(customerCustomerAddr);
+        dest.writeValue(customerCustomerChatappId);
         dest.writeValue(chatappName);
         dest.writeValue(tokoTokoName);
         dest.writeValue(tokoTokoNoHp);
         dest.writeValue(tokoTokoUrl);
         dest.writeValue(total);
+        dest.writeList(item);
+        dest.writeList(log);
     }
 
     public int describeContents() {
-        return 0;
+        return  0;
     }
 
 }

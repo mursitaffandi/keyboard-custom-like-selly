@@ -1,9 +1,9 @@
 package com.inspiraspace.jokulid.presenter;
 
+import com.inspiraspace.jokulid.model.transactions.Transaction;
+import com.inspiraspace.jokulid.network.main.ClientMainCall;
+import com.inspiraspace.jokulid.network.main.PulseMainServer;
 import com.inspiraspace.jokulid.utils.Constant;
-import com.inspiraspace.jokulid.model.Transaction;
-import com.inspiraspace.jokulid.network.ClientMainCall;
-import com.inspiraspace.jokulid.network.PulseMainServer;
 
 import java.util.List;
 
@@ -19,7 +19,7 @@ public class GeneratorTransactions {
     PulseMainServer pulseMainServer;
     ClientMainCall clientMainCall = new ClientMainCall();
     private Call<Transaction> apiCall;
-    private List<com.inspiraspace.jokulid.model.Response> listTransaction;
+    private List<com.inspiraspace.jokulid.model.transactions.Response> listTransaction;
     int code_status_transaction;
 
     public GeneratorTransactions(PulseMainServer pulseMainServer) {

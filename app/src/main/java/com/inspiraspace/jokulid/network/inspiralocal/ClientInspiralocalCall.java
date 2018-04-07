@@ -1,4 +1,4 @@
-package com.inspiraspace.jokulid.network;
+package com.inspiraspace.jokulid.network.inspiralocal;
 
 import com.inspiraspace.jokulid.BuildConfig;
 import com.inspiraspace.jokulid.utils.Constant;

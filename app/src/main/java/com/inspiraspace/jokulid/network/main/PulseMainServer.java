@@ -1,6 +1,6 @@
-package com.inspiraspace.jokulid.network;
+package com.inspiraspace.jokulid.network.main;
 
-import com.inspiraspace.jokulid.model.Response;
+import com.inspiraspace.jokulid.model.transactions.Response;
 
 import java.util.List;
 

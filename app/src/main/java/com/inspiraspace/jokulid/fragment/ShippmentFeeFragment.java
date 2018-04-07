@@ -29,7 +29,7 @@ GeneratorOngkir generatorOngkir;
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_shippment_fee, container, false);
+        View view = inflater.inflate(R.layout.subcdt_shippmentfee, container, false);
         generatorOngkir = new GeneratorOngkir(this);
         generatorOngkir.getOngkir(
                 "1145",

@@ -16,6 +16,7 @@
         android:layout_width="match_parent"
         android:layout_height="300dp"
         android:visibility="gone"
+        android:background="@color/colorWhite"
         android:orientation="vertical">
 
         <android.support.design.widget.AppBarLayout
@@ -54,11 +55,16 @@
             android:visibility="gone"
             layout="@layout/subcdt_createinvoice" />
 
-
-        <include
+        <ScrollView
             android:id="@+id/layout_subcdt_shipmentfee"
-            android:visibility="gone"
-            layout="@layout/subcdt_shippmentfee" />
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone">
+
+            <include
+                layout="@layout/subcdt_shippmentfee" />
+        </ScrollView>
+
 
         <ScrollView
             android:id="@+id/layout_subcdt_autotext"

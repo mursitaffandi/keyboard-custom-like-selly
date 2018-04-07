@@ -75,4 +75,5 @@
     <string name="title_subcdt_toolbar_countshippmentfee">Count Shippment Fee</string>
     <string name="title_subcdt_toolbar_autotext">Auto Text</string>
     <string name="title_subcdt_toolbar_pending">Pending</string>
+    <string name="title_activity_example">ExampleActivity</string>
 </resources>

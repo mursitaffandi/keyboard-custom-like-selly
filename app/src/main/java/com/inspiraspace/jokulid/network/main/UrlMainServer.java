@@ -1,9 +1,7 @@
-package com.inspiraspace.jokulid.network;
+package com.inspiraspace.jokulid.network.main;
 
-import com.inspiraspace.jokulid.model.Response;
-import com.inspiraspace.jokulid.model.Transaction;
-
-import java.util.List;
+import com.inspiraspace.jokulid.model.preaddtransaction.PremakeTransaction;
+import com.inspiraspace.jokulid.model.transactions.Transaction;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
@@ -14,18 +12,22 @@ import retrofit2.http.Query;
  */
 
 public interface UrlMainServer {
-    @GET("transaction_pending.php")
+    @GET("transaction_pending.php?status=0")
     Call<Transaction> getTransaction_pendings(@Query("user_id") String id_user);
 
-    @GET("transaction_paid.php")
+    @GET("transaction_pending.php?status=1")
     Call<Transaction> getTransaction_paids(@Query("user_id") String id_user);
 
-    @GET("transaction_shipped.php")
+    @GET("transaction_pending.php?status=2")
     Call<Transaction> getTransaction_shippeds(@Query("user_id") String id_user);
 
-    @GET("transaction_done.php")
+    @GET("transaction_pending.php?status=11")
     Call<Transaction> getTransaction_done(@Query("user_id") String id_user);
 
-    @GET("transaction_cancel.php")
+    @GET("transaction_pending.php?status=10")
     Call<Transaction> getTransaction_cancel(@Query("user_id") String id_user);
+
+
+    @GET("pre_create_transaction.php")
+    Call<PremakeTransaction> getPreDetailTransaction(@Query("user_id") String id_user);
 }

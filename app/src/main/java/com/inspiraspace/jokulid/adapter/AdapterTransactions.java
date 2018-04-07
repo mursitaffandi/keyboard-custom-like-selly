@@ -7,10 +7,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.inspiraspace.jokulid.utils.Constant;
-import com.inspiraspace.jokulid.subactivities.DetailTransaction;
 import com.inspiraspace.jokulid.R;
-import com.inspiraspace.jokulid.model.Response;
+import com.inspiraspace.jokulid.model.transactions.Response;
+import com.inspiraspace.jokulid.subactivities.DetailTransaction;
+import com.inspiraspace.jokulid.utils.Constant;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -54,7 +54,7 @@ public class AdapterTransactions extends RecyclerView.Adapter<VHTransaction> imp
     @Override
     public void OnClickitemTransaction(VHTransaction vhTransaction) {
         final Intent intent = new Intent(mContext, DetailTransaction.class);
-        intent.putExtra(Constant.TAG_ID_DETAIL_TRANSACTION, getItem(vhTransaction.getAdapterPosition()).getTransactionId());
+        intent.putExtra(Constant.TAG_TRANSACTION, getItem(vhTransaction.getAdapterPosition()));
         mContext.startActivity(intent);    }
 
     private Response getItem(int adapterPosition) {

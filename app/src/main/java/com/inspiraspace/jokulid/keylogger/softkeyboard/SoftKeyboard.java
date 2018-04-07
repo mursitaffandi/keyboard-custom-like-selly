@@ -77,6 +77,7 @@ public class SoftKeyboard extends InputMethodService
     private LatinKeyboard mSymbolsKeyboard;
     private LatinKeyboard mSymbolsShiftedKeyboard;
     private LatinKeyboard mQwertyKeyboard;
+    private LatinKeyboard mNumberKeyboard;
 
     private LatinKeyboard mCurKeyboard;
 

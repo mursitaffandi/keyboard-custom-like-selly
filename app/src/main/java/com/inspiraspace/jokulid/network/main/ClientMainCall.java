@@ -1,4 +1,4 @@
-package com.inspiraspace.jokulid.network;
+package com.inspiraspace.jokulid.network.main;
 
 import com.inspiraspace.jokulid.BuildConfig;
 

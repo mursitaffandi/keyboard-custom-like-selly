@@ -1,6 +1,5 @@
 package com.inspiraspace.jokulid.network.ongkir;
 
-import com.inspiraspace.jokulid.model.Response;
 import com.inspiraspace.jokulid.model.rajaongkir.Result;
 
 import java.util.List;
