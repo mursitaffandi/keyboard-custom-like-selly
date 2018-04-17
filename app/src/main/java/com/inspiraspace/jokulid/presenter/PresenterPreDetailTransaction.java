@@ -1,7 +1,6 @@
 package com.inspiraspace.jokulid.presenter;
 
-import com.inspiraspace.jokulid.model.preaddtransaction.Payment;
-import com.inspiraspace.jokulid.model.preaddtransaction.PremakeTransaction;
+import com.inspiraspace.jokulid.model.preaddtransaction.Premaketransaction;
 import com.inspiraspace.jokulid.model.preaddtransaction.Response;
 import com.inspiraspace.jokulid.network.main.ClientMainCall;
 import com.inspiraspace.jokulid.utils.Constant;
@@ -17,32 +16,32 @@ import retrofit2.Callback;
 
 public class PresenterPreDetailTransaction {
     ClientMainCall clientMainCall = new ClientMainCall();
-    private Call<PremakeTransaction> apiCall;
+    private Call<Premaketransaction> apiCall;
     private Response listTransaction = new Response();
-    private boolean isRequested = false;
+    private PulsePreDetailTransaction pulsePreDetailTransaction;
 
-    public PresenterPreDetailTransaction() {
+    public PresenterPreDetailTransaction(final PulsePreDetailTransaction pulsePreDetailTransaction) {
+        this.pulsePreDetailTransaction = pulsePreDetailTransaction;
+
         apiCall = clientMainCall.getService().getPreDetailTransaction(Constant.USER_ID);
-        apiCall.enqueue(new Callback<PremakeTransaction>() {
+        apiCall.enqueue(new Callback<Premaketransaction>() {
+
 
             @Override
-            public void onResponse(Call<PremakeTransaction> call, retrofit2.Response<PremakeTransaction> response) {
+            public void onResponse(Call<Premaketransaction> call, retrofit2.Response<Premaketransaction> response) {
                 listTransaction = response.body().getResponse();
-                isRequested = true;
-            }
+                pulsePreDetailTransaction.onSuccesPayment(listTransaction);            }
 
             @Override
-            public void onFailure(Call<PremakeTransaction> call, Throwable t) {
+            public void onFailure(Call<Premaketransaction> call, Throwable t) {
+                pulsePreDetailTransaction.onFailure(t.getMessage());
             }
         });
     }
 
-    public boolean statusRequest() {
-        return this.isRequested;
-    }
 
-    public List<Payment> getPreaddTransaction() {
-        return listTransaction.getPayment();
+    public interface PulsePreDetailTransaction{
+        void onSuccesPayment(Response payments);
+        void onFailure(String message);
     }
-
 }

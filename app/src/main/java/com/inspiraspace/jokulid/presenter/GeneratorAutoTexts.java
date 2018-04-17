@@ -1,0 +1,41 @@
+package com.inspiraspace.jokulid.presenter;
+
+import com.inspiraspace.jokulid.model.autotext.Mautotext;
+import com.inspiraspace.jokulid.model.autotext.Response;
+import com.inspiraspace.jokulid.network.main.ClientMainCall;
+import com.inspiraspace.jokulid.network.main.PulseAutoText;
+import com.inspiraspace.jokulid.utils.Constant;
+
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+
+/**
+ * Created by mursitaffandi on 4/12/18.
+ */
+
+public class GeneratorAutoTexts {
+    PulseAutoText pulseMainServer;
+    ClientMainCall clientMainCall = new ClientMainCall();
+    private Call<Mautotext> apiCall;
+
+    public GeneratorAutoTexts(PulseAutoText pulseMainServer) {
+        this.pulseMainServer = pulseMainServer;
+    }
+
+    public void getAutoText(int code_status_transaction) {
+        apiCall = clientMainCall.getService().getAutoText(Constant.USER_ID);
+        apiCall.enqueue(new Callback<Mautotext>() {
+            @Override
+            public void onResponse(Call<Mautotext> call, retrofit2.Response<Mautotext> response) {
+                pulseMainServer.onSuccess(response.body().getResponse());
+            }
+
+            @Override
+            public void onFailure(Call<Mautotext> call, Throwable t) {
+                pulseMainServer.onError(t.getMessage());
+            }
+        });
+    }
+}

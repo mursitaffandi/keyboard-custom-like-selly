@@ -1,8 +1,10 @@
 package com.inspiraspace.jokulid.fragment;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
@@ -13,6 +15,7 @@ import android.view.ViewGroup;
 import com.inspiraspace.jokulid.R;
 import com.inspiraspace.jokulid.adapter.AdapterFragmentPager;
 import com.inspiraspace.jokulid.fragment.transactions.ListTransactionFragment;
+import com.inspiraspace.jokulid.subactivities.CreateTransactionActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -28,6 +31,9 @@ public class MainFragment extends Fragment implements TabLayout.OnTabSelectedLis
 
     @BindView(R.id.tabs)
     TabLayout tabLayout;
+
+    @BindView(R.id.fab)
+    FloatingActionButton fab_add_transactions;
 
     AdapterFragmentPager adapterViewPager;
     private int mainpage;
@@ -76,7 +82,12 @@ public class MainFragment extends Fragment implements TabLayout.OnTabSelectedLis
         tabLayout.setOnTabSelectedListener(this);
 
         selectActionTab(0);
-
+        fab_add_transactions.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(), CreateTransactionActivity.class));
+            }
+        });
         return view;
     }
 

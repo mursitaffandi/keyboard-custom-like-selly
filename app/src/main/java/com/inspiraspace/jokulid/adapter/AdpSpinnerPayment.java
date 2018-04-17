@@ -11,7 +11,6 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.inspiraspace.jokulid.BuildConfig;
 import com.inspiraspace.jokulid.R;
-import com.inspiraspace.jokulid.model.ListChatapp;
 import com.inspiraspace.jokulid.model.preaddtransaction.Payment;
 import com.inspiraspace.jokulid.utils.Constant;
 
@@ -48,10 +47,7 @@ public class AdpSpinnerPayment extends ArrayAdapter<String> {
         TextView label = row.findViewById(R.id.tv_item_payment);
         ImageView icon = row.findViewById(R.id.iv_item_payment);
         label.setText(tempValues.getBankName());
-        Glide
-                .with(activity)
-                .load(BuildConfig.BASE_URL_MAIN_IMAGE_PAYMENT + tempValues.getBankImage())
-                .into(icon);
+        Glide.with(row).load(BuildConfig.BASE_URL_MAIN_IMAGE_PAYMENT + tempValues.getBankImage()).into(icon);
         return row;
     }
 
@@ -62,7 +58,7 @@ public class AdpSpinnerPayment extends ArrayAdapter<String> {
         TextView label = row.findViewById(R.id.tv_item_payment);
         ImageView icon = row.findViewById(R.id.iv_item_payment);
         label.setText(tempValues.getBankName());
-        icon.setImageResource(Constant.LIST_IC_CHATAPP[position]);
+        Glide.with(row).load(BuildConfig.BASE_URL_MAIN_IMAGE_PAYMENT + tempValues.getBankImage()).into(icon);
         return row;
     }
 }

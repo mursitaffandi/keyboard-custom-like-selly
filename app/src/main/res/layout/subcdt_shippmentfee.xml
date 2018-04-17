@@ -19,7 +19,6 @@
             android:focusableInTouchMode="true"
             android:hint="weight"
             android:inputType="numberDecimal"
-            android:text="1.0"
             android:textSize="12sp" />
     </android.support.design.widget.TextInputLayout>
 
@@ -53,14 +52,6 @@
             android:textSize="12sp" />
     </android.support.design.widget.TextInputLayout>
 
-    <!-- <include
-         layout="@layout/layout_progress"
-         android:layout_width="match_parent"
-         android:layout_height="match_parent"
-         android:layout_gravity="center_horizontal"
-         android:layout_margin="10dp"
-         android:visibility="gone" />-->
-
     <Button
         android:layout_width="match_parent"
         android:id="@+id/btn_count_shippmentfee"
@@ -75,4 +66,10 @@
         android:paddingEnd="@dimen/fab_margin"
         android:paddingStart="@dimen/fab_margin"
         android:visibility="gone" />
+    <Button
+        android:layout_width="match_parent"
+        android:id="@+id/btn_shippmentfee_copytoclipboard"
+        android:layout_height="@dimen/button_subcdt_content_action"
+        android:text="@string/btn_subcdt_shippmentfee_copy"
+        android:visibility="gone"/>
 </LinearLayout>

@@ -16,7 +16,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.inspiraspace.jokulid.R;
+import com.inspiraspace.jokulid.adapter.AdpLVItemTransaction;
+import com.inspiraspace.jokulid.adapter.AdpLVLogTransaction;
 import com.inspiraspace.jokulid.adapter.AdpSpinnerChatapp;
+import com.inspiraspace.jokulid.adapter.AdpSpinnerPayment;
 import com.inspiraspace.jokulid.model.ListChatapp;
 import com.inspiraspace.jokulid.model.transactions.Item;
 import com.inspiraspace.jokulid.model.transactions.Log;
@@ -30,11 +33,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class DetailTransaction extends AppCompatActivity {
-    ListChatapp chatapps;
-    public ArrayList<ListChatapp.Chatapp_> CustomListViewValuesArr = new ListChatapp().objectchatapps.getArryChatapps();
-
-    PresenterPreDetailTransaction preDetailTransaction;
+public class DetailTransaction extends AppCompatActivity implements PresenterPreDetailTransaction.PulsePreDetailTransaction{
 
     @BindView(R.id.tv_detailtr_lb_customername)
     TextView tv_detailtr_lb_customername;
@@ -105,6 +104,7 @@ public class DetailTransaction extends AppCompatActivity {
     @BindView(R.id.toolbarDetail)
     Toolbar toolbar;
 
+    Intent rc_transaction;
     String customer_name,
             customer_chatapp_id, customer_number,
             customer_addr,
@@ -114,7 +114,10 @@ public class DetailTransaction extends AppCompatActivity {
 
     List<Item> customer_items;
     List<Log> customer_logs;
-    Intent rc_transaction;
+
+    private ArrayList dataChatapps;
+    private ArrayList dataPayments;
+    private com.inspiraspace.jokulid.model.preaddtransaction.Response preaddtransaction;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -123,14 +126,15 @@ public class DetailTransaction extends AppCompatActivity {
         ButterKnife.bind(this);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
+        new PresenterPreDetailTransaction(this);
         rc_transaction = getIntent();
-        chatapps = new ListChatapp();
-        preDetailTransaction = new PresenterPreDetailTransaction();
 
-        setupViewFromIntent();
-
-//        whatsapp();
+        disableEdittext(edt_detailtr_ety_customername);
+        disableEdittext(edt_detailtr_ety_customernumber);
+        disableEdittext(edt_detailtr_ety_customeraddr);
+        disableEdittext(edt_detailtr_ety_customeritemtotalprice);
+        disableEdittext(edt_detailtr_ety_customershippmentfee);
+        disableEdittext(edt_detailtr_ety_customernote);
     }
 
     private void setupViewFromIntent() {
@@ -156,31 +160,32 @@ public class DetailTransaction extends AppCompatActivity {
         edt_detailtr_ety_customershippmentfee.setText(customer_shippmentfee);
         edt_detailtr_ety_customernote.setText(customer_note);
 
-        AdpSpinnerChatapp adpSpinnerChatapp = new AdpSpinnerChatapp(this, R.id.tv_item_chatapp, CustomListViewValuesArr);
+        AdpSpinnerChatapp adpSpinnerChatapp = new AdpSpinnerChatapp(this, R.id.tv_item_chatapp, dataChatapps);
         sp_detailtr_ety_chatapp.setAdapter(adpSpinnerChatapp);
 
 
+        AdpSpinnerPayment adpSpinnerPayment = new AdpSpinnerPayment(this, R.id.tv_item_payment, dataPayments);
+        sp_detailtr_ety_paymentmethod.setAdapter(adpSpinnerPayment);
 
-        disableEdittext(edt_detailtr_ety_customername);
-        disableEdittext(edt_detailtr_ety_customernumber);
-        disableEdittext(edt_detailtr_ety_customeraddr);
-        disableEdittext(edt_detailtr_ety_customeritemtotalprice);
-        disableEdittext(edt_detailtr_ety_customershippmentfee);
-        disableEdittext(edt_detailtr_ety_customernote);
+        AdpLVLogTransaction adpLVLogTransaction = new AdpLVLogTransaction(item_transaction.getLog(), this);
+        lv_detailtr_ety_customerlog.setAdapter(adpLVLogTransaction);
 
-       /* enableEdittext(edt_detailtr_ety_customername);
+        AdpLVItemTransaction adpLVItemTransaction = new AdpLVItemTransaction(item_transaction.getItem(), this);
+        lv_detailtr_ety_customeritem.setAdapter(adpLVItemTransaction);
+
+        enableEdittext(edt_detailtr_ety_customername);
         enableEdittext(edt_detailtr_ety_customernumber);
         enableEdittext(edt_detailtr_ety_customeraddr);
         enableEdittext(edt_detailtr_ety_customeritemtotalprice);
         enableEdittext(edt_detailtr_ety_customershippmentfee);
-        enableEdittext(edt_detailtr_ety_customernote);*/
+        enableEdittext(edt_detailtr_ety_customernote);
     }
 
 
     public void disableEdittext(EditText target) {
-        target.setTag(target.getKeyListener());
+       /* target.setTag(target.getKeyListener());
         target.setKeyListener(null);
-        target.setFocusable(false);
+        target.setFocusable(false);*/
     }
 
     public void enableEdittext(EditText target) {
@@ -191,8 +196,8 @@ public class DetailTransaction extends AppCompatActivity {
     public void openChatapp(int id_chat) {
         Intent i;
         id_chat = --id_chat;
-        String appPackage = chatapps.objectchatapps.getChatapps().get(id_chat).getChattappApppackage();
-        String appName = chatapps.objectchatapps.getChatapps().get(id_chat).getChattappAppfullname();
+        String appPackage = preaddtransaction.getChatapp().get(id_chat).getPackage();
+        String appName = preaddtransaction.getChatapp().get(id_chat).getName();
         if (id_chat == 0) {
             i = new Intent(Intent.ACTION_VIEW);
 //            customer_number =
@@ -212,8 +217,8 @@ public class DetailTransaction extends AppCompatActivity {
     }
 
     public void shareTextToChatapp(int id_chat, String text_chat) {
-        String appPackage = chatapps.objectchatapps.getChatapps().get(id_chat).getChattappApppackage();
-        String appName = chatapps.objectchatapps.getChatapps().get(id_chat).getChattappAppfullname();
+        String appPackage = preaddtransaction.getChatapp().get(id_chat).getPackage();
+        String appName = preaddtransaction.getChatapp().get(id_chat).getName();
         PackageManager pm = getPackageManager();
         try {
             PackageInfo info = pm.getPackageInfo(appPackage, PackageManager.GET_META_DATA);
@@ -228,6 +233,20 @@ public class DetailTransaction extends AppCompatActivity {
         } catch (PackageManager.NameNotFoundException e) {
             Toast.makeText(this, appName + " Not Installed", Toast.LENGTH_SHORT).show();
         }
+
+    }
+
+    @Override
+    public void onSuccesPayment(com.inspiraspace.jokulid.model.preaddtransaction.Response payments) {
+        preaddtransaction = payments;
+        dataPayments = payments.getArrPayment();
+        dataChatapps = payments.getArrChatapp();
+
+        setupViewFromIntent();
+    }
+
+    @Override
+    public void onFailure(String message) {
 
     }
 }

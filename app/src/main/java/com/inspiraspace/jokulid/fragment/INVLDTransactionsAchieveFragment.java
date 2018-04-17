@@ -12,10 +12,10 @@ import com.inspiraspace.jokulid.R;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class TransactionsAchieveFragment extends Fragment {
+public class INVLDTransactionsAchieveFragment extends Fragment {
 
 
-    public TransactionsAchieveFragment() {
+    public INVLDTransactionsAchieveFragment() {
         // Required empty public constructor
     }
 

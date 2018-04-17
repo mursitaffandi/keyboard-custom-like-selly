@@ -1,7 +1,9 @@
 
 package com.inspiraspace.jokulid.model.preaddtransaction;
 
+import java.util.ArrayList;
 import java.util.List;
+
 import com.google.gson.annotations.SerializedName;
 
 @SuppressWarnings("unused")
@@ -22,6 +24,22 @@ public class Response {
 
     public List<Payment> getPayment() {
         return mPayment;
+    }
+
+    public ArrayList<Payment> getArrPayment() {
+        ArrayList<Payment> p = new ArrayList<>();
+        for (Payment tmpPays : mPayment) {
+            p.add(tmpPays);
+        }
+        return p;
+    }
+
+    public ArrayList<Chatapp> getArrChatapp() {
+        ArrayList<Chatapp> p = new ArrayList<>();
+        for (Chatapp tmpPays : mChatapp) {
+            p.add(tmpPays);
+        }
+        return p;
     }
 
     public void setPayment(List<Payment> payment) {

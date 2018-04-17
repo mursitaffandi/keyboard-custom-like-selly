@@ -7,8 +7,12 @@ import android.inputmethodservice.InputMethodService;
 import android.inputmethodservice.Keyboard;
 import android.inputmethodservice.KeyboardView;
 import android.os.IBinder;
+import android.support.design.widget.TextInputEditText;
+import android.text.Editable;
 import android.text.InputType;
+import android.text.TextWatcher;
 import android.text.method.MetaKeyKeyListener;
+import android.util.Log;
 import android.view.KeyCharacterMap;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -20,23 +24,21 @@ import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputConnection;
 import android.view.inputmethod.InputMethodManager;
 import android.view.inputmethod.InputMethodSubtype;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.inspiraspace.jokulid.MainActivity;
 import com.inspiraspace.jokulid.R;
-import com.inspiraspace.jokulid.fragment.ShippmentFeeFragment;
 import com.inspiraspace.jokulid.keylogger.Emoji.EmojiHelper.EmojiconGridView;
 import com.inspiraspace.jokulid.keylogger.Emoji.EmojiHelper.EmojiconsPopup;
 import com.inspiraspace.jokulid.keylogger.Emoji.Emojicon;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
 
 
 /**
@@ -47,7 +49,8 @@ import butterknife.ButterKnife;
  * be fleshed out as appropriate.
  */
 public class SoftKeyboard extends InputMethodService
-        implements KeyboardView.OnKeyboardActionListener, View.OnClickListener {
+        implements KeyboardView.OnKeyboardActionListener, View.OnClickListener, View.OnFocusChangeListener, TextWatcher {
+
     static final boolean DEBUG = false;
 
     /**
@@ -85,12 +88,21 @@ public class SoftKeyboard extends InputMethodService
 
     LinearLayout layout_candidatebar_main;
     LinearLayout layout_subcdt_content;
+
     View layout_subcdt_createinvoice;
     View layout_subcdt_shippmentFee;
     View layout_subcdt_autotext;
     View layout_subcdt_pending;
 
-TextView tv_title_toobar_subcdt;
+    TextInputEditText etItemWeight;
+    AutoCompleteTextView etFrom;
+    AutoCompleteTextView etDestination;
+    Button btn_count_shippmentfee;
+    ListView listOngkir;
+    Button btn_shippmentfee_copytoclipboard;
+
+    TextView tv_title_toobar_subcdt;
+
     /**
      * Main initialization of the input method component.  Be sure to call
      * to super class.
@@ -226,6 +238,7 @@ TextView tv_title_toobar_subcdt;
         layout_candidatebar_main.setVisibility(View.GONE);
         tv_title_toobar_subcdt.setText(getString(R.string.title_subcdt_toolbar_countshippmentfee));
 
+        etItemWeight.requestFocus();
     }
 
     private void showSubAutotext() {
@@ -239,6 +252,7 @@ TextView tv_title_toobar_subcdt;
         layout_candidatebar_main.setVisibility(View.GONE);
         tv_title_toobar_subcdt.setText(getString(R.string.title_subcdt_toolbar_autotext));
 
+        getCurrentInputConnection().commitText("newcommit0 \n nsdvknkv \n ksnfvs", 3);
 
     }
 
@@ -277,6 +291,7 @@ TextView tv_title_toobar_subcdt;
         ImageButton btn_cdt_autotext = wordBar.findViewById(R.id.btn_cdt_autotext);
         ImageButton btn_cdt_pending = wordBar.findViewById(R.id.btn_cdt_pending);
         ImageButton btn_cdt_dashboard = wordBar.findViewById(R.id.btn_cdt_dashboard);
+
         tv_title_toobar_subcdt = wordBar.findViewById(R.id.tv_title_toobar_subcdt);
         layout_candidatebar_main = wordBar.findViewById(R.id.ln_candidatebar_main);
         layout_subcdt_content = wordBar.findViewById(R.id.ln_subcdt_content);
@@ -284,6 +299,17 @@ TextView tv_title_toobar_subcdt;
         layout_subcdt_shippmentFee = wordBar.findViewById(R.id.layout_subcdt_shipmentfee);
         layout_subcdt_autotext = wordBar.findViewById(R.id.layout_subcdt_autotext);
         layout_subcdt_pending = wordBar.findViewById(R.id.layout_subcdt_pending);
+
+        etItemWeight = wordBar.findViewById(R.id.etItemWeight);
+        etFrom = wordBar.findViewById(R.id.etFrom);
+        etDestination = wordBar.findViewById(R.id.etDestination);
+        btn_count_shippmentfee = wordBar.findViewById(R.id.btn_count_shippmentfee);
+        listOngkir = wordBar.findViewById(R.id.listOngkir);
+        btn_shippmentfee_copytoclipboard = wordBar.findViewById(R.id.btn_shippmentfee_copytoclipboard);
+
+        etItemWeight.setOnFocusChangeListener(this);
+        etFrom.setOnFocusChangeListener(this);
+        etDestination.setOnFocusChangeListener(this);
 
         btntoolbar_back_subcdt_content.setOnClickListener(this);
         btn_cdt_makeinvoice.setOnClickListener(this);
@@ -900,5 +926,47 @@ TextView tv_title_toobar_subcdt;
     public void onRelease(int primaryCode) {
     }
 
+/*start TextWatcher*/
+
+    @Override
+    public void afterTextChanged(Editable s) {
+
+    }
+
+    @Override
+    public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+    }
+
+    @Override
+    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+    }
+/*end TextWatcher*/
+
+    /*start View.OnFocusChangeListener*/
+    @Override
+    public void onFocusChange(View v, boolean hasFocus) {
+        EditorInfo editorInfo = getCurrentInputEditorInfo();
+        Log.d("onFocusChange field", "onFocusChange: " + editorInfo.inputType);
+
+        if (etItemWeight.isFocused()) {
+            if (mInputView.getVisibility() == View.GONE) {
+                mInputView.setVisibility(View.VISIBLE);
+                
+            }
+
+        } else if (etFrom.isFocused()) {
+            if (mInputView.getVisibility() == View.GONE) {
+                mInputView.setVisibility(View.VISIBLE);
+            }
+
+        } else if (etDestination.isFocused()) {
+            if (mInputView.getVisibility() == View.GONE) {
+                mInputView.setVisibility(View.VISIBLE);
+            }
+        }
+    }
+            /*end View.OnFocusChangeListener*/
 
 }

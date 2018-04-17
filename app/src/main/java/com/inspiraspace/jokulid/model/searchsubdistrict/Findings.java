@@ -1,6 +1,7 @@
 
 package com.inspiraspace.jokulid.model.searchsubdistrict;
 
+import java.util.ArrayList;
 import java.util.List;
 import com.google.gson.annotations.SerializedName;
 
@@ -18,6 +19,15 @@ public class Findings {
 
     public List<Datum> getData() {
         return mData;
+    }
+
+    public ArrayList<Datum> getArrDatum(){
+        ArrayList<Datum> p = new ArrayList<>();
+        for (Datum mDatum : mData) {
+            p.add(mDatum);
+        }
+
+        return p;
     }
 
     public void setData(List<Datum> data) {

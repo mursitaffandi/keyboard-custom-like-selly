@@ -1,6 +1,7 @@
 package com.inspiraspace.jokulid.network.main;
 
-import com.inspiraspace.jokulid.model.preaddtransaction.PremakeTransaction;
+import com.inspiraspace.jokulid.model.autotext.Mautotext;
+import com.inspiraspace.jokulid.model.preaddtransaction.Premaketransaction;
 import com.inspiraspace.jokulid.model.transactions.Transaction;
 
 import retrofit2.Call;
@@ -29,5 +30,8 @@ public interface UrlMainServer {
 
 
     @GET("pre_create_transaction.php")
-    Call<PremakeTransaction> getPreDetailTransaction(@Query("user_id") String id_user);
+    Call<Premaketransaction> getPreDetailTransaction(@Query("user_id") String id_user);
+
+    @GET("autotext.php")
+    Call<Mautotext> getAutoText(@Query("user_id") String id_user);
 }

@@ -9,16 +9,16 @@ import android.view.View;
 
 import com.inspiraspace.jokulid.R;
 
-public class CreateTransactionActivity extends AppCompatActivity {
+public class TemplateActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_create_transaction);
+        setContentView(R.layout.activity_template);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
 
     }
 

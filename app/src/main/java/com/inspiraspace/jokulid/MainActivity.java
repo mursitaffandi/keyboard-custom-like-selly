@@ -1,12 +1,17 @@
 package com.inspiraspace.jokulid;
 
+import android.content.ComponentName;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -19,7 +24,6 @@ import com.inspiraspace.jokulid.fragment.MainFragment;
 import com.inspiraspace.jokulid.fragment.ReportFragment;
 import com.inspiraspace.jokulid.fragment.SettingsFragment;
 import com.inspiraspace.jokulid.fragment.ShippmentFeeFragment;
-import com.inspiraspace.jokulid.fragment.TransactionsAchieveFragment;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -119,5 +123,43 @@ public class MainActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+    @Override
+    protected void onPostCreate(Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
 
+        String id = Settings.Secure.getString(
+                getContentResolver(),
+                Settings.Secure.DEFAULT_INPUT_METHOD);
+
+        if (!id.equals("com.inspiraspace.jokulid/.keylogger.softkeyboard.SoftKeyboard")) {
+            showChangeKeyboardDialog();
+        }
+    }
+
+    public void showChangeKeyboardDialog() {
+        AlertDialog.Builder dialogChangeKeyboard = new AlertDialog.Builder(this);
+        dialogChangeKeyboard.setTitle("Jokul.id Keyboard");
+        dialogChangeKeyboard.setMessage("Ganti keyboard dengan Jokul.id sekarang?");
+        dialogChangeKeyboard.setPositiveButton("Iya", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                changeKeyboardSetting();
+            }
+        });
+        dialogChangeKeyboard.setNegativeButton("Nanti", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+
+        AlertDialog alert = dialogChangeKeyboard.create();
+        alert.show();
+    }
+
+    public void changeKeyboardSetting() {
+        Intent in = new Intent();
+        in.setComponent(new ComponentName("com.android.settings", "com.android.settings.Settings$InputMethodAndLanguageSettingsActivity"));
+        startActivity(in);
+    }
 }

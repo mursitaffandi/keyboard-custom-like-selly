@@ -8,8 +8,16 @@ public class Chatapp {
 
     @SerializedName("id")
     private String mId;
+    @SerializedName("image")
+    private String mImage;
+    @SerializedName("link")
+    private Object mLink;
     @SerializedName("name")
     private String mName;
+    @SerializedName("nick")
+    private String mNick;
+    @SerializedName("package")
+    private String mPackage;
 
     public String getId() {
         return mId;
@@ -19,12 +27,44 @@ public class Chatapp {
         mId = id;
     }
 
+    public String getImage() {
+        return mImage;
+    }
+
+    public void setImage(String image) {
+        mImage = image;
+    }
+
+    public Object getLink() {
+        return mLink;
+    }
+
+    public void setLink(Object link) {
+        mLink = link;
+    }
+
     public String getName() {
         return mName;
     }
 
     public void setName(String name) {
         mName = name;
+    }
+
+    public String getNick() {
+        return mNick;
+    }
+
+    public void setNick(String nick) {
+        mNick = nick;
+    }
+
+    public String getPackage() {
+        return mPackage;
+    }
+
+    public void setPackage(String vpackage) {
+        mPackage = vpackage;
     }
 
 }

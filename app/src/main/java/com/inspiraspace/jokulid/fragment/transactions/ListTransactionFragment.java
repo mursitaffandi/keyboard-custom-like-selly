@@ -45,8 +45,6 @@ public class ListTransactionFragment extends Fragment implements PulseMainServer
     @BindView(R.id.rv_transactions)
     RecyclerView rv_main;
 
-    @BindView(R.id.fab)
-    FloatingActionButton fab_add_transactions;
 
     GeneratorTransactions presenterTransactions;
 
@@ -87,12 +85,7 @@ public class ListTransactionFragment extends Fragment implements PulseMainServer
             adapter.swipeLoadTransactions(responses);
         }
 
-        fab_add_transactions.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(context, CreateTransactionActivity.class));
-            }
-        });
+
         return view;
     }
 

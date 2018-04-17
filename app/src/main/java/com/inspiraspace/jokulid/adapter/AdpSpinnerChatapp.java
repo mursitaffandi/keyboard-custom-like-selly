@@ -10,8 +10,11 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.inspiraspace.jokulid.BuildConfig;
 import com.inspiraspace.jokulid.R;
 import com.inspiraspace.jokulid.model.ListChatapp;
+import com.inspiraspace.jokulid.model.preaddtransaction.Chatapp;
 import com.inspiraspace.jokulid.utils.Constant;
 
 import java.util.ArrayList;
@@ -25,7 +28,7 @@ public class AdpSpinnerChatapp extends ArrayAdapter<String>{
 
     private Activity activity;
     private ArrayList data;
-   ListChatapp.Chatapp_ tempValues=null;
+    Chatapp tempValues =null;
     LayoutInflater inflater;
 
     public AdpSpinnerChatapp(
@@ -44,22 +47,22 @@ public class AdpSpinnerChatapp extends ArrayAdapter<String>{
     @Override
     public View getDropDownView(int position, View convertView,ViewGroup parent) {
         View row = inflater.inflate(R.layout.item_chatapp, parent, false);
-        tempValues = (ListChatapp.Chatapp_) data.get(position);
+        tempValues = (Chatapp) data.get(position);
         TextView label = row.findViewById(R.id.tv_item_chatapp);
         ImageView icon = row.findViewById(R.id.iv_item_chatapp);
-        label.setText(tempValues.getChattappAppname());
-        icon.setImageResource(Constant.LIST_IC_CHATAPP[position]);
+        label.setText(tempValues.getName());
+        Glide.with(row).load(BuildConfig.BASE_URL_MAIN_IMAGE_PAYMENT + tempValues.getImage()).into(icon);
         return row;
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         View row = inflater.inflate(R.layout.item_chatapp, parent, false);
-        tempValues = (ListChatapp.Chatapp_) data.get(position);
+        tempValues = (Chatapp) data.get(position);
         TextView label = row.findViewById(R.id.tv_item_chatapp);
         ImageView icon = row.findViewById(R.id.iv_item_chatapp);
-        label.setText(tempValues.getChattappAppname());
-        icon.setImageResource(Constant.LIST_IC_CHATAPP[position]);
+        label.setText(tempValues.getNick());
+        Glide.with(row).load(BuildConfig.BASE_URL_MAIN_IMAGE_PAYMENT + tempValues.getImage()).into(icon);
         return row;
     }
 }

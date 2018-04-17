@@ -16,12 +16,6 @@ import java.util.List;
 public class ListChatapp {
     public Chatapps objectchatapps;
 
-    public ListChatapp() {
-        GsonBuilder gsonBuilder = new GsonBuilder();
-        Gson gson = gsonBuilder.create();
-        objectchatapps = gson.fromJson(Constant.JSON_CHATAPPS, Chatapps.class);
-    }
-
     public class Chatapps {
 
 

@@ -1,13 +1,119 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.inspiraspace.jokulid.fragment.SettingsFragment">
-
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="wrap_content">
 
-</FrameLayout>
+        <Button
+            android:id="@+id/btn_main_setting_detailshop"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="8dp"
+            android:textSize="24sp"
+            android:text="@string/label_main_setting_detailshop" />
+
+        <Button
+            android:id="@+id/btn_main_setting_detailuser"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/btn_main_setting_detailshop"
+            android:paddingBottom="8dp"
+            android:textSize="24sp"
+            android:text="@string/label_main_setting_detailuser" />
+
+        <Button
+            android:id="@+id/btn_main_setting_payment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/btn_main_setting_detailuser"
+            android:paddingBottom="8dp"
+            android:textSize="24sp"
+
+            android:text="@string/label_main_setting_payment" />
+
+        <Button
+            android:id="@+id/btn_main_setting_tempalte_afterpaid"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/btn_main_setting_payment"
+            android:paddingBottom="8dp"
+            android:textSize="24sp"
+            android:text="@string/label_main_setting_tempalte_afterpaid" />
+
+        <Button
+            android:id="@+id/btn_main_setting_tempalte_remaindtopay"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/btn_main_setting_tempalte_afterpaid"
+            android:paddingBottom="8dp"
+            android:textSize="24sp"
+            android:text="@string/label_main_setting_tempalte_remaindtopay" />
+        <Button
+            android:id="@+id/btn_main_setting_tempalte_sendresi"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/btn_main_setting_tempalte_remaindtopay"
+            android:paddingBottom="8dp"
+            android:textSize="24sp"
+            android:text="@string/label_main_setting_tempalte_sendresi" />
+
+        <Button
+            android:id="@+id/btn_main_setting_tempalte_autotext"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/btn_main_setting_tempalte_sendresi"
+            android:paddingBottom="8dp"
+            android:textSize="24sp"
+            android:text="@string/label_main_setting_tempalte_autotext" />
+
+
+        <Button
+            android:id="@+id/btn_main_setting_shippment_origin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/btn_main_setting_tempalte_autotext"
+            android:paddingBottom="8dp"
+            android:textSize="24sp"
+            android:text="@string/label_main_setting_shippment_origin" />
+
+        <Button
+            android:id="@+id/btn_main_setting_shippment_companyservice"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/btn_main_setting_shippment_origin"
+            android:paddingBottom="8dp"
+            android:textSize="24sp"
+            android:text="@string/label_main_setting_shippment_companyservice" />
+
+        <Button
+            android:id="@+id/btn_main_setting_shippment_weigth"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/btn_main_setting_shippment_companyservice"
+            android:paddingBottom="8dp"
+            android:textSize="24sp"
+            android:text="@string/label_main_setting_shippment_weigth" />
+
+        <Button
+            android:id="@+id/btn_main_setting_dailyreminder"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/btn_main_setting_shippment_weigth"
+            android:paddingBottom="8dp"
+            android:textSize="24sp"
+            android:text="@string/label_main_setting_dailyreminder" />
+
+        <Button
+            android:id="@+id/btn_main_setting_logout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/btn_main_setting_dailyreminder"
+            android:paddingBottom="8dp"
+            android:textSize="24sp"
+            android:text="@string/label_main_setting_logout" />
+    </RelativeLayout>
+
+</ScrollView>
