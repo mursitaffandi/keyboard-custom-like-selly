@@ -15,7 +15,7 @@ import retrofit2.Callback;
  */
 
 public class PresenterPreDetailTransaction {
-    ClientMainCall clientMainCall = new ClientMainCall();
+    private ClientMainCall clientMainCall = new ClientMainCall();
     private Call<Premaketransaction> apiCall;
     private Response listTransaction = new Response();
     private PulsePreDetailTransaction pulsePreDetailTransaction;
@@ -26,11 +26,11 @@ public class PresenterPreDetailTransaction {
         apiCall = clientMainCall.getService().getPreDetailTransaction(Constant.USER_ID);
         apiCall.enqueue(new Callback<Premaketransaction>() {
 
-
             @Override
             public void onResponse(Call<Premaketransaction> call, retrofit2.Response<Premaketransaction> response) {
                 listTransaction = response.body().getResponse();
-                pulsePreDetailTransaction.onSuccesPayment(listTransaction);            }
+                pulsePreDetailTransaction.onSuccesPayment(listTransaction);
+            }
 
             @Override
             public void onFailure(Call<Premaketransaction> call, Throwable t) {

@@ -1,12 +1,10 @@
-package com.inspiraspace.jokulid.fragment.transactions;
+package com.inspiraspace.jokulid.fragment;
 
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.annotation.Nullable;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -20,7 +18,6 @@ import com.inspiraspace.jokulid.adapter.AdapterTransactions;
 import com.inspiraspace.jokulid.model.transactions.Response;
 import com.inspiraspace.jokulid.network.main.PulseMainServer;
 import com.inspiraspace.jokulid.presenter.GeneratorTransactions;
-import com.inspiraspace.jokulid.subactivities.CreateTransactionActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,15 +35,12 @@ public class ListTransactionFragment extends Fragment implements PulseMainServer
     private Unbinder unbinder;
     private AdapterTransactions adapter;
     List<Response> responses;
-    // Store instance variables
     public static final String ARG_PAGE = "ARG_PAGE";
     private int page;
-
     @BindView(R.id.rv_transactions)
     RecyclerView rv_main;
 
-
-    GeneratorTransactions presenterTransactions;
+    private GeneratorTransactions presenterTransactions;
 
     // newInstance constructor for creating fragment with arguments
     public static ListTransactionFragment newInstance(int page) {
@@ -84,8 +78,6 @@ public class ListTransactionFragment extends Fragment implements PulseMainServer
             responses = savedInstanceState.getParcelableArrayList(TRANSACTION_LIST_STATE);
             adapter.swipeLoadTransactions(responses);
         }
-
-
         return view;
     }
 
@@ -98,7 +90,6 @@ public class ListTransactionFragment extends Fragment implements PulseMainServer
     @Override
     public void onFailOccureTransactions(String errmsg) {
         Toast.makeText(this.getContext(), errmsg, Toast.LENGTH_SHORT).show();
-        System.out.println(errmsg);
     }
 
     @Override

@@ -16,8 +16,8 @@ import retrofit2.Callback;
  */
 
 public class GeneratorAutoTexts {
-    PulseAutoText pulseMainServer;
-    ClientMainCall clientMainCall = new ClientMainCall();
+    private PulseAutoText pulseMainServer;
+    private ClientMainCall clientMainCall = new ClientMainCall();
     private Call<Mautotext> apiCall;
 
     public GeneratorAutoTexts(PulseAutoText pulseMainServer) {

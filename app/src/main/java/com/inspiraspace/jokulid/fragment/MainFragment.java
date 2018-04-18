@@ -14,7 +14,6 @@ import android.view.ViewGroup;
 
 import com.inspiraspace.jokulid.R;
 import com.inspiraspace.jokulid.adapter.AdapterFragmentPager;
-import com.inspiraspace.jokulid.fragment.transactions.ListTransactionFragment;
 import com.inspiraspace.jokulid.subactivities.CreateTransactionActivity;
 
 import butterknife.BindView;

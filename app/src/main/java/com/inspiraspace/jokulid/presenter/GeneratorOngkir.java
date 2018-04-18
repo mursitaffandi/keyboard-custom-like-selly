@@ -17,8 +17,8 @@ import retrofit2.Response;
  */
 
 public class GeneratorOngkir {
-    PulseOngkir pulseMainServer;
-    ClientRajaongkirproCall clientMainCall = new ClientRajaongkirproCall();
+    private PulseOngkir pulseMainServer;
+    private ClientRajaongkirproCall clientMainCall = new ClientRajaongkirproCall();
     private Call<FeeShipping> apiCall;
     private List<Result> listResultOngkir;
 

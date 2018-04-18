@@ -12,6 +12,13 @@ import android.widget.Button;
 
 import com.inspiraspace.jokulid.R;
 import com.inspiraspace.jokulid.subactivities.AutoTextActivity;
+import com.inspiraspace.jokulid.subactivities.DefaultShippmentOriginActivity;
+import com.inspiraspace.jokulid.subactivities.DefaultShippmentWeightActivity;
+import com.inspiraspace.jokulid.subactivities.DetailShopActivity;
+import com.inspiraspace.jokulid.subactivities.DetailUserActivity;
+import com.inspiraspace.jokulid.subactivities.PaymentActivity;
+import com.inspiraspace.jokulid.subactivities.ScheduleDailyreminderActivity;
+import com.inspiraspace.jokulid.subactivities.ShippmentCompanysericeActivity;
 import com.inspiraspace.jokulid.subactivities.TemplateActivity;
 
 import butterknife.BindView;
@@ -57,7 +64,8 @@ public class SettingsFragment extends Fragment implements View.OnClickListener {
     @BindView(R.id.btn_main_setting_logout)
     Button btn_main_setting_logout;
 
-    private Intent intent;
+    private Intent intent = null;
+    private Class<?> cls = null;
     private Context activity;
     public SettingsFragment() {
         // Required empty public constructor
@@ -89,48 +97,44 @@ public class SettingsFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        intent = null;
-        switch (v.getId()){
-            case R.id.btn_main_setting_detailshop :
-
+        switch (v.getId()) {
+            case R.id.btn_main_setting_detailshop:
+                cls = DetailShopActivity.class;
                 break;
-            case R.id.btn_main_setting_detailuser :
-
+            case R.id.btn_main_setting_detailuser:
+                cls = DetailUserActivity.class;
                 break;
-            case R.id.btn_main_setting_payment :
-
+            case R.id.btn_main_setting_payment:
+                cls = PaymentActivity.class;
                 break;
-            case R.id.btn_main_setting_tempalte_afterpaid :
-            case R.id.btn_main_setting_tempalte_remaindtopay :
-            case R.id.btn_main_setting_tempalte_sendresi :
-                intent =  new Intent(activity, TemplateActivity.class);
+            case R.id.btn_main_setting_tempalte_afterpaid:
+            case R.id.btn_main_setting_tempalte_remaindtopay:
+            case R.id.btn_main_setting_tempalte_sendresi:
+                cls = TemplateActivity.class;
                 break;
-            case R.id.btn_main_setting_tempalte_autotext :
-                intent =  new Intent(activity, AutoTextActivity.class);
-
+            case R.id.btn_main_setting_tempalte_autotext:
+                cls = AutoTextActivity.class;
                 break;
-            case R.id.btn_main_setting_shippment_origin :
-
+            case R.id.btn_main_setting_shippment_origin:
+                cls = DefaultShippmentOriginActivity.class;
                 break;
-            case R.id.btn_main_setting_shippment_companyservice :
-
+            case R.id.btn_main_setting_shippment_companyservice:
+                cls = ShippmentCompanysericeActivity.class;
                 break;
-            case R.id.btn_main_setting_shippment_weigth :
-
+            case R.id.btn_main_setting_shippment_weigth:
+                cls = DefaultShippmentWeightActivity.class;
                 break;
-            case R.id.btn_main_setting_dailyreminder :
-
+            case R.id.btn_main_setting_dailyreminder:
+                cls = ScheduleDailyreminderActivity.class;
                 break;
-            case R.id.btn_main_setting_logout :
-
+            case R.id.btn_main_setting_logout:
                 break;
-
-                default:
-                    break;
+            default:
+                break;
         }
-        if (intent!=null)
-        startActivity(intent);
+        intent = new Intent(activity, cls);
+        if (cls != null)
+            startActivity(intent);
         else return;
-
     }
 }

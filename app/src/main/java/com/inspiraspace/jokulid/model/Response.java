@@ -9,7 +9,7 @@ public class Response {
     @SerializedName("city")
     private String mCity;
     @SerializedName("id")
-    private Long mId;
+    private String mId;
     @SerializedName("state")
     private String mState;
     @SerializedName("subdistrict")
@@ -28,11 +28,11 @@ public class Response {
         mCity = city;
     }
 
-    public Long getId() {
+    public String getId() {
         return mId;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         mId = id;
     }
 

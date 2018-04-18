@@ -49,13 +49,14 @@ public class ShippmentFeeFragment extends Fragment implements TextWatcher, Pulse
     @BindView(R.id.btn_shippmentfee_copytoclipboard)
     Button btn_shippmentfee_copytoclipboard;
 
-    GeneratorOngkir generatorOngkir;
     GeneratorFindings generatorFindings;
     ArrayAdapter autoTextAdapter;
     ArrayList<String> arrSubdistrictOrigin;
     List<Response> arrSubdistrict;
+    List<Result> resultOngkir;
 
-    private String idShippmentOrigin;
+    private String idShippmentOrigin = null;
+    private String idShippmentDestination = null;
     private Context mContext;
 
     public ShippmentFeeFragment() {
@@ -71,7 +72,6 @@ public class ShippmentFeeFragment extends Fragment implements TextWatcher, Pulse
         ButterKnife.bind(this, view);
 
         this.mContext = this.getContext();
-        generatorOngkir = new GeneratorOngkir(this);
 //        generatorFindings = new GeneratorFindings(this);
         arrSubdistrict = Constant.getSampleSubdistrictID().getResponse();
 
@@ -83,17 +83,12 @@ public class ShippmentFeeFragment extends Fragment implements TextWatcher, Pulse
         etFrom.setThreshold(3);
         etDestination.setThreshold(3);
 
-        etFrom.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                                             @Override
-                                             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                                                 idShippmentOrigin = String.valueOf(arrSubdistrict.get(position).getId());
-                                             }
-
-                                             @Override
-                                             public void onNothingSelected(AdapterView<?> parent) {
-
-                                             }
-                                         }
+        etFrom.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                                          @Override
+                                          public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                                              idShippmentOrigin = arrSubdistrict.get(position).getId();
+                                          }
+                                      }
         );
         etFrom.addTextChangedListener(this);
         etDestination.addTextChangedListener(this);
@@ -105,20 +100,10 @@ public class ShippmentFeeFragment extends Fragment implements TextWatcher, Pulse
         generatorFindings.searchSubdistrict(keyword, field);
     }
 
-    public void countShippmentFee(String origin_id, String destination_id, String weight_gram) {
-        generatorOngkir.getOngkir(
-                origin_id,
-                "subdistrict",
-                destination_id,
-                "subdistrict",
-                weight_gram,
-                "jne"
-        );
-    }
 
     @Override
     public void onSuccessGetOngkir(List<Result> resultOngkir) {
-        System.out.println("resultOngkir " + resultOngkir.get(0).getCosts().get(0).getService());
+        this.resultOngkir = resultOngkir;
     }
 
     @Override
@@ -163,6 +148,7 @@ public class ShippmentFeeFragment extends Fragment implements TextWatcher, Pulse
                 //searchSubdistrict(etFrom.getText().toString(), etFrom);
                 autoTextAdapter = new ArrayAdapter(mContext, R.layout.item_subdistrict, arrSubdistrictOrigin);
                 autoTextAdapter.setDropDownViewResource(R.layout.item_subdistrict);
+
                 etFrom.setAdapter(autoTextAdapter);
                 if (etFrom.getText().length() >= etFrom.getThreshold() && !autoTextAdapter.isEmpty()) {
                     etFrom.showDropDown();
@@ -174,6 +160,4 @@ public class ShippmentFeeFragment extends Fragment implements TextWatcher, Pulse
             }
         }
     }
-
-
 }

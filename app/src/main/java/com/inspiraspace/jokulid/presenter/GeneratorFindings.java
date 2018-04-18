@@ -14,8 +14,8 @@ import retrofit2.Callback;
  */
 
 public class GeneratorFindings {
-    PulseFindingsSubdistrict pulseMainServer;
-    ClientInspiralocalCall clientMainCall = new ClientInspiralocalCall();
+    private PulseFindingsSubdistrict pulseMainServer;
+    private ClientInspiralocalCall clientMainCall = new ClientInspiralocalCall();
     private Call<Findings> apiCall;
 
     public GeneratorFindings(PulseFindingsSubdistrict pulseMainServer) {

@@ -24,11 +24,13 @@ import com.inspiraspace.jokulid.fragment.MainFragment;
 import com.inspiraspace.jokulid.fragment.ReportFragment;
 import com.inspiraspace.jokulid.fragment.SettingsFragment;
 import com.inspiraspace.jokulid.fragment.ShippmentFeeFragment;
+import com.inspiraspace.jokulid.utils.BaseAuthedActivity;
+import com.inspiraspace.jokulid.utils.Constant;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class MainActivity extends AppCompatActivity
+public class MainActivity extends BaseAuthedActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     private Fragment fragment;
     private FragmentManager fragmentManager;
@@ -60,6 +62,12 @@ public class MainActivity extends AppCompatActivity
         toggle.syncState();
 
         navigationView.setNavigationItemSelectedListener(this);
+    }
+
+    @Override
+    protected void onStop() {
+        this.fragment = fragment;
+        super.onStop();
     }
 
     @Override
@@ -98,23 +106,33 @@ public class MainActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
-
-        if (id == R.id.nav_transactions) {
-            fragment = new MainFragment().newInstance(0);
-        } else if (id == R.id.nav_shippment) {
-            fragment = new ShippmentFeeFragment();
-        } else if (id == R.id.nav_report) {
-            fragment = new ReportFragment();
-        } else if (id == R.id.nav_customers) {
-            fragment = new CustomersFragment();
-        } else if (id == R.id.nav_transactionachieve) {
-            fragment = new MainFragment().newInstance(1);
-        } else if (id == R.id.nav_gratis) {
-            fragment = new GratisFragment();
-        } else if (id == R.id.nav_settings) {
-            fragment = new SettingsFragment();
-        } else if (id == R.id.nav_help) {
-            fragment = new HelpFragment();
+        switch (item.getItemId()) {
+            case R.id.nav_transactions:
+                fragment = new MainFragment().newInstance(0);
+                break;
+            case R.id.nav_shippment:
+                fragment = new ShippmentFeeFragment();
+                break;
+            case R.id.nav_report:
+                fragment = new ReportFragment();
+                break;
+            case R.id.nav_customers:
+                fragment = new CustomersFragment();
+                break;
+            case R.id.nav_transactionachieve:
+                fragment = new MainFragment().newInstance(1);
+                break;
+            case R.id.nav_gratis:
+                fragment = new GratisFragment();
+                break;
+            case R.id.nav_settings:
+                fragment = new SettingsFragment();
+                break;
+            case R.id.nav_help:
+                fragment = new HelpFragment();
+                break;
+            default:
+                break;
         }
 
         fragmentManager.beginTransaction()
@@ -123,6 +141,7 @@ public class MainActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
@@ -131,22 +150,22 @@ public class MainActivity extends AppCompatActivity
                 getContentResolver(),
                 Settings.Secure.DEFAULT_INPUT_METHOD);
 
-        if (!id.equals("com.inspiraspace.jokulid/.keylogger.softkeyboard.SoftKeyboard")) {
+        if (!id.equals(Constant.URI_KEYBOARD_JOKULID)) {
             showChangeKeyboardDialog();
         }
     }
 
     public void showChangeKeyboardDialog() {
         AlertDialog.Builder dialogChangeKeyboard = new AlertDialog.Builder(this);
-        dialogChangeKeyboard.setTitle("Jokul.id Keyboard");
-        dialogChangeKeyboard.setMessage("Ganti keyboard dengan Jokul.id sekarang?");
-        dialogChangeKeyboard.setPositiveButton("Iya", new DialogInterface.OnClickListener() {
+        dialogChangeKeyboard.setTitle(R.string.dialog_title_chagekeyboard);
+        dialogChangeKeyboard.setMessage(R.string.dialog_question_chagekeyboard);
+        dialogChangeKeyboard.setPositiveButton(R.string.dialog_positive_chagekeyboard, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 changeKeyboardSetting();
             }
         });
-        dialogChangeKeyboard.setNegativeButton("Nanti", new DialogInterface.OnClickListener() {
+        dialogChangeKeyboard.setNegativeButton(R.string.dialog_negative_chagekeyboard, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.cancel();

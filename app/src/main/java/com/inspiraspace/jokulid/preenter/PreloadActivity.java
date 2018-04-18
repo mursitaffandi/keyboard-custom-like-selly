@@ -4,8 +4,9 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
 import com.inspiraspace.jokulid.R;
+import com.inspiraspace.jokulid.utils.BaseAuthedActivity;
 
-public class PreloadActivity extends AppCompatActivity {
+public class PreloadActivity extends BaseAuthedActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -4,15 +4,15 @@ android {
     compileSdkVersion 27
     defaultConfig {
         applicationId "com.inspiraspace.jokulid"
-        minSdkVersion 16
+        minSdkVersion 19
         targetSdkVersion 27
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         buildConfigField "String", "BASE_URL_MAIN", "\"http://192.168.10.168/jokul_id/\""
         buildConfigField "String", "BASE_URL_MAIN_IMAGE_PAYMENT", "\"http://192.168.10.168/jokul_id/image/\""
-//        buildConfigField "String", "BASE_URL_MAIN_IMAGE_PAYMENT", "\"http://192.168.43.196/jokul_id/image/\""
 //        buildConfigField "String", "BASE_URL_MAIN", "\"http://192.168.43.196/jokul_id/\""
+//        buildConfigField "String", "BASE_URL_MAIN_IMAGE_PAYMENT", "\"http://192.168.43.196/jokul_id/image/\""
         buildConfigField "String", "BASE_URL_INSPIRALOCAL", "\"https://inspiralocal.id:3000\""
         buildConfigField "String", "BASE_URL_RAJAONGKIR", "\"https://pro.rajaongkir.com\""
 

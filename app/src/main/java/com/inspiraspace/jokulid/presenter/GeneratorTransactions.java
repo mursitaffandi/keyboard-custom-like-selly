@@ -16,11 +16,10 @@ import retrofit2.Response;
  */
 
 public class GeneratorTransactions {
-    PulseMainServer pulseMainServer;
-    ClientMainCall clientMainCall = new ClientMainCall();
+    private PulseMainServer pulseMainServer;
+    private ClientMainCall clientMainCall = new ClientMainCall();
     private Call<Transaction> apiCall;
     private List<com.inspiraspace.jokulid.model.transactions.Response> listTransaction;
-    int code_status_transaction;
 
     public GeneratorTransactions(PulseMainServer pulseMainServer) {
        this.pulseMainServer = pulseMainServer;
@@ -37,7 +36,6 @@ public class GeneratorTransactions {
             case 2:
                 apiCall = clientMainCall.getService().getTransaction_shippeds(Constant.USER_ID);
                 break;
-
             case 3:
                 apiCall = clientMainCall.getService().getTransaction_done(Constant.USER_ID);
                 break;
