@@ -15,6 +15,7 @@
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -35,106 +36,76 @@
                 android:resource="@xml/method" />
         </service>
 
+        <receiver
+            android:name=".utils.AlarmReceiver"
+            android:enabled="true"
+            android:exported="true" />
+
         <activity
             android:name=".subactivities.DetailTransaction"
             android:label="@string/title_activity_detail_transaction"
             android:parentActivityName=".MainActivity"
-            android:theme="@style/AppTheme.NoActionBar">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.inspiraspace.jokulid.MainActivity" />
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar"/>
+
         <activity
             android:name=".subactivities.CreateTransactionActivity"
             android:label="@string/title_activity_create_transaction"
-            android:parentActivityName=".MainActivity"
-            android:theme="@style/AppTheme.NoActionBar">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.inspiraspace.jokulid.MainActivity" />
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar"/>
+
         <activity
             android:name=".subactivities.TemplateActivity"
             android:label="@string/title_activity_template"
-            android:parentActivityName=".MainActivity"
-            android:theme="@style/AppTheme.NoActionBar">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.inspiraspace.jokulid.MainActivity" />
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar"/>
+
         <activity
             android:name=".subactivities.AutoTextActivity"
             android:label="@string/title_activity_auto_text"
-            android:parentActivityName=".MainActivity"
-            android:theme="@style/AppTheme.NoActionBar">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.inspiraspace.jokulid.MainActivity" />
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar"/>
+
         <activity android:name=".subactivities.DetailAutoTextActivity" />
+
         <activity
             android:name=".subactivities.DetailShopActivity"
             android:label="@string/title_activity_detail_shop"
-            android:parentActivityName=".MainActivity"
-            android:theme="@style/AppTheme.NoActionBar">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.inspiraspace.jokulid.MainActivity" />
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar"/>
+
         <activity
             android:name=".subactivities.DetailUserActivity"
             android:label="@string/title_activity_detail_user"
             android:theme="@style/AppTheme.NoActionBar" />
+
         <activity
             android:name=".subactivities.PaymentActivity"
             android:label="@string/title_activity_payment"
-            android:parentActivityName=".MainActivity"
-            android:theme="@style/AppTheme.NoActionBar">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.inspiraspace.jokulid.MainActivity" />
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar"/>
+
         <activity
             android:name=".subactivities.DefaultShippmentOriginActivity"
             android:label="@string/title_activity_default_shippment_origin"
-            android:parentActivityName=".MainActivity"
-            android:theme="@style/AppTheme.NoActionBar">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.inspiraspace.jokulid.MainActivity" />
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar"/>
+
         <activity
             android:name=".subactivities.ShippmentCompanysericeActivity"
             android:label="@string/title_activity_shippment_companyserice"
-            android:parentActivityName=".MainActivity"
-            android:theme="@style/AppTheme.NoActionBar">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.inspiraspace.jokulid.MainActivity" />
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar"/>
+
         <activity
             android:name=".subactivities.DefaultShippmentWeightActivity"
             android:label="@string/title_activity_default_shippment_weight"
-            android:parentActivityName=".MainActivity"
-            android:theme="@style/AppTheme.NoActionBar">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.inspiraspace.jokulid.MainActivity" />
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar"/>
+
         <activity
             android:name=".subactivities.ScheduleDailyreminderActivity"
             android:label="@string/title_activity_schedule_dailyreminder"
-            android:parentActivityName=".MainActivity"
-            android:theme="@style/AppTheme.NoActionBar">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.inspiraspace.jokulid.MainActivity" />
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar"/>
+
         <activity android:name=".preenter.PreloadActivity" />
+
         <activity android:name=".preenter.RegisterActivity" />
+
         <activity
             android:name=".preenter.LoginActivity"
-            android:label="@string/title_activity_login"></activity>
+            android:label="@string/title_activity_login"/>
     </application>
 
 </manifest>

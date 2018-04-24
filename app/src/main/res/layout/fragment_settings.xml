@@ -106,14 +106,14 @@
             android:textSize="24sp"
             android:text="@string/label_main_setting_dailyreminder" />
 
-        <Button
+        <!--<Button
             android:id="@+id/btn_main_setting_logout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/btn_main_setting_dailyreminder"
             android:paddingBottom="8dp"
             android:textSize="24sp"
-            android:text="@string/label_main_setting_logout" />
+            android:text="@string/label_main_setting_logout" />-->
     </RelativeLayout>
 
 </ScrollView>

@@ -23,6 +23,8 @@ import com.inspiraspace.jokulid.adapter.AdpLVLogTransaction;
 import com.inspiraspace.jokulid.adapter.AdpSpinnerChatapp;
 import com.inspiraspace.jokulid.adapter.AdpSpinnerPayment;
 import com.inspiraspace.jokulid.model.ListChatapp;
+import com.inspiraspace.jokulid.model.preaddtransaction.Chatapp;
+import com.inspiraspace.jokulid.model.preaddtransaction.Payment;
 import com.inspiraspace.jokulid.model.transactions.Item;
 import com.inspiraspace.jokulid.model.transactions.Log;
 import com.inspiraspace.jokulid.model.transactions.Response;
@@ -117,9 +119,13 @@ public class DetailTransaction extends AppCompatActivity implements PresenterPre
     List<Item> customer_items;
     List<Log> customer_logs;
 
-    private ArrayList dataChatapps;
-    private ArrayList dataPayments;
-    private com.inspiraspace.jokulid.model.preaddtransaction.Response preaddtransaction;
+    private ArrayList<Chatapp> dataChatapps;
+    private ArrayList<Payment> dataPayments;
+
+    AdpSpinnerChatapp adpSpinnerChatapp;
+    AdpSpinnerPayment adpSpinnerPayment;
+    AdpLVLogTransaction adpLVLogTransaction;
+    AdpLVItemTransaction adpLVItemTransaction;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -162,7 +168,7 @@ public class DetailTransaction extends AppCompatActivity implements PresenterPre
         edt_detailtr_ety_customershippmentfee.setText(customer_shippmentfee);
         edt_detailtr_ety_customernote.setText(customer_note);
 
-        AdpSpinnerChatapp adpSpinnerChatapp = new AdpSpinnerChatapp(this, R.id.tv_item_chatapp, dataChatapps);
+        adpSpinnerChatapp = new AdpSpinnerChatapp(this, R.id.tv_item_chatapp, dataChatapps);
         sp_detailtr_ety_chatapp.setAdapter(adpSpinnerChatapp);
         /*sp_detailtr_ety_chatapp.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -184,13 +190,13 @@ public class DetailTransaction extends AppCompatActivity implements PresenterPre
         });
 
 
-        AdpSpinnerPayment adpSpinnerPayment = new AdpSpinnerPayment(this, R.id.tv_item_payment, dataPayments);
+        adpSpinnerPayment = new AdpSpinnerPayment(this, R.id.tv_item_payment, dataPayments);
         sp_detailtr_ety_paymentmethod.setAdapter(adpSpinnerPayment);
 
-        AdpLVLogTransaction adpLVLogTransaction = new AdpLVLogTransaction(item_transaction.getLog(), this);
+        adpLVLogTransaction = new AdpLVLogTransaction(item_transaction.getLog(), this);
         lv_detailtr_ety_customerlog.setAdapter(adpLVLogTransaction);
 
-        AdpLVItemTransaction adpLVItemTransaction = new AdpLVItemTransaction(item_transaction.getItem(), this);
+        adpLVItemTransaction = new AdpLVItemTransaction(item_transaction.getItem(), this);
         lv_detailtr_ety_customeritem.setAdapter(adpLVItemTransaction);
 
         enableEdittext(edt_detailtr_ety_customername);
@@ -215,9 +221,9 @@ public class DetailTransaction extends AppCompatActivity implements PresenterPre
 
     public void openChatapp(int id_chat) {
         Intent i;
-        id_chat = --id_chat;
-        String appPackage = preaddtransaction.getChatapp().get(id_chat).getPackage();
-        String appName = preaddtransaction.getChatapp().get(id_chat).getName();
+        --id_chat;
+        String appPackage = dataChatapps.get(id_chat).getPackage();
+        String appName = dataChatapps.get(id_chat).getName();
         if (id_chat == 0) {
             i = new Intent(Intent.ACTION_VIEW);
 //            customer_number =
@@ -233,12 +239,11 @@ public class DetailTransaction extends AppCompatActivity implements PresenterPre
             Toast.makeText(this, appName + " Not Installed", Toast.LENGTH_SHORT).show();
             System.out.println(e.getMessage());
         }
-
     }
 
     public void shareTextToChatapp(int id_chat, String text_chat) {
-        String appPackage = preaddtransaction.getChatapp().get(id_chat).getPackage();
-        String appName = preaddtransaction.getChatapp().get(id_chat).getName();
+        String appPackage = dataChatapps.get(id_chat).getPackage();
+        String appName = dataChatapps.get(id_chat).getName();
         PackageManager pm = getPackageManager();
         try {
             PackageInfo info = pm.getPackageInfo(appPackage, PackageManager.GET_META_DATA);
@@ -258,7 +263,6 @@ public class DetailTransaction extends AppCompatActivity implements PresenterPre
 
     @Override
     public void onSuccesPayment(com.inspiraspace.jokulid.model.preaddtransaction.Response payments) {
-        preaddtransaction = payments;
         dataPayments = payments.getArrPayment();
         dataChatapps = payments.getArrChatapp();
 

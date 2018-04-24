@@ -11,35 +11,41 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.ListView;
 
 import com.inspiraspace.jokulid.R;
-import com.inspiraspace.jokulid.model.Response;
+import com.inspiraspace.jokulid.adapter.AdpAutocomplateAddress;
+import com.inspiraspace.jokulid.adapter.AdpLVResultOngkir;
+import com.inspiraspace.jokulid.model.rajaongkir.Item_Ongkir;
 import com.inspiraspace.jokulid.model.rajaongkir.Result;
-import com.inspiraspace.jokulid.network.ongkir.PulseOngkir;
-import com.inspiraspace.jokulid.presenter.GeneratorFindings;
-import com.inspiraspace.jokulid.presenter.GeneratorOngkir;
-import com.inspiraspace.jokulid.utils.Constant;
+import com.inspiraspace.jokulid.model.searchsubdistrict.Datum;
+import com.inspiraspace.jokulid.presenter.shippmentfare.OnViewShippmentfare;
+import com.inspiraspace.jokulid.presenter.shippmentfare.PShippmentFare;
+import com.inspiraspace.jokulid.utils.Clipboard_Utils;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.Unbinder;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ShippmentFeeFragment extends Fragment implements TextWatcher, PulseOngkir/*, PulseFindingsSubdistrict*/ {
+public class ShippmentFeeFragment extends Fragment implements TextWatcher, OnViewShippmentfare, View.OnClickListener {
     @BindView(R.id.etItemWeight)
     TextInputEditText etItemWeight;
+
     @BindView(R.id.etFrom)
     AutoCompleteTextView etFrom;
+
     @BindView(R.id.etDestination)
     AutoCompleteTextView etDestination;
+
     @BindView(R.id.btn_count_shippmentfee)
     Button btn_count_shippmentfee;
 
@@ -49,15 +55,17 @@ public class ShippmentFeeFragment extends Fragment implements TextWatcher, Pulse
     @BindView(R.id.btn_shippmentfee_copytoclipboard)
     Button btn_shippmentfee_copytoclipboard;
 
-    GeneratorFindings generatorFindings;
-    ArrayAdapter autoTextAdapter;
-    ArrayList<String> arrSubdistrictOrigin;
-    List<Response> arrSubdistrict;
-    List<Result> resultOngkir;
+    Unbinder unbinder;
+    AdpAutocomplateAddress autoTextAdapter;
+    AdpLVResultOngkir adpResultOngkir;
+    ArrayList<Datum> arrSubdistrict;
+    List<Item_Ongkir> resultOngkir = new ArrayList<>();
 
     private String idShippmentOrigin = null;
     private String idShippmentDestination = null;
+    private String weightShippment = null;
     private Context mContext;
+    private PShippmentFare onPresentShippmentfare;
 
     public ShippmentFeeFragment() {
         // Required empty public constructor
@@ -69,67 +77,46 @@ public class ShippmentFeeFragment extends Fragment implements TextWatcher, Pulse
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.subcdt_shippmentfee, container, false);
-        ButterKnife.bind(this, view);
+        unbinder = ButterKnife.bind(this, view);
 
         this.mContext = this.getContext();
-//        generatorFindings = new GeneratorFindings(this);
-        arrSubdistrict = Constant.getSampleSubdistrictID().getResponse();
-
-        arrSubdistrictOrigin = Constant.getSampleSubdistrictID().getArrSubdistrict();
-        float scale = mContext.getResources().getDisplayMetrics().density;
-        etFrom.setDropDownHeight((int) (100 * scale + 0.5f));
-        etDestination.setDropDownHeight((int) (100 * scale + 0.5f));
+        onPresentShippmentfare = new PShippmentFare(mContext, this);
+        adpResultOngkir = new AdpLVResultOngkir(mContext, resultOngkir);
+        listOngkir.setAdapter(adpResultOngkir);
 
         etFrom.setThreshold(3);
         etDestination.setThreshold(3);
 
-        etFrom.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                                          @Override
-                                          public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                                              idShippmentOrigin = arrSubdistrict.get(position).getId();
-                                          }
-                                      }
+        etFrom.setOnItemClickListener(
+                new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        idShippmentOrigin = arrSubdistrict.get(position).getSubdistrictId();
+                    }
+                }
         );
+
+        etDestination.setOnItemClickListener(
+                new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        idShippmentDestination = arrSubdistrict.get(position).getSubdistrictId();
+                    }
+                }
+        );
+        etItemWeight.addTextChangedListener(this);
         etFrom.addTextChangedListener(this);
         etDestination.addTextChangedListener(this);
 
+
+        btn_count_shippmentfee.setOnClickListener(this);
+        btn_shippmentfee_copytoclipboard.setOnClickListener(this);
         return view;
     }
 
     public void searchSubdistrict(String keyword, AutoCompleteTextView field) {
-        generatorFindings.searchSubdistrict(keyword, field);
+        onPresentShippmentfare.OnSearchAddress(keyword, field);
     }
-
-
-    @Override
-    public void onSuccessGetOngkir(List<Result> resultOngkir) {
-        this.resultOngkir = resultOngkir;
-    }
-
-    @Override
-    public void onFailOccureTransactions(String errmsg) {
-        System.out.println("error ongkir" + errmsg);
-    }
-
-    /*@Override
-    public void onSuccessFindingsSubdistrict(ArrayList<Datum> findins, AutoCompleteTextView field) {
-        autoTextAdapter = new ArrayAdapter(mContext, R.layout.item_subdistrict, findins);
-        autoTextAdapter.setDropDownViewResource(R.layout.item_subdistrict);
-        float scale = getResources().getDisplayMetrics().density;
-        field.setDropDownHeight((int) (100 * scale + 0.5f));
-        field.setThreshold(3);
-        field.setAdapter(autoTextAdapter);
-
-        if (field.getText().length() >= field.getThreshold() && !autoTextAdapter.isEmpty()) {
-            field.showDropDown();
-        }
-    }*/
-
-    /*@Override
-    public void onFailFindins(String errmsg) {
-
-    }*/
-
 
     @Override
     public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -144,20 +131,61 @@ public class ShippmentFeeFragment extends Fragment implements TextWatcher, Pulse
     @Override
     public void afterTextChanged(Editable s) {
         if (etFrom.isFocused()) {
+            idShippmentOrigin = null;
             if (s.length() >= etFrom.getThreshold()) {
-                //searchSubdistrict(etFrom.getText().toString(), etFrom);
-                autoTextAdapter = new ArrayAdapter(mContext, R.layout.item_subdistrict, arrSubdistrictOrigin);
-                autoTextAdapter.setDropDownViewResource(R.layout.item_subdistrict);
-
-                etFrom.setAdapter(autoTextAdapter);
-                if (etFrom.getText().length() >= etFrom.getThreshold() && !autoTextAdapter.isEmpty()) {
-                    etFrom.showDropDown();
-                }
+                searchSubdistrict(etFrom.getText().toString(), etFrom);
             }
         } else if (etDestination.isFocused()) {
+            idShippmentDestination = null;
             if (s.length() >= etDestination.getThreshold()) {
-                //searchSubdistrict(etDestination.getText().toString(), etDestination);
+                searchSubdistrict(etDestination.getText().toString(), etDestination);
             }
+        }
+        weightShippment = etItemWeight.getText().toString();
+    }
+
+    private void showAutocomplateDropdown(AutoCompleteTextView field, ArrayList<Datum> listAddress) {
+        autoTextAdapter = new AdpAutocomplateAddress(mContext, R.layout.item_subdistrict, listAddress);
+        autoTextAdapter.setDropDownViewResource(R.layout.item_subdistrict);
+
+        field.setAdapter(autoTextAdapter);
+        if (field.getText().length() >= field.getThreshold() && !autoTextAdapter.isEmpty()) {
+            field.showDropDown();
+        }
+    }
+
+    @Override
+    public void OnSuccessFindingsAddress(ArrayList<Datum> datumListAddress, AutoCompleteTextView field) {
+        arrSubdistrict = datumListAddress;
+        showAutocomplateDropdown(field, datumListAddress);
+    }
+
+    @Override
+    public void OnSuccessShippmentfare(List<Item_Ongkir> resultListOngkir) {
+        listOngkir.setVisibility(View.VISIBLE);
+        this.resultOngkir = resultListOngkir;
+        adpResultOngkir.swipeRefresh(resultOngkir);
+        adpResultOngkir.notifyDataSetChanged();
+        if (resultListOngkir.size() > 0)
+            btn_shippmentfee_copytoclipboard.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void onDestroy() {
+        unbinder.unbind();
+        super.onDestroy();
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.btn_shippmentfee_copytoclipboard:
+                onPresentShippmentfare.OnClickCopyOngkir(adpResultOngkir.getItemsOngkir_selected());
+                break;
+
+            case R.id.btn_count_shippmentfee:
+                onPresentShippmentfare.OnCount(weightShippment, idShippmentOrigin, idShippmentDestination);
+                break;
         }
     }
 }

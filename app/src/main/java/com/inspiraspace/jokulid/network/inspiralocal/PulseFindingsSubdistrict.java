@@ -3,6 +3,7 @@ package com.inspiraspace.jokulid.network.inspiralocal;
 import android.widget.AutoCompleteTextView;
 
 import com.inspiraspace.jokulid.model.searchsubdistrict.Datum;
+import com.inspiraspace.jokulid.model.searchsubdistrict.Findings;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,6 +13,6 @@ import java.util.List;
  */
 
 public interface PulseFindingsSubdistrict {
-    void onSuccessFindingsSubdistrict(ArrayList<Datum> findins, AutoCompleteTextView field);
+    void onSuccessFindingsSubdistrict(Findings findins, AutoCompleteTextView field);
     void onFailFindins(String errmsg);
 }

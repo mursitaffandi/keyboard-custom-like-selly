@@ -89,7 +89,7 @@ public class ListTransactionFragment extends Fragment implements PulseMainServer
 
     @Override
     public void onFailOccureTransactions(String errmsg) {
-        Toast.makeText(this.getContext(), errmsg, Toast.LENGTH_SHORT).show();
+        Toast.makeText(context, errmsg, Toast.LENGTH_SHORT).show();
     }
 
     @Override

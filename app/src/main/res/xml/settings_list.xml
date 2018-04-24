@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory android:title="@string/action_notification">
+
+        <SwitchPreference
+            android:defaultValue="false"
+            android:key="@string/key_notif_daily"
+            android:summary="@string/label_notif_daily_summary"
+            android:title="@string/label_scheduler_reminder_pending" />
+
+
+        <Preference
+            android:key="@string/key_notif_daily_time"
+            android:title="@string/label_scheduler_reminder_pending_time" />
+    </PreferenceCategory>
+</PreferenceScreen>

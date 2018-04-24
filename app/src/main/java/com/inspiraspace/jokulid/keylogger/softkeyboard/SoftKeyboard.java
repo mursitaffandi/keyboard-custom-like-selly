@@ -7,6 +7,7 @@ import android.inputmethodservice.InputMethodService;
 import android.inputmethodservice.Keyboard;
 import android.inputmethodservice.KeyboardView;
 import android.os.IBinder;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TextInputEditText;
 import android.text.Editable;
 import android.text.InputType;
@@ -24,6 +25,7 @@ import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputConnection;
 import android.view.inputmethod.InputMethodManager;
 import android.view.inputmethod.InputMethodSubtype;
+import android.widget.AdapterView;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
@@ -34,9 +36,17 @@ import android.widget.TextView;
 
 import com.inspiraspace.jokulid.MainActivity;
 import com.inspiraspace.jokulid.R;
+import com.inspiraspace.jokulid.adapter.AdpAutoTexts;
+import com.inspiraspace.jokulid.adapter.AdpSubcdtPendings;
 import com.inspiraspace.jokulid.keylogger.Emoji.EmojiHelper.EmojiconGridView;
 import com.inspiraspace.jokulid.keylogger.Emoji.EmojiHelper.EmojiconsPopup;
 import com.inspiraspace.jokulid.keylogger.Emoji.Emojicon;
+import com.inspiraspace.jokulid.model.transactions.Response;
+import com.inspiraspace.jokulid.network.main.PulseAutoText;
+import com.inspiraspace.jokulid.network.main.PulseMainServer;
+import com.inspiraspace.jokulid.presenter.GeneratorAutoTexts;
+import com.inspiraspace.jokulid.presenter.GeneratorTransactions;
+import com.inspiraspace.jokulid.subactivities.DetailAutoTextActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -50,7 +60,7 @@ import java.util.List;
  * be fleshed out as appropriate.
  */
 public class SoftKeyboard extends InputMethodService
-        implements KeyboardView.OnKeyboardActionListener, View.OnClickListener, View.OnFocusChangeListener, TextWatcher {
+        implements KeyboardView.OnKeyboardActionListener, View.OnClickListener, View.OnFocusChangeListener, TextWatcher, PulseMainServer, PulseAutoText {
 
     static final boolean DEBUG = false;
 
@@ -103,6 +113,19 @@ public class SoftKeyboard extends InputMethodService
     Button btn_shippmentfee_copytoclipboard;
 
     TextView tv_title_toobar_subcdt;
+
+    ListView lv_subcdt_pending;
+    List<Response> responseTransactionList = new ArrayList<>();
+    AdpSubcdtPendings adpSubcdtPendings;
+    GeneratorTransactions generatorTransactions;
+
+    EditText edt_subcdt_autotext_search;
+    Button btn_subcdt_autotext_search;
+    ListView lv_subcdt_autotext_search;
+    FloatingActionButton btn_add_autotext;
+    GeneratorAutoTexts generatorAutoTexts;
+    List<com.inspiraspace.jokulid.model.autotext.Response> autotextList = new ArrayList<>();
+    AdpAutoTexts adpAutoTexts;
 
     private EditText[] getAllEditableField() {
         return new EditText[]{
@@ -214,6 +237,13 @@ public class SoftKeyboard extends InputMethodService
                 dialogIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(dialogIntent);
                 break;
+
+            case R.id.fab_autotext:
+                Intent i = new Intent(this, DetailAutoTextActivity.class);
+                i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                System.out.println("jvj");
+                startActivity(i);
+                break;
             default:
                 break;
         }
@@ -272,10 +302,14 @@ public class SoftKeyboard extends InputMethodService
 
         layout_candidatebar_main.setVisibility(View.GONE);
         tv_title_toobar_subcdt.setText(getString(R.string.title_subcdt_toolbar_autotext));
-
-        getCurrentInputConnection().commitText("newcommit0 \n nsdvknkv \n ksnfvs", 3);
+        generatorAutoTexts.getAutoText("");
 
     }
+    //send text to current field keyboad
+public void sendTextToFieldText(String text){
+    getCurrentInputConnection().commitText(text, 0);
+}
+
 
     private void showSubPending() {
         layout_subcdt_pending.setVisibility(View.VISIBLE);
@@ -287,6 +321,9 @@ public class SoftKeyboard extends InputMethodService
 
         layout_candidatebar_main.setVisibility(View.GONE);
         tv_title_toobar_subcdt.setText(getString(R.string.title_subcdt_toolbar_pending));
+
+        generatorTransactions.getTransactios(0);
+
     }
 
     private void setLatinKeyboard(LatinKeyboard nextKeyboard) {
@@ -295,7 +332,6 @@ public class SoftKeyboard extends InputMethodService
         nextKeyboard.setLanguageSwitchKeyVisibility(shouldSupportLanguageSwitchKey);
         mInputView.setKeyboard(nextKeyboard);
     }
-
 
     /**
      * Called by the framework when your view for showing candidates needs to
@@ -320,6 +356,28 @@ public class SoftKeyboard extends InputMethodService
         layout_subcdt_shippmentFee = wordBar.findViewById(R.id.layout_subcdt_shipmentfee);
         layout_subcdt_autotext = wordBar.findViewById(R.id.layout_subcdt_autotext);
         layout_subcdt_pending = wordBar.findViewById(R.id.layout_subcdt_pending);
+
+        lv_subcdt_pending = wordBar.findViewById(R.id.lv_subcdt_pending);
+        adpSubcdtPendings = new AdpSubcdtPendings(responseTransactionList, this);
+        lv_subcdt_pending.setAdapter(adpSubcdtPendings);
+        generatorTransactions = new GeneratorTransactions(this);
+
+        edt_subcdt_autotext_search = wordBar.findViewById(R.id.edt_subcdt_autotext_search);
+        btn_subcdt_autotext_search = wordBar.findViewById(R.id.btn_subcdt_autotext_search);
+        lv_subcdt_autotext_search = wordBar.findViewById(R.id.lv_subcdt_autotext_search);
+        lv_subcdt_autotext_search.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                sendTextToFieldText(autotextList.get(position).getContent());
+            }
+        });
+        btn_subcdt_autotext_search.setOnClickListener(this);
+        adpAutoTexts = new AdpAutoTexts(this);
+        btn_add_autotext = wordBar.findViewById(R.id.fab_autotext);
+        btn_cdt_autotext.setOnClickListener(this);
+        generatorAutoTexts = new GeneratorAutoTexts(this);
+
+
 
         etItemWeight = wordBar.findViewById(R.id.etItemWeight);
         etFrom = wordBar.findViewById(R.id.etFrom);
@@ -1037,6 +1095,27 @@ public class SoftKeyboard extends InputMethodService
                 mInputView.setVisibility(View.VISIBLE);
             }
         }
+    }
+
+    @Override
+    public void onSuccessGetTransactions(List<Response> transaction) {
+        adpSubcdtPendings.swapLogs(transaction);
+    }
+
+    @Override
+    public void onFailOccureTransactions(String errmsg) {
+
+    }
+
+    @Override
+    public void onSuccess(List<com.inspiraspace.jokulid.model.autotext.Response> response) {
+        autotextList = response;
+        adpAutoTexts.swapLogs(autotextList);
+    }
+
+    @Override
+    public void onError(String msgerror) {
+
     }
             /*end View.OnFocusChangeListener*/
 

@@ -51,8 +51,8 @@ public class Datum {
         mProvinceName = provinceName;
     }
 
-    public Long getSubdistrictId() {
-        return mSubdistrictId;
+    public String getSubdistrictId() {
+        return String.valueOf(mSubdistrictId);
     }
 
     public void setSubdistrictId(Long subdistrictId) {
@@ -67,4 +67,7 @@ public class Datum {
         mSubdistrictName = subdistrictName;
     }
 
+    public String getFullAddress() {
+        return mSubdistrictName + ", " + mCityName + ", " + mProvinceName;
+    }
 }

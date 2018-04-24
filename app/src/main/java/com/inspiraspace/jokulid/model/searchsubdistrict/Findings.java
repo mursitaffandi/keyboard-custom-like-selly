@@ -4,6 +4,7 @@ package com.inspiraspace.jokulid.model.searchsubdistrict;
 import java.util.ArrayList;
 import java.util.List;
 import com.google.gson.annotations.SerializedName;
+import com.inspiraspace.jokulid.model.Response;
 
 @SuppressWarnings("unused")
 public class Findings {
@@ -23,11 +24,17 @@ public class Findings {
 
     public ArrayList<Datum> getArrDatum(){
         ArrayList<Datum> p = new ArrayList<>();
-        for (Datum mDatum : mData) {
+        for (Datum mDatum : mData)
             p.add(mDatum);
-        }
-
         return p;
+    }
+
+    public ArrayList<String> getArrSubdistrict(){
+        ArrayList<String> result = new ArrayList<>();
+        for(Datum r: mData){
+            result.add(r.getSubdistrictName() + ", " + r.getCityName() + ", " + r.getProvinceName());
+        }
+        return result;
     }
 
     public void setData(List<Datum> data) {

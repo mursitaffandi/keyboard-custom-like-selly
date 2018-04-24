@@ -20,6 +20,7 @@ import com.inspiraspace.jokulid.subactivities.PaymentActivity;
 import com.inspiraspace.jokulid.subactivities.ScheduleDailyreminderActivity;
 import com.inspiraspace.jokulid.subactivities.ShippmentCompanysericeActivity;
 import com.inspiraspace.jokulid.subactivities.TemplateActivity;
+import com.inspiraspace.jokulid.utils.Constant;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -61,8 +62,8 @@ public class SettingsFragment extends Fragment implements View.OnClickListener {
     @BindView(R.id.btn_main_setting_dailyreminder)
     Button btn_main_setting_dailyreminder;
 
-    @BindView(R.id.btn_main_setting_logout)
-    Button btn_main_setting_logout;
+   /* @BindView(R.id.btn_main_setting_logout)
+    Button btn_main_setting_logout;*/
 
     private Intent intent = null;
     private Class<?> cls = null;
@@ -90,13 +91,14 @@ public class SettingsFragment extends Fragment implements View.OnClickListener {
         btn_main_setting_shippment_companyservice.setOnClickListener(this);
         btn_main_setting_shippment_weigth.setOnClickListener(this);
         btn_main_setting_dailyreminder.setOnClickListener(this);
-        btn_main_setting_logout.setOnClickListener(this);
+        /*btn_main_setting_logout.setOnClickListener(this);*/
 
         return view;
     }
 
     @Override
     public void onClick(View v) {
+        intent = new Intent();
         switch (v.getId()) {
             case R.id.btn_main_setting_detailshop:
                 cls = DetailShopActivity.class;
@@ -108,8 +110,11 @@ public class SettingsFragment extends Fragment implements View.OnClickListener {
                 cls = PaymentActivity.class;
                 break;
             case R.id.btn_main_setting_tempalte_afterpaid:
+                intent.putExtra(Constant.KEY_INTENT_TEMPALTE, Constant.KEY_TEMPLATE_AFTERPAID);
             case R.id.btn_main_setting_tempalte_remaindtopay:
+                intent.putExtra(Constant.KEY_INTENT_TEMPALTE, Constant.KEY_TEMPLATE_REMINDERTOPAY);
             case R.id.btn_main_setting_tempalte_sendresi:
+                intent.putExtra(Constant.KEY_INTENT_TEMPALTE, Constant.KEY_TEMPLATE_SENDRESI);
                 cls = TemplateActivity.class;
                 break;
             case R.id.btn_main_setting_tempalte_autotext:
@@ -127,12 +132,12 @@ public class SettingsFragment extends Fragment implements View.OnClickListener {
             case R.id.btn_main_setting_dailyreminder:
                 cls = ScheduleDailyreminderActivity.class;
                 break;
-            case R.id.btn_main_setting_logout:
-                break;
+            /*case R.id.btn_main_setting_logout:
+                break;*/
             default:
                 break;
         }
-        intent = new Intent(activity, cls);
+        intent.setClass(activity,cls);
         if (cls != null)
             startActivity(intent);
         else return;

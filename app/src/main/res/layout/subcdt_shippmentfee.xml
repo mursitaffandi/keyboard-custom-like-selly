@@ -61,7 +61,7 @@
     <ListView
         android:id="@+id/listOngkir"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="210dp"
         android:background="#dcdcdc"
         android:paddingEnd="@dimen/fab_margin"
         android:paddingStart="@dimen/fab_margin"

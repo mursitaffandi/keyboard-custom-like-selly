@@ -11,7 +11,7 @@ public class Chatapp {
     @SerializedName("image")
     private String mImage;
     @SerializedName("link")
-    private Object mLink;
+    private String mLink;
     @SerializedName("name")
     private String mName;
     @SerializedName("nick")
@@ -35,11 +35,11 @@ public class Chatapp {
         mImage = image;
     }
 
-    public Object getLink() {
+    public String getLink() {
         return mLink;
     }
 
-    public void setLink(Object link) {
+    public void setLink(String link) {
         mLink = link;
     }
 

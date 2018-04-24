@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="216dp"
+    android:layout_height="match_parent">
+
+
+    <TextView
+        android:id="@+id/tv_item_subcdt_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true" />
+
+    <TextView
+        android:id="@+id/tv_item_subcdt_customer_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_item_subcdt_date" />
+
+    <TextView
+        android:id="@+id/tv_item_subcdt_customer_nohp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/tv_item_subcdt_customer_name"
+        android:layout_below="@+id/tv_item_subcdt_customer_name"
+        android:layout_marginTop="15dp" />
+
+    <TextView
+        android:id="@+id/tv_item_subcdt_customer_totalprice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/tv_item_subcdt_customer_nohp"
+        android:layout_below="@+id/tv_item_subcdt_customer_nohp"
+        android:layout_marginTop="36dp" />
+
+    <TextView
+        android:id="@+id/tv_item_subcdt_customer_paymentmethod"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/tv_item_subcdt_customer_totalprice"
+        android:layout_marginStart="37dp"
+        android:layout_toEndOf="@+id/tv_item_subcdt_customer_totalprice" />
+</RelativeLayout>

@@ -4,6 +4,7 @@ import com.facebook.stetho.okhttp3.StethoInterceptor;
 import com.inspiraspace.jokulid.BuildConfig;
 
 import java.io.IOException;
+import java.util.concurrent.TimeUnit;
 
 import okhttp3.HttpUrl;
 import okhttp3.Interceptor;
@@ -27,9 +28,7 @@ public class ClientRajaongkirproCall {
             public Response intercept(Chain chain) throws IOException {
                 Request request = chain.request();
 
-                HttpUrl httpUrl = request.url().newBuilder()
-
-                        .build();
+                HttpUrl httpUrl = request.url().newBuilder().build();
 
                 request = request
                         .newBuilder()
@@ -40,7 +39,9 @@ public class ClientRajaongkirproCall {
                         .build();
                 return chain.proceed(request);
             }
-        }).build();
+        }).readTimeout(60, TimeUnit.SECONDS)
+                .connectTimeout(60, TimeUnit.SECONDS)
+                .build();
 
         Retrofit retrofit =  new Retrofit.Builder().client(okHttpClient).baseUrl(BuildConfig.BASE_URL_RAJAONGKIR).addConverterFactory(GsonConverterFactory.create()).build();
 

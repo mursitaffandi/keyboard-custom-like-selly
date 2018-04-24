@@ -1,5 +1,6 @@
 package com.inspiraspace.jokulid.network.main;
 
+import com.facebook.stetho.okhttp3.StethoInterceptor;
 import com.inspiraspace.jokulid.BuildConfig;
 
 import java.io.IOException;
@@ -21,7 +22,7 @@ public class ClientMainCall {
 
     public ClientMainCall() {
 
-        OkHttpClient okHttpClient = new OkHttpClient.Builder().addInterceptor(new Interceptor() {
+        OkHttpClient okHttpClient = new OkHttpClient.Builder().addNetworkInterceptor(new StethoInterceptor()).addInterceptor(new Interceptor() {
             @Override
             public Response intercept(Chain chain) throws IOException {
                 Request request = chain.request();

@@ -33,7 +33,7 @@ public class GeneratorOngkir {
                           String weight,
                           String courier) {
 
-        apiCall = clientMainCall.getService().requestfee( origin,
+        apiCall = clientMainCall.getService().requestfee(origin,
                 originType,
                 destination,
                 destinationType,

@@ -126,4 +126,16 @@
     <string name="dialog_positive_chagekeyboard">Iya</string>
     <string name="dialog_negative_chagekeyboard">Nanti</string>
     <string name="login_button_register">Create New Account</string>
+    <string name="message_set_daily_reminder_on">Daily Pending Transaction Reminder ON</string>
+    <string name="message_set_daily_reminder_off">Daily Pending Transaction Reminder OFF</string>
+    <string name="text_body_notif_daily_reminder">There %1$d some Pending Transaction</string>
+    <string name="label_scheduler_reminder_pending">Setting Daily Pending Reminder</string>
+    <string name="key_notif_daily">setting_daily_reminder_pendingtansaction</string>
+    <string name="label_notif_daily_summary">Set Your Notification Pending Transaction So we can Remain you for ask cutomer to pay</string>
+    <string name="action_notification">Reminder Setting</string>
+    <string name="key_notif_daily_time">key notif time</string>
+    <string name="label_scheduler_reminder_pending_time">Daily Reminder Scheduled at</string>
+    <string name="label_add_autotext">Add Autotext</string>
+    <string name="label_add_autotext_content">Content</string>
+    <string name="label_add_autotext_title">Shortcut</string>
 </resources>

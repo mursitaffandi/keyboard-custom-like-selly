@@ -6,6 +6,7 @@ import com.inspiraspace.jokulid.model.searchsubdistrict.Findings;
 import retrofit2.Call;
 import retrofit2.http.Field;
 import retrofit2.http.GET;
+import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 /**
@@ -15,6 +16,6 @@ import retrofit2.http.Query;
 public interface UrlInspiralocal {
     @GET("/provinces/search/{keyword}")
     Call<Findings> getFindingAddress(
-            @Query("keyword") String keyword
+            @Path("keyword") String keyword
     );
 }

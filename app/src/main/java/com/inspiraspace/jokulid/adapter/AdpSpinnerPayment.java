@@ -20,17 +20,17 @@ import java.util.ArrayList;
  * Created by mursitaffandi on 4/7/18.
  */
 
-public class AdpSpinnerPayment extends ArrayAdapter<String> {
+public class AdpSpinnerPayment extends ArrayAdapter<Payment> {
 
     private Activity activity;
-    private ArrayList data;
+    private ArrayList<Payment> data;
     Payment tempValues=null;
     LayoutInflater inflater;
 
     public AdpSpinnerPayment(
             Activity activitySpinner,
             int textViewResourceId,
-            ArrayList objects
+            ArrayList<Payment> objects
     )
     {
         super(activitySpinner, textViewResourceId, objects);
@@ -43,10 +43,15 @@ public class AdpSpinnerPayment extends ArrayAdapter<String> {
     @Override
     public View getDropDownView(int position, View convertView, ViewGroup parent) {
         View row = inflater.inflate(R.layout.item_payment, parent, false);
-        tempValues = (Payment) data.get(position);
+        tempValues = data.get(position);
         TextView label = row.findViewById(R.id.tv_item_payment);
+        TextView name = row.findViewById(R.id.tv_item_payment_name);
+        TextView number = row.findViewById(R.id.tv_item_payment_number);
+
         ImageView icon = row.findViewById(R.id.iv_item_payment);
         label.setText(tempValues.getBankName());
+        name.setText(tempValues.getBankAccountName());
+        number.setText(tempValues.getBankAccountNumber());
         Glide.with(row).load(BuildConfig.BASE_URL_MAIN_IMAGE_PAYMENT + tempValues.getBankImage()).into(icon);
         return row;
     }
@@ -54,7 +59,7 @@ public class AdpSpinnerPayment extends ArrayAdapter<String> {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         View row = inflater.inflate(R.layout.item_payment, parent, false);
-        tempValues = (Payment) data.get(position);
+        tempValues = data.get(position);
         TextView label = row.findViewById(R.id.tv_item_payment);
         ImageView icon = row.findViewById(R.id.iv_item_payment);
         label.setText(tempValues.getBankName());

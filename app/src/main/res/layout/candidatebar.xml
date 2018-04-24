@@ -54,11 +54,9 @@
             android:id="@+id/layout_subcdt_createinvoice"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:visibility="gone">
-           <!-- <include
-                layout="@layout/subcdt_createinvoice" />-->
+            android:visibility="gone">\
             <include
-                layout="@layout/content_create_transaction" />
+                layout="@layout/subcdt_createinvoice" />
         </ScrollView>
 
         <ScrollView
@@ -72,16 +70,10 @@
         </ScrollView>
 
 
-        <ScrollView
+        <include
             android:id="@+id/layout_subcdt_autotext"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:visibility="gone">
-
-            <!--<include
-                layout="@layout/subcdt_autotext" />-->
-            <include layout="@layout/content_auto_text"/>
-        </ScrollView>
+            layout="@layout/subcdt_autotext"
+            android:visibility="gone" />
 
         <include
             android:id="@+id/layout_subcdt_pending"

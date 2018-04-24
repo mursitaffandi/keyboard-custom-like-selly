@@ -1,11 +1,16 @@
 package com.inspiraspace.jokulid.network.main;
 
 import com.inspiraspace.jokulid.model.autotext.Mautotext;
+import com.inspiraspace.jokulid.model.customers.Customers;
 import com.inspiraspace.jokulid.model.preaddtransaction.Premaketransaction;
+import com.inspiraspace.jokulid.model.template.Template;
 import com.inspiraspace.jokulid.model.transactions.Transaction;
 
 import retrofit2.Call;
+import retrofit2.http.Field;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.POST;
 import retrofit2.http.Query;
 
 /**
@@ -28,10 +33,32 @@ public interface UrlMainServer {
     @GET("transaction_pending.php?status=10")
     Call<Transaction> getTransaction_cancel(@Query("user_id") String id_user);
 
-
     @GET("pre_create_transaction.php")
     Call<Premaketransaction> getPreDetailTransaction(@Query("user_id") String id_user);
 
     @GET("autotext.php")
-    Call<Mautotext> getAutoText(@Query("user_id") String id_user);
+    Call<Mautotext> getAutoText(@Query("user_id") String id_user, @Query("keyword") String keyword);
+
+    @GET("customers.php")
+    Call<Customers> getCustomers(@Query("user_id") String id_user);
+
+    @GET("get_template.php")
+    Call<Template> getTemplate(@Query("user_id") String id_user, @Query("template") String template);
+
+    @FormUrlEncoded
+    @POST("create_transaction.php")
+    Call<Void>  setNewTransaction(
+            @Field("customername") String strsend_customername,
+            @Field("customernohp") String strsend_customernohp,
+            @Field("customeraddress") String strsend_customeraddress,
+            @Field("transactionnote") String strsend_transactionnote,
+            @Field("transactionongkir") String strsend_transactionongkir,
+            @Field("id_bankaccount") String strsend_id_bankaccount,
+            @Field("id_chatapp") String strsend_id_chatapp,
+            @Field("item_qty") String strsend_item_qty,
+            @Field("item_name") String strsend_item_name,
+            @Field("item_price") String strsend_item_price,
+            @Field("user_id") String user_id
+    );
+
 }

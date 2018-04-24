@@ -24,8 +24,9 @@ public class GeneratorAutoTexts {
         this.pulseMainServer = pulseMainServer;
     }
 
-    public void getAutoText(int code_status_transaction) {
-        apiCall = clientMainCall.getService().getAutoText(Constant.USER_ID);
+    public void getAutoText(String keyword) {
+        if (keyword=="") keyword="a";
+        apiCall = clientMainCall.getService().getAutoText(Constant.USER_ID, keyword);
         apiCall.enqueue(new Callback<Mautotext>() {
             @Override
             public void onResponse(Call<Mautotext> call, retrofit2.Response<Mautotext> response) {

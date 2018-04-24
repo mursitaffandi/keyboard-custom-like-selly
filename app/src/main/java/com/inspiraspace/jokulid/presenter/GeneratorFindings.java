@@ -27,8 +27,8 @@ public class GeneratorFindings {
         apiCall.enqueue(new Callback<Findings>() {
             @Override
             public void onResponse(Call<Findings> call, retrofit2.Response<Findings> response) {
-Findings f = response.body();
-                pulseMainServer.onSuccessFindingsSubdistrict(response.body().getArrDatum(), field);
+                Findings f = response.body();
+                pulseMainServer.onSuccessFindingsSubdistrict(f, field);
             }
 
             @Override
