@@ -3,23 +3,16 @@ package com.inspiraspace.jokulid.subactivities;
 import android.os.Bundle;
 import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.view.View;
-import android.widget.AdapterView;
 import android.widget.AutoCompleteTextView;
-import android.widget.Button;
 import android.widget.Spinner;
 
 import com.inspiraspace.jokulid.R;
-import com.inspiraspace.jokulid.adapter.AdpLVItemTransaction;
-import com.inspiraspace.jokulid.adapter.AdpLVLogTransaction;
 import com.inspiraspace.jokulid.adapter.AdpSpinnerChatapp;
 import com.inspiraspace.jokulid.adapter.AdpSpinnerPayment;
 import com.inspiraspace.jokulid.model.preaddtransaction.Chatapp;
 import com.inspiraspace.jokulid.model.preaddtransaction.Payment;
 import com.inspiraspace.jokulid.model.preaddtransaction.Response;
-import com.inspiraspace.jokulid.presenter.PresenterPreDetailTransaction;
-import com.inspiraspace.jokulid.utils.Constant;
+import com.inspiraspace.jokulid.presenter.GeneratorChatappPayment;
 
 import java.util.ArrayList;
 
@@ -28,7 +21,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 
-public class CreateTransactionActivity extends AppCompatActivity implements PresenterPreDetailTransaction.PulsePreDetailTransaction{
+public class AddTransactionActivity extends AppCompatActivity implements GeneratorChatappPayment.PulsePreDetailTransaction{
     @BindView(R.id.edt_add_transaction_customername)
     TextInputEditText edt_add_transaction_customername;
 
@@ -61,7 +54,7 @@ public class CreateTransactionActivity extends AppCompatActivity implements Pres
 
     Unbinder unbinder;
 
-    PresenterPreDetailTransaction loaderChatappPayment;
+    GeneratorChatappPayment loaderChatappPayment;
     private ArrayList<Payment> dataPayments;
     private ArrayList<Chatapp> dataChatapps;
     private AdpSpinnerChatapp adpSpinnerChatapp;
@@ -87,7 +80,7 @@ public class CreateTransactionActivity extends AppCompatActivity implements Pres
         sp_add_transaction_chatapp = findViewById(R.id.sp_add_transaction_chatapp);
         sp_add_transaction_bankaccount = findViewById(R.id.sp_add_transaction_bankaccount);
 
-        loaderChatappPayment = new PresenterPreDetailTransaction(this);
+        loaderChatappPayment = new GeneratorChatappPayment(this);
 
     }
 

@@ -1,22 +1,284 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.inspiraspace.jokulid.subactivities.DetailTransaction">
-    <android.support.design.widget.AppBarLayout
+    android:orientation="vertical">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/tv_detailtr_lb_customername"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Customer Name" />
+
+            <EditText
+                android:id="@+id/edt_detailtr_ety_customername"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_detailtr_lb_customername"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:text="Name" />
+
+            <TextView
+                android:id="@+id/tv_detailtr_lb_chatapp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/edt_detailtr_ety_customername"
+                android:text="Customer Chatapp" />
+
+            <Spinner
+                android:id="@+id/sp_detailtr_ety_chatapp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/tv_detailtr_lb_chatapp"
+                android:overlapAnchor="false"
+                android:visibility="gone" />
+
+            <RelativeLayout
+                android:id="@+id/rl_detailtr_chatapp"
+                android:layout_width="wrap_content"
+                android:layout_height="60dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/tv_detailtr_lb_chatapp"
+                android:background="#fff">
+
+                <ImageView
+                    android:id="@+id/iv_detail_chatapp"
+                    android:layout_width="64dp"
+                    android:layout_height="match_parent" />
+
+                <TextView
+                    android:id="@+id/tv_detail_chatapp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/iv_detail_chatapp"
+                    android:layout_marginLeft="18dp"
+                    android:layout_marginStart="18dp"
+                    android:layout_toEndOf="@+id/iv_detail_chatapp"
+                    android:layout_toRightOf="@+id/iv_detail_chatapp"
+                    android:gravity="left|center_vertical" />
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/tv_detailtr_lb_customernumber"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_below="@+id/edt_detailtr_ety_customername"
+                android:text="Customer Number" />
+
+            <EditText
+                android:id="@+id/edt_detailtr_ety_customernumber"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_below="@+id/tv_detailtr_lb_customernumber"
+                android:ems="10"
+                android:inputType="number"
+                android:text="Customer Number"
+                android:textAlignment="viewEnd" />
+
+            <TextView
+                android:id="@+id/tv_detailtr_lb_customeraddr"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/rl_detailtr_chatapp"
+                android:text="Customer Address" />
+
+            <EditText
+                android:id="@+id/edt_detailtr_ety_customeraddr"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_detailtr_lb_customeraddr"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:text="Address" />
+
+            <TextView
+                android:id="@+id/tv_detailtr_lb_customeritemtotalprice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/edt_detailtr_ety_customeraddr"
+                android:text="Total Price" />
+
+            <EditText
+                android:id="@+id/edt_detailtr_ety_customeritemtotalprice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/tv_detailtr_lb_customeritemtotalprice"
+                android:ems="10"
+                android:inputType="number"
+                android:text="Price" />
+
+            <TextView
+                android:id="@+id/tv_detailtr_lb_paymentmethod"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_below="@+id/edt_detailtr_ety_customeraddr"
+                android:text="Payment Method" />
+
+            <Spinner
+                android:id="@+id/sp_detailtr_ety_paymentmethod"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_below="@+id/tv_detailtr_lb_paymentmethod"
+                android:layout_marginEnd="24dp"
+                android:layout_marginRight="24dp"
+                android:visibility="gone" />
+
+            <RelativeLayout
+                android:id="@+id/rl_detailtr_paymentmethod"
+                android:layout_width="wrap_content"
+                android:layout_height="64dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_below="@+id/tv_detailtr_lb_paymentmethod"
+                android:background="#fff">
+
+                <ImageView
+                    android:id="@+id/iv_detail_payment"
+                    android:layout_width="64dp"
+                    android:layout_height="64dp" />
+
+                <TextView
+                    android:id="@+id/tv_detail_payment"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_toEndOf="@+id/iv_detail_payment" />
+
+                <TextView
+                    android:id="@+id/tv_detail_payment_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toEndOf="@+id/iv_detail_payment" />
+
+                <TextView
+                    android:id="@+id/tv_detail_payment_number"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_toEndOf="@+id/iv_detail_payment" />
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/tv_detailtr_lb_customershippmentfee"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/edt_detailtr_ety_customeritemtotalprice"
+                android:text="Shippment Fee" />
+
+            <EditText
+                android:id="@+id/edt_detailtr_ety_customershippmentfee"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/tv_detailtr_lb_customershippmentfee"
+                android:ems="10"
+                android:inputType="number"
+                android:text="Shippment Fee" />
+
+            <TextView
+                android:id="@+id/tv_detailtr_lb_customernote"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/edt_detailtr_ety_customershippmentfee"
+                android:text="Note" />
+
+            <EditText
+                android:id="@+id/edt_detailtr_ety_customernote"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/tv_detailtr_lb_customernote"
+                android:ems="10"
+                android:inputType="text|textMultiLine"
+                android:text="Note" />
+
+            <TextView
+                android:id="@+id/tv_detailtr_lb_customeritem"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/edt_detailtr_ety_customernote"
+                android:text="Customer Item Buy" />
+
+            <Button
+                android:id="@+id/btn_detailtr_add_customeritem"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_below="@+id/edt_detailtr_ety_customernote"
+                android:text="Add Item"
+                android:visibility="invisible" />
+
+            <ListView
+                android:id="@+id/lv_detailtr_ety_customeritem"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/btn_detailtr_add_customeritem" />
+
+            <TextView
+                android:id="@+id/tv_detailtr_lb_customerlog"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/lv_detailtr_ety_customeritem"
+                android:text="Customer History" />
+
+            <Button
+                android:id="@+id/btn_detailtr_add_customerlog"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_below="@+id/lv_detailtr_ety_customeritem"
+                android:text="Add History"
+                android:visibility="invisible" />
+
+            <ListView
+                android:id="@+id/lv_detailtr_ety_customerlog"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/btn_detailtr_add_customerlog" />
+        </RelativeLayout>
+    </ScrollView>
+    <Button
+        android:id="@+id/btn_detailtr_sendresi"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:theme="@style/AppTheme.AppBarOverlay">
-
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbarDetail"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
-            app:popupTheme="@style/AppTheme.PopupOverlay" />
-
-    </android.support.design.widget.AppBarLayout>
-    <include layout="@layout/content_detail_transaction" />
-</android.support.design.widget.CoordinatorLayout>
+        android:text="@string/label_button_sendresi" />
+</LinearLayout>

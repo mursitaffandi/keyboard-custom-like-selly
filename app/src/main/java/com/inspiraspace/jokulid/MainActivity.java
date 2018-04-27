@@ -12,7 +12,7 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -24,6 +24,7 @@ import com.inspiraspace.jokulid.fragment.MainFragment;
 import com.inspiraspace.jokulid.fragment.ReportFragment;
 import com.inspiraspace.jokulid.fragment.SettingsFragment;
 import com.inspiraspace.jokulid.fragment.ShippmentFeeFragment;
+import com.inspiraspace.jokulid.subactivities.SearchActivity;
 import com.inspiraspace.jokulid.utils.BaseAuthedActivity;
 import com.inspiraspace.jokulid.utils.Constant;
 
@@ -82,7 +83,23 @@ public class MainActivity extends BaseAuthedActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-//        getMenuInflater().inflate(R.menu.main, menu);
+        getMenuInflater().inflate(R.menu.main, menu);
+        SearchView searchView = (SearchView) menu.findItem(R.id.action_search).getActionView();
+        searchView.setQueryHint(getResources().getString(R.string.label_menu_search));
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                Intent intent = new Intent(getApplicationContext(), SearchActivity.class);
+                intent.putExtra(Constant.KEY_SEARCH_TRANSACTION, query);
+                startActivity(intent);
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
+            }
+        });
         return true;
     }
 

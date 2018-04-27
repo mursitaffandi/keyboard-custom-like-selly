@@ -14,7 +14,7 @@ import android.view.ViewGroup;
 
 import com.inspiraspace.jokulid.R;
 import com.inspiraspace.jokulid.adapter.AdapterFragmentPager;
-import com.inspiraspace.jokulid.subactivities.CreateTransactionActivity;
+import com.inspiraspace.jokulid.subactivities.AddTransactionActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -84,7 +84,7 @@ public class MainFragment extends Fragment implements TabLayout.OnTabSelectedLis
         fab_add_transactions.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getActivity(), CreateTransactionActivity.class));
+                startActivity(new Intent(getActivity(), AddTransactionActivity.class));
             }
         });
         return view;

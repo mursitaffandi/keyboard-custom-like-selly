@@ -27,13 +27,14 @@ public class AutoTextActivity extends AppCompatActivity implements PulseAutoText
     EditText
     edt_subcdt_autotext_search;
 
-    @BindView(R.id.btn_subcdt_autotext_search)
-    Button
-    btn_subcdt_autotext_search;
+    @OnClick(R.id.btn_subcdt_autotext_search)
+    public void searcAutotext(){
+        generatorAutoTexts.getAutoText(edt_subcdt_autotext_search.getText().toString());
+    }
 
     @OnClick(R.id.fab_autotext)
-    void toNewAutotext(){
-        Intent i = new Intent(this, DetailAutoTextActivity.class);
+    public void toNewAutotext(){
+        Intent i = new Intent(this, AddAutoTextActivity.class);
         startActivity(i);
     }
 
@@ -50,17 +51,9 @@ public class AutoTextActivity extends AppCompatActivity implements PulseAutoText
         setContentView(R.layout.subcdt_autotext);
         ButterKnife.bind(this);
         generatorAutoTexts = new GeneratorAutoTexts(this);
-        generatorAutoTexts.getAutoText("");
+
         adpAutoTexts = new AdpAutoTexts( this);
         lv_subcdt_autotext_search.setAdapter(adpAutoTexts);
-
-        btn_subcdt_autotext_search.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                generatorAutoTexts.getAutoText(edt_subcdt_autotext_search.getText().toString());
-            }
-        });
-
 
         lv_subcdt_autotext_search.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -68,10 +61,13 @@ public class AutoTextActivity extends AppCompatActivity implements PulseAutoText
 
             }
         });
-
-
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        generatorAutoTexts.getAutoText("");
+    }
 
     @Override
     public void onSuccess(List<Response> response) {

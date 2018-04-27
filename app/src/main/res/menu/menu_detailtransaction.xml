@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/toolbar_detailtr_chatting"
+        android:icon="@android:drawable/stat_notify_chat"
+        android:title="chatting"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/toolbar_detailtr_sendinvoice"
+        android:title="@string/toolbar_detailtr_sendinvoice"
+        />
+    <item android:id="@+id/submenu"
+        android:title="@string/toolbar_detailtr_changestatus"
+        >
+        <menu>
+            <item android:id="@+id/toolbar_detailtr_changestatus_pending"
+                android:title="@string/toolbar_detailtr_changestatus_pending" />
+
+            <item android:id="@+id/toolbar_detailtr_changestatus_paid"
+                android:title="@string/toolbar_detailtr_changestatus_paid" />
+            <item android:id="@+id/toolbar_detailtr_changestatus_shipped"
+                android:title="@string/toolbar_detailtr_changestatus_shipped" />
+            <item android:id="@+id/toolbar_detailtr_changestatus_done"
+                android:title="@string/toolbar_detailtr_changestatus_done" />
+            <item android:id="@+id/toolbar_detailtr_changestatus_cancel"
+                android:title="@string/toolbar_detailtr_changestatus_cancel" />
+
+        </menu>
+
+    </item>
+</menu>

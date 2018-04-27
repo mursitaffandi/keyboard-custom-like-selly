@@ -8,17 +8,19 @@ import com.inspiraspace.jokulid.utils.Constant;
 
 import retrofit2.Call;
 import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * Created by mursitaffandi on 4/24/18.
  */
 
-public class GenerateTemplate {
+public class GeneratorTemplate {
     PulseTemplate pulseTemplate;
     private ClientMainCall clientMainCall = new ClientMainCall();
     private Call<Template> apiCall;
+    Call<Void> apiUpdate;
 
-    public GenerateTemplate(PulseTemplate pulseTemplate) {
+    public GeneratorTemplate(PulseTemplate pulseTemplate) {
         this.pulseTemplate = pulseTemplate;
     }
 
@@ -33,6 +35,21 @@ public class GenerateTemplate {
             @Override
             public void onFailure(Call<Template> call, Throwable t) {
                 pulseTemplate.OnErrorTemplate(t.getMessage());
+            }
+        });
+    }
+
+    public void updateTemplate(String template, String new_content){
+        apiUpdate = clientMainCall.getService().updateTemplate(Constant.USER_ID,template,new_content);
+        apiUpdate.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                pulseTemplate.OnSuccessUpdateTemplate();
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                pulseTemplate.OnErrorUpdateTemplate(t.getMessage());
             }
         });
     }

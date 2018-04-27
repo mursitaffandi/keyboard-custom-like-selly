@@ -14,10 +14,11 @@ import com.inspiraspace.jokulid.presenter.GeneratorOngkir;
 import com.inspiraspace.jokulid.utils.Clipboard_Utils;
 import com.inspiraspace.jokulid.utils.Constant;
 
+import org.apache.commons.lang3.StringUtils;
+
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -37,6 +38,11 @@ public class PShippmentFare implements OnPresentShippmentfare, PulseOngkir, Puls
 
     public PShippmentFare(Context context, OnViewShippmentfare onViewShippmentfare) {
         this.mContext = context;
+        this.onViewShippmentfare = onViewShippmentfare;
+        generatorFindings = new GeneratorFindings(this);
+    }
+
+    public PShippmentFare(OnViewShippmentfare onViewShippmentfare) {
         this.onViewShippmentfare = onViewShippmentfare;
         generatorFindings = new GeneratorFindings(this);
     }
@@ -67,6 +73,10 @@ public class PShippmentFare implements OnPresentShippmentfare, PulseOngkir, Puls
 
 
     private void countFare(String weight, String originID, String destinantionId) {
+        /*
+        * https://stackoverflow.com/questions/6244823/convert-liststring-to-delimited-string
+        * */
+        String shippmentEnableCompany = StringUtils.join(Constant.COMPANY_ENABLE_SERVICE, ':');
         generatorOngkir = new GeneratorOngkir(this);
         generatorOngkir.getOngkir(
                 originID,
@@ -74,14 +84,14 @@ public class PShippmentFare implements OnPresentShippmentfare, PulseOngkir, Puls
                 destinationID,
                 "subdistrict",
                 weightgram,
-                Constant.COMPANY_ENABLE_SERVICE
+                shippmentEnableCompany
         );
     }
 
     @Override
     public void onSuccessGetOngkir(List<Result> resultOngkir) {
         List<Item_Ongkir> mapVal = new ArrayList<>();
-        NumberFormat formatter = new DecimalFormat("#.###");
+        NumberFormat formatter = new DecimalFormat("##.###");
         for (int i = 0; i < resultOngkir.size(); i++) {
             Result jObjVal = resultOngkir.get(i);
             String strCourier = jObjVal.getCode();

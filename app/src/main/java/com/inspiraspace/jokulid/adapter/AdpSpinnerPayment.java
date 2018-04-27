@@ -37,8 +37,9 @@ public class AdpSpinnerPayment extends ArrayAdapter<Payment> {
         activity = activitySpinner;
         data     = objects;
         inflater = (LayoutInflater)activity.getSystemService(activity.LAYOUT_INFLATER_SERVICE);
-
     }
+
+
 
     @Override
     public View getDropDownView(int position, View convertView, ViewGroup parent) {

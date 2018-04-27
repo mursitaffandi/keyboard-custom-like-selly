@@ -15,6 +15,7 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.ListView;
 
+import com.inspiraspace.jokulid.JokulidApplication;
 import com.inspiraspace.jokulid.R;
 import com.inspiraspace.jokulid.adapter.AdpAutocomplateAddress;
 import com.inspiraspace.jokulid.adapter.AdpLVResultOngkir;
@@ -104,7 +105,10 @@ public class ShippmentFeeFragment extends Fragment implements TextWatcher, OnVie
                     }
                 }
         );
-        etItemWeight.addTextChangedListener(this);
+        etItemWeight.setText(JokulidApplication.getInstance().getShippmentWeight());
+        etFrom.setText(JokulidApplication.getInstance().getShippmentOrigin().get(JokulidApplication.KEY_SHIPPMENT_ORIGIN ));
+        idShippmentOrigin = JokulidApplication.getInstance().getShippmentOrigin().get(JokulidApplication.KEY_SHIPPMENT_ORIGIN_ID);
+
         etFrom.addTextChangedListener(this);
         etDestination.addTextChangedListener(this);
 

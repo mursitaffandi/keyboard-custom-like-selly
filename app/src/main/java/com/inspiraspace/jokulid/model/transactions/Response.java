@@ -1,506 +1,508 @@
-
 package com.inspiraspace.jokulid.model.transactions;
+
+import android.os.Parcel;
+import android.os.Parcelable;
 
 import java.util.ArrayList;
 import java.util.List;
-import android.os.Parcel;
-import android.os.Parcelable;
-import android.os.Parcelable.Creator;
-import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Response implements Parcelable
-{
-
-    @SerializedName("transaction_userby_user_id")
-    @Expose
-    private String transactionUserbyUserId;
-    @SerializedName("transaction_id")
-    @Expose
-    private String transactionId;
-    @SerializedName("transaction_tr_addr_destination")
-    @Expose
-    private String transactionTrAddrDestination;
-    @SerializedName("transaction_note")
-    @Expose
-    private String transactionNote;
-    @SerializedName("transaction_status")
-    @Expose
-    private String transactionStatus;
-    @SerializedName("bank_account_bank_account_number")
-    @Expose
-    private String bankAccountBankAccountNumber;
-    @SerializedName("bank_account_bank_account_name")
-    @Expose
-    private String bankAccountBankAccountName;
-    @SerializedName("bank_account_bank_user_id")
-    @Expose
-    private String bankAccountBankUserId;
-    @SerializedName("bank_bank_name")
-    @Expose
-    private String bankBankName;
-    @SerializedName("shipment_weight")
-    @Expose
-    private String shipmentWeight;
-    @SerializedName("shipment_addr_from")
-    @Expose
-    private String shipmentAddrFrom;
-    @SerializedName("shipment_addr_destination")
-    @Expose
-    private String shipmentAddrDestination;
-    @SerializedName("shipment_dayeta")
-    @Expose
-    private String shipmentDayeta;
-    @SerializedName("shipment_resi")
-    @Expose
-    private Object shipmentResi;
-    @SerializedName("shipment_ongkir")
-    @Expose
-    private String shipmentOngkir;
-    @SerializedName("courier_company")
-    @Expose
-    private String courierCompany;
-    @SerializedName("courier_flovour")
-    @Expose
-    private String courierFlovour;
-    @SerializedName("customer_customer_name")
-    @Expose
-    private String customerCustomerName;
-    @SerializedName("customer_customer_nohp")
-    @Expose
-    private String customerCustomerNohp;
-    @SerializedName("customer_customer_totalspent")
-    @Expose
-    private Object customerCustomerTotalspent;
-    @SerializedName("customer_customer_createdat")
-    @Expose
-    private String customerCustomerCreatedat;
-    @SerializedName("customer_customer_addr")
-    @Expose
-    private Object customerCustomerAddr;
-    @SerializedName("customer_customer_chatapp_id")
-    @Expose
-    private String customerCustomerChatappId;
-    @SerializedName("chatapp_name")
-    @Expose
-    private String chatappName;
-    @SerializedName("toko_toko_name")
-    @Expose
-    private String tokoTokoName;
-    @SerializedName("toko_toko_no_hp")
-    @Expose
-    private String tokoTokoNoHp;
-    @SerializedName("toko_toko_url")
-    @Expose
-    private Object tokoTokoUrl;
-    @SerializedName("total")
-    @Expose
-    private String total;
-    @SerializedName("item")
-    @Expose
-    private List<Item> item = new ArrayList<Item>();
-    @SerializedName("log")
-    @Expose
-    private List<Log> log = new ArrayList<Log>();
-    public final static Parcelable.Creator<Response> CREATOR = new Creator<Response>() {
-
-
-        @SuppressWarnings({
-            "unchecked"
-        })
-        public Response createFromParcel(Parcel in) {
-            return new Response(in);
-        }
-
-        public Response[] newArray(int size) {
-            return (new Response[size]);
-        }
-
-    }
-    ;
-
-    protected Response(Parcel in) {
-        this.transactionUserbyUserId = ((String) in.readValue((String.class.getClassLoader())));
-        this.transactionId = ((String) in.readValue((String.class.getClassLoader())));
-        this.transactionTrAddrDestination = ((String) in.readValue((String.class.getClassLoader())));
-        this.transactionNote = ((String) in.readValue((String.class.getClassLoader())));
-        this.transactionStatus = ((String) in.readValue((String.class.getClassLoader())));
-        this.bankAccountBankAccountNumber = ((String) in.readValue((String.class.getClassLoader())));
-        this.bankAccountBankAccountName = ((String) in.readValue((String.class.getClassLoader())));
-        this.bankAccountBankUserId = ((String) in.readValue((String.class.getClassLoader())));
-        this.bankBankName = ((String) in.readValue((String.class.getClassLoader())));
-        this.shipmentWeight = ((String) in.readValue((String.class.getClassLoader())));
-        this.shipmentAddrFrom = ((String) in.readValue((String.class.getClassLoader())));
-        this.shipmentAddrDestination = ((String) in.readValue((String.class.getClassLoader())));
-        this.shipmentDayeta = ((String) in.readValue((String.class.getClassLoader())));
-        this.shipmentResi = ((Object) in.readValue((Object.class.getClassLoader())));
-        this.shipmentOngkir = ((String) in.readValue((String.class.getClassLoader())));
-        this.courierCompany = ((String) in.readValue((String.class.getClassLoader())));
-        this.courierFlovour = ((String) in.readValue((String.class.getClassLoader())));
-        this.customerCustomerName = ((String) in.readValue((String.class.getClassLoader())));
-        this.customerCustomerNohp = ((String) in.readValue((String.class.getClassLoader())));
-        this.customerCustomerTotalspent = ((Object) in.readValue((Object.class.getClassLoader())));
-        this.customerCustomerCreatedat = ((String) in.readValue((String.class.getClassLoader())));
-        this.customerCustomerAddr = ((Object) in.readValue((Object.class.getClassLoader())));
-        this.customerCustomerChatappId = ((String) in.readValue((String.class.getClassLoader())));
-        this.chatappName = ((String) in.readValue((String.class.getClassLoader())));
-        this.tokoTokoName = ((String) in.readValue((String.class.getClassLoader())));
-        this.tokoTokoNoHp = ((String) in.readValue((String.class.getClassLoader())));
-        this.tokoTokoUrl = ((Object) in.readValue((Object.class.getClassLoader())));
-        this.total = ((String) in.readValue((String.class.getClassLoader())));
-        in.readList(this.item, (com.inspiraspace.jokulid.model.transactions.Item.class.getClassLoader()));
-        in.readList(this.log, (com.inspiraspace.jokulid.model.transactions.Log.class.getClassLoader()));
-    }
-
-    /**
-     * No args constructor for use in serialization
-     * 
-     */
-    public Response() {
-    }
-
-    /**
-     * 
-     * @param total
-     * @param courierFlovour
-     * @param bankBankName
-     * @param customerCustomerAddr
-     * @param transactionId
-     * @param transactionUserbyUserId
-     * @param shipmentWeight
-     * @param shipmentOngkir
-     * @param tokoTokoUrl
-     * @param customerCustomerCreatedat
-     * @param bankAccountBankAccountNumber
-     * @param shipmentResi
-     * @param bankAccountBankUserId
-     * @param customerCustomerName
-     * @param customerCustomerChatappId
-     * @param shipmentDayeta
-     * @param transactionStatus
-     * @param shipmentAddrFrom
-     * @param tokoTokoName
-     * @param bankAccountBankAccountName
-     * @param log
-     * @param chatappName
-     * @param transactionNote
-     * @param customerCustomerNohp
-     * @param shipmentAddrDestination
-     * @param transactionTrAddrDestination
-     * @param courierCompany
-     * @param item
-     * @param customerCustomerTotalspent
-     * @param tokoTokoNoHp
-     */
-    public Response(String transactionUserbyUserId, String transactionId, String transactionTrAddrDestination, String transactionNote, String transactionStatus, String bankAccountBankAccountNumber, String bankAccountBankAccountName, String bankAccountBankUserId, String bankBankName, String shipmentWeight, String shipmentAddrFrom, String shipmentAddrDestination, String shipmentDayeta, Object shipmentResi, String shipmentOngkir, String courierCompany, String courierFlovour, String customerCustomerName, String customerCustomerNohp, Object customerCustomerTotalspent, String customerCustomerCreatedat, Object customerCustomerAddr, String customerCustomerChatappId, String chatappName, String tokoTokoName, String tokoTokoNoHp, Object tokoTokoUrl, String total, List<Item> item, List<Log> log) {
-        super();
-        this.transactionUserbyUserId = transactionUserbyUserId;
-        this.transactionId = transactionId;
-        this.transactionTrAddrDestination = transactionTrAddrDestination;
-        this.transactionNote = transactionNote;
-        this.transactionStatus = transactionStatus;
-        this.bankAccountBankAccountNumber = bankAccountBankAccountNumber;
-        this.bankAccountBankAccountName = bankAccountBankAccountName;
-        this.bankAccountBankUserId = bankAccountBankUserId;
-        this.bankBankName = bankBankName;
-        this.shipmentWeight = shipmentWeight;
-        this.shipmentAddrFrom = shipmentAddrFrom;
-        this.shipmentAddrDestination = shipmentAddrDestination;
-        this.shipmentDayeta = shipmentDayeta;
-        this.shipmentResi = shipmentResi;
-        this.shipmentOngkir = shipmentOngkir;
-        this.courierCompany = courierCompany;
-        this.courierFlovour = courierFlovour;
-        this.customerCustomerName = customerCustomerName;
-        this.customerCustomerNohp = customerCustomerNohp;
-        this.customerCustomerTotalspent = customerCustomerTotalspent;
-        this.customerCustomerCreatedat = customerCustomerCreatedat;
-        this.customerCustomerAddr = customerCustomerAddr;
-        this.customerCustomerChatappId = customerCustomerChatappId;
-        this.chatappName = chatappName;
-        this.tokoTokoName = tokoTokoName;
-        this.tokoTokoNoHp = tokoTokoNoHp;
-        this.tokoTokoUrl = tokoTokoUrl;
-        this.total = total;
-        this.item = item;
-        this.log = log;
-    }
-
-    public String getTransactionUserbyUserId() {
-        return transactionUserbyUserId;
-    }
-
-    public void setTransactionUserbyUserId(String transactionUserbyUserId) {
-        this.transactionUserbyUserId = transactionUserbyUserId;
-    }
-
-    public String getTransactionId() {
-        return transactionId;
-    }
-
-    public void setTransactionId(String transactionId) {
-        this.transactionId = transactionId;
-    }
-
-    public String getTransactionTrAddrDestination() {
-        return transactionTrAddrDestination;
-    }
-
-    public void setTransactionTrAddrDestination(String transactionTrAddrDestination) {
-        this.transactionTrAddrDestination = transactionTrAddrDestination;
-    }
-
-    public String getTransactionNote() {
-        return transactionNote;
-    }
-
-    public void setTransactionNote(String transactionNote) {
-        this.transactionNote = transactionNote;
-    }
-
-    public String getTransactionStatus() {
-        return transactionStatus;
-    }
-
-    public void setTransactionStatus(String transactionStatus) {
-        this.transactionStatus = transactionStatus;
-    }
-
-    public String getBankAccountBankAccountNumber() {
-        return bankAccountBankAccountNumber;
-    }
-
-    public void setBankAccountBankAccountNumber(String bankAccountBankAccountNumber) {
-        this.bankAccountBankAccountNumber = bankAccountBankAccountNumber;
-    }
-
-    public String getBankAccountBankAccountName() {
-        return bankAccountBankAccountName;
-    }
-
-    public void setBankAccountBankAccountName(String bankAccountBankAccountName) {
-        this.bankAccountBankAccountName = bankAccountBankAccountName;
-    }
-
-    public String getBankAccountBankUserId() {
-        return bankAccountBankUserId;
-    }
-
-    public void setBankAccountBankUserId(String bankAccountBankUserId) {
-        this.bankAccountBankUserId = bankAccountBankUserId;
-    }
-
-    public String getBankBankName() {
-        return bankBankName;
-    }
-
-    public void setBankBankName(String bankBankName) {
-        this.bankBankName = bankBankName;
-    }
-
-    public String getShipmentWeight() {
-        return shipmentWeight;
-    }
-
-    public void setShipmentWeight(String shipmentWeight) {
-        this.shipmentWeight = shipmentWeight;
-    }
-
-    public String getShipmentAddrFrom() {
-        return shipmentAddrFrom;
-    }
-
-    public void setShipmentAddrFrom(String shipmentAddrFrom) {
-        this.shipmentAddrFrom = shipmentAddrFrom;
-    }
-
-    public String getShipmentAddrDestination() {
-        return shipmentAddrDestination;
-    }
-
-    public void setShipmentAddrDestination(String shipmentAddrDestination) {
-        this.shipmentAddrDestination = shipmentAddrDestination;
-    }
-
-    public String getShipmentDayeta() {
-        return shipmentDayeta;
-    }
-
-    public void setShipmentDayeta(String shipmentDayeta) {
-        this.shipmentDayeta = shipmentDayeta;
-    }
-
-    public Object getShipmentResi() {
-        return shipmentResi;
-    }
-
-    public void setShipmentResi(Object shipmentResi) {
-        this.shipmentResi = shipmentResi;
-    }
-
-    public String getShipmentOngkir() {
-        return shipmentOngkir;
-    }
-
-    public void setShipmentOngkir(String shipmentOngkir) {
-        this.shipmentOngkir = shipmentOngkir;
-    }
-
-    public String getCourierCompany() {
-        return courierCompany;
-    }
-
-    public void setCourierCompany(String courierCompany) {
-        this.courierCompany = courierCompany;
-    }
-
-    public String getCourierFlovour() {
-        return courierFlovour;
-    }
-
-    public void setCourierFlovour(String courierFlovour) {
-        this.courierFlovour = courierFlovour;
-    }
-
-    public String getCustomerCustomerName() {
-        return customerCustomerName;
-    }
-
-    public void setCustomerCustomerName(String customerCustomerName) {
-        this.customerCustomerName = customerCustomerName;
-    }
-
-    public String getCustomerCustomerNohp() {
-        return customerCustomerNohp;
-    }
-
-    public void setCustomerCustomerNohp(String customerCustomerNohp) {
-        this.customerCustomerNohp = customerCustomerNohp;
-    }
-
-    public Object getCustomerCustomerTotalspent() {
-        return customerCustomerTotalspent;
-    }
-
-    public void setCustomerCustomerTotalspent(Object customerCustomerTotalspent) {
-        this.customerCustomerTotalspent = customerCustomerTotalspent;
-    }
-
-    public String getCustomerCustomerCreatedat() {
-        return customerCustomerCreatedat;
-    }
-
-    public void setCustomerCustomerCreatedat(String customerCustomerCreatedat) {
-        this.customerCustomerCreatedat = customerCustomerCreatedat;
-    }
-
-    public Object getCustomerCustomerAddr() {
-        return customerCustomerAddr;
-    }
-
-    public void setCustomerCustomerAddr(Object customerCustomerAddr) {
-        this.customerCustomerAddr = customerCustomerAddr;
-    }
-
-    public String getCustomerCustomerChatappId() {
-        return customerCustomerChatappId;
-    }
-
-    public void setCustomerCustomerChatappId(String customerCustomerChatappId) {
-        this.customerCustomerChatappId = customerCustomerChatappId;
-    }
-
-    public String getChatappName() {
-        return chatappName;
-    }
-
-    public void setChatappName(String chatappName) {
-        this.chatappName = chatappName;
-    }
-
-    public String getTokoTokoName() {
-        return tokoTokoName;
-    }
-
-    public void setTokoTokoName(String tokoTokoName) {
-        this.tokoTokoName = tokoTokoName;
-    }
-
-    public String getTokoTokoNoHp() {
-        return tokoTokoNoHp;
-    }
-
-    public void setTokoTokoNoHp(String tokoTokoNoHp) {
-        this.tokoTokoNoHp = tokoTokoNoHp;
-    }
-
-    public Object getTokoTokoUrl() {
-        return tokoTokoUrl;
-    }
-
-    public void setTokoTokoUrl(Object tokoTokoUrl) {
-        this.tokoTokoUrl = tokoTokoUrl;
-    }
-
-    public String getTotal() {
-        return total;
-    }
-
-    public void setTotal(String total) {
-        this.total = total;
-    }
-
-    public List<Item> getItem() {
-        return item;
-    }
-
-    public void setItem(List<Item> item) {
-        this.item = item;
-    }
-
-    public List<Log> getLog() {
-        return log;
-    }
-
-    public void setLog(List<Log> log) {
-        this.log = log;
-    }
-
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeValue(transactionUserbyUserId);
-        dest.writeValue(transactionId);
-        dest.writeValue(transactionTrAddrDestination);
-        dest.writeValue(transactionNote);
-        dest.writeValue(transactionStatus);
-        dest.writeValue(bankAccountBankAccountNumber);
-        dest.writeValue(bankAccountBankAccountName);
-        dest.writeValue(bankAccountBankUserId);
-        dest.writeValue(bankBankName);
-        dest.writeValue(shipmentWeight);
-        dest.writeValue(shipmentAddrFrom);
-        dest.writeValue(shipmentAddrDestination);
-        dest.writeValue(shipmentDayeta);
-        dest.writeValue(shipmentResi);
-        dest.writeValue(shipmentOngkir);
-        dest.writeValue(courierCompany);
-        dest.writeValue(courierFlovour);
-        dest.writeValue(customerCustomerName);
-        dest.writeValue(customerCustomerNohp);
-        dest.writeValue(customerCustomerTotalspent);
-        dest.writeValue(customerCustomerCreatedat);
-        dest.writeValue(customerCustomerAddr);
-        dest.writeValue(customerCustomerChatappId);
-        dest.writeValue(chatappName);
-        dest.writeValue(tokoTokoName);
-        dest.writeValue(tokoTokoNoHp);
-        dest.writeValue(tokoTokoUrl);
-        dest.writeValue(total);
-        dest.writeList(item);
-        dest.writeList(log);
-    }
-
-    public int describeContents() {
-        return  0;
-    }
+public class Response implements Parcelable {
 
+	@SerializedName("transaction_userby_user_id")
+	private String transactionUserbyUserId;
+
+	@SerializedName("bank_account_bank_user_id")
+	private String bankAccountBankUserId;
+
+	@SerializedName("courier_flovour")
+	private String courierFlovour;
+
+	@SerializedName("transaction_status")
+	private String transactionStatus;
+
+	@SerializedName("bank_account_bank_account_number")
+	private String bankAccountBankAccountNumber;
+
+	@SerializedName("toko_toko_no_hp")
+	private String tokoTokoNoHp;
+
+	@SerializedName("log")
+	private List<Log> log;
+
+	@SerializedName("customer_customer_name")
+	private String customerCustomerName;
+
+	@SerializedName("customer_customer_nohp")
+	private String customerCustomerNohp;
+
+	@SerializedName("chatapp_name")
+	private String chatappName;
+
+	@SerializedName("customer_customer_createdat")
+	private String customerCustomerCreatedat;
+
+	@SerializedName("customer_customer_addr")
+	private String customerCustomerAddr;
+
+	@SerializedName("courier_company")
+	private String courierCompany;
+
+	@SerializedName("total")
+	private String total;
+
+	@SerializedName("chatapp_nick")
+	private String chatappNick;
+
+	@SerializedName("transaction_tr_addr_destination")
+	private String transactionTrAddrDestination;
+
+	@SerializedName("shipment_weight")
+	private String shipmentWeight;
+
+	@SerializedName("chatapp_package")
+	private String chatappPackage;
+
+	@SerializedName("toko_toko_url")
+	private String tokoTokoUrl;
+
+	@SerializedName("bank_bank_name")
+	private String bankBankName;
+
+	@SerializedName("transaction_id")
+	private String transactionId;
+
+	@SerializedName("customer_customer_chatapp_id")
+	private String customerCustomerChatappId;
+
+	@SerializedName("item")
+	private List<Item> item;
+
+	@SerializedName("transaction_note")
+	private String transactionNote;
+
+	@SerializedName("shipment_addr_from")
+	private String shipmentAddrFrom;
+
+	@SerializedName("bank_bank_image")
+	private String bankBankImage;
+
+	@SerializedName("customer_customer_totalspent")
+	private String customerCustomerTotalspent;
+
+	@SerializedName("chatapp_image")
+	private String chatappImage;
+
+	@SerializedName("bank_account_bank_account_name")
+	private String bankAccountBankAccountName;
+
+	@SerializedName("shipment_addr_destination")
+	private String shipmentAddrDestination;
+
+	@SerializedName("shipment_resi")
+	private String shipmentResi;
+
+	@SerializedName("shipment_ongkir")
+	private String shipmentOngkir;
+
+	@SerializedName("shipment_dayeta")
+	private String shipmentDayeta;
+
+	@SerializedName("chatapp_link")
+	private String chatappLink;
+
+	@SerializedName("toko_toko_name")
+	private String tokoTokoName;
+
+	@SerializedName("customer_customer_id")
+	private String customerCustomerId;
+
+	public void setTransactionUserbyUserId(String transactionUserbyUserId){
+		this.transactionUserbyUserId = transactionUserbyUserId;
+	}
+
+	public String getTransactionUserbyUserId(){
+		return transactionUserbyUserId;
+	}
+
+	public void setBankAccountBankUserId(String bankAccountBankUserId){
+		this.bankAccountBankUserId = bankAccountBankUserId;
+	}
+
+	public String getBankAccountBankUserId(){
+		return bankAccountBankUserId;
+	}
+
+	public void setCourierFlovour(String courierFlovour){
+		this.courierFlovour = courierFlovour;
+	}
+
+	public String getCourierFlovour(){
+		return courierFlovour;
+	}
+
+	public void setTransactionStatus(String transactionStatus){
+		this.transactionStatus = transactionStatus;
+	}
+
+	public String getTransactionStatus(){
+		return transactionStatus;
+	}
+
+	public void setBankAccountBankAccountNumber(String bankAccountBankAccountNumber){
+		this.bankAccountBankAccountNumber = bankAccountBankAccountNumber;
+	}
+
+	public String getBankAccountBankAccountNumber(){
+		return bankAccountBankAccountNumber;
+	}
+
+	public void setTokoTokoNoHp(String tokoTokoNoHp){
+		this.tokoTokoNoHp = tokoTokoNoHp;
+	}
+
+	public String getTokoTokoNoHp(){
+		return tokoTokoNoHp;
+	}
+
+	public void setLog(List<Log> log){
+		this.log = log;
+	}
+
+	public List<Log> getLog(){
+		return log;
+	}
+
+	public void setCustomerCustomerName(String customerCustomerName){
+		this.customerCustomerName = customerCustomerName;
+	}
+
+	public String getCustomerCustomerName(){
+		return customerCustomerName;
+	}
+
+	public void setCustomerCustomerNohp(String customerCustomerNohp){
+		this.customerCustomerNohp = customerCustomerNohp;
+	}
+
+	public String getCustomerCustomerNohp(){
+		return customerCustomerNohp;
+	}
+
+	public void setChatappName(String chatappName){
+		this.chatappName = chatappName;
+	}
+
+	public String getChatappName(){
+		return chatappName;
+	}
+
+	public void setCustomerCustomerCreatedat(String customerCustomerCreatedat){
+		this.customerCustomerCreatedat = customerCustomerCreatedat;
+	}
+
+	public String getCustomerCustomerCreatedat(){
+		return customerCustomerCreatedat;
+	}
+
+	public void setCustomerCustomerAddr(String customerCustomerAddr){
+		this.customerCustomerAddr = customerCustomerAddr;
+	}
+
+	public String getCustomerCustomerAddr(){
+		return customerCustomerAddr;
+	}
+
+	public void setCourierCompany(String courierCompany){
+		this.courierCompany = courierCompany;
+	}
+
+	public String getCourierCompany(){
+		return courierCompany;
+	}
+
+	public void setTotal(String total){
+		this.total = total;
+	}
+
+	public String getTotal(){
+		return total;
+	}
+
+	public void setChatappNick(String chatappNick){
+		this.chatappNick = chatappNick;
+	}
+
+	public String getChatappNick(){
+		return chatappNick;
+	}
+
+	public void setTransactionTrAddrDestination(String transactionTrAddrDestination){
+		this.transactionTrAddrDestination = transactionTrAddrDestination;
+	}
+
+	public String getTransactionTrAddrDestination(){
+		return transactionTrAddrDestination;
+	}
+
+	public void setShipmentWeight(String shipmentWeight){
+		this.shipmentWeight = shipmentWeight;
+	}
+
+	public String getShipmentWeight(){
+		return shipmentWeight;
+	}
+
+	public void setChatappPackage(String chatappPackage){
+		this.chatappPackage = chatappPackage;
+	}
+
+	public String getChatappPackage(){
+		return chatappPackage;
+	}
+
+	public void setTokoTokoUrl(String tokoTokoUrl){
+		this.tokoTokoUrl = tokoTokoUrl;
+	}
+
+	public String getTokoTokoUrl(){
+		return tokoTokoUrl;
+	}
+
+	public void setBankBankName(String bankBankName){
+		this.bankBankName = bankBankName;
+	}
+
+	public String getBankBankName(){
+		return bankBankName;
+	}
+
+	public void setTransactionId(String transactionId){
+		this.transactionId = transactionId;
+	}
+
+	public String getTransactionId(){
+		return transactionId;
+	}
+
+	public void setCustomerCustomerChatappId(String customerCustomerChatappId){
+		this.customerCustomerChatappId = customerCustomerChatappId;
+	}
+
+	public String getCustomerCustomerChatappId(){
+		return customerCustomerChatappId;
+	}
+
+	public void setItem(List<Item> item){
+		this.item = item;
+	}
+
+	public List<Item> getItem(){
+		return item;
+	}
+
+	public void setTransactionNote(String transactionNote){
+		this.transactionNote = transactionNote;
+	}
+
+	public String getTransactionNote(){
+		return transactionNote;
+	}
+
+	public void setShipmentAddrFrom(String shipmentAddrFrom){
+		this.shipmentAddrFrom = shipmentAddrFrom;
+	}
+
+	public String getShipmentAddrFrom(){
+		return shipmentAddrFrom;
+	}
+
+	public void setBankBankImage(String bankBankImage){
+		this.bankBankImage = bankBankImage;
+	}
+
+	public String getBankBankImage(){
+		return bankBankImage;
+	}
+
+	public void setCustomerCustomerTotalspent(String customerCustomerTotalspent){
+		this.customerCustomerTotalspent = customerCustomerTotalspent;
+	}
+
+	public String getCustomerCustomerTotalspent(){
+		return customerCustomerTotalspent;
+	}
+
+	public void setChatappImage(String chatappImage){
+		this.chatappImage = chatappImage;
+	}
+
+	public String getChatappImage(){
+		return chatappImage;
+	}
+
+	public void setBankAccountBankAccountName(String bankAccountBankAccountName){
+		this.bankAccountBankAccountName = bankAccountBankAccountName;
+	}
+
+	public String getBankAccountBankAccountName(){
+		return bankAccountBankAccountName;
+	}
+
+	public void setShipmentAddrDestination(String shipmentAddrDestination){
+		this.shipmentAddrDestination = shipmentAddrDestination;
+	}
+
+	public String getShipmentAddrDestination(){
+		return shipmentAddrDestination;
+	}
+
+	public void setShipmentResi(String shipmentResi){
+		this.shipmentResi = shipmentResi;
+	}
+
+	public String getShipmentResi(){
+		return shipmentResi;
+	}
+
+	public void setShipmentOngkir(String shipmentOngkir){
+		this.shipmentOngkir = shipmentOngkir;
+	}
+
+	public String getShipmentOngkir(){
+		return shipmentOngkir;
+	}
+
+	public void setShipmentDayeta(String shipmentDayeta){
+		this.shipmentDayeta = shipmentDayeta;
+	}
+
+	public String getShipmentDayeta(){
+		return shipmentDayeta;
+	}
+
+	public void setChatappLink(String chatappLink){
+		this.chatappLink = chatappLink;
+	}
+
+	public String getChatappLink(){
+		return chatappLink;
+	}
+
+	public void setTokoTokoName(String tokoTokoName){
+		this.tokoTokoName = tokoTokoName;
+	}
+
+	public String getTokoTokoName(){
+		return tokoTokoName;
+	}
+
+	public void setCustomerCustomerId(String customerCustomerId){
+		this.customerCustomerId = customerCustomerId;
+	}
+
+	public String getCustomerCustomerId(){
+		return customerCustomerId;
+	}
+
+	@Override
+	public int describeContents() {
+		return 0;
+	}
+
+	@Override
+	public void writeToParcel(Parcel dest, int flags) {
+		dest.writeString(this.transactionUserbyUserId);
+		dest.writeString(this.bankAccountBankUserId);
+		dest.writeString(this.courierFlovour);
+		dest.writeString(this.transactionStatus);
+		dest.writeString(this.bankAccountBankAccountNumber);
+		dest.writeString(this.tokoTokoNoHp);
+		dest.writeList(this.log);
+		dest.writeString(this.customerCustomerName);
+		dest.writeString(this.customerCustomerNohp);
+		dest.writeString(this.chatappName);
+		dest.writeString(this.customerCustomerCreatedat);
+		dest.writeString(this.customerCustomerAddr);
+		dest.writeString(this.courierCompany);
+		dest.writeString(this.total);
+		dest.writeString(this.chatappNick);
+		dest.writeString(this.transactionTrAddrDestination);
+		dest.writeString(this.shipmentWeight);
+		dest.writeString(this.chatappPackage);
+		dest.writeString(this.tokoTokoUrl);
+		dest.writeString(this.bankBankName);
+		dest.writeString(this.transactionId);
+		dest.writeString(this.customerCustomerChatappId);
+		dest.writeList(this.item);
+		dest.writeString(this.transactionNote);
+		dest.writeString(this.shipmentAddrFrom);
+		dest.writeString(this.bankBankImage);
+		dest.writeString(this.customerCustomerTotalspent);
+		dest.writeString(this.chatappImage);
+		dest.writeString(this.bankAccountBankAccountName);
+		dest.writeString(this.shipmentAddrDestination);
+		dest.writeString(this.shipmentResi);
+		dest.writeString(this.shipmentOngkir);
+		dest.writeString(this.shipmentDayeta);
+		dest.writeString(this.chatappLink);
+		dest.writeString(this.tokoTokoName);
+		dest.writeString(this.customerCustomerId);
+	}
+
+	public Response() {
+	}
+
+	protected Response(Parcel in) {
+		this.transactionUserbyUserId = in.readString();
+		this.bankAccountBankUserId = in.readString();
+		this.courierFlovour = in.readString();
+		this.transactionStatus = in.readString();
+		this.bankAccountBankAccountNumber = in.readString();
+		this.tokoTokoNoHp = in.readString();
+		this.log = new ArrayList<Log>();
+		in.readList(this.log, Log.class.getClassLoader());
+		this.customerCustomerName = in.readString();
+		this.customerCustomerNohp = in.readString();
+		this.chatappName = in.readString();
+		this.customerCustomerCreatedat = in.readString();
+		this.customerCustomerAddr = in.readString();
+		this.courierCompany = in.readString();
+		this.total = in.readString();
+		this.chatappNick = in.readString();
+		this.transactionTrAddrDestination = in.readString();
+		this.shipmentWeight = in.readString();
+		this.chatappPackage = in.readString();
+		this.tokoTokoUrl = in.readString();
+		this.bankBankName = in.readString();
+		this.transactionId = in.readString();
+		this.customerCustomerChatappId = in.readString();
+		this.item = new ArrayList<Item>();
+		in.readList(this.item, Item.class.getClassLoader());
+		this.transactionNote = in.readString();
+		this.shipmentAddrFrom = in.readString();
+		this.bankBankImage = in.readString();
+		this.customerCustomerTotalspent = in.readString();
+		this.chatappImage = in.readString();
+		this.bankAccountBankAccountName = in.readString();
+		this.shipmentAddrDestination = in.readString();
+		this.shipmentResi = in.readString();
+		this.shipmentOngkir = in.readString();
+		this.shipmentDayeta = in.readString();
+		this.chatappLink = in.readString();
+		this.tokoTokoName = in.readString();
+		this.customerCustomerId = in.readString();
+	}
+
+	public static final Parcelable.Creator<Response> CREATOR = new Parcelable.Creator<Response>() {
+		@Override
+		public Response createFromParcel(Parcel source) {
+			return new Response(source);
+		}
+
+		@Override
+		public Response[] newArray(int size) {
+			return new Response[size];
+		}
+	};
 }

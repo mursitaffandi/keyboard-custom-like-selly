@@ -12,7 +12,7 @@ import com.bumptech.glide.Glide;
 import com.inspiraspace.jokulid.BuildConfig;
 import com.inspiraspace.jokulid.R;
 import com.inspiraspace.jokulid.model.customers.ResponseItem;
-import com.inspiraspace.jokulid.model.rajaongkir.Item_Ongkir;
+
 import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -21,11 +21,11 @@ import butterknife.ButterKnife;
  * Created by mursitaffandi on 4/19/18.
  */
 
-public class AdpCustomer extends RecyclerView.Adapter<AdpCustomer.ViewHolder> {
+public class AdapterCustomer extends RecyclerView.Adapter<AdapterCustomer.ViewHolder> {
     List<ResponseItem> responseItemList;
     Context mContext;
 
-    public AdpCustomer(Context mContext, List<ResponseItem> responseItemList) {
+    public AdapterCustomer(Context mContext, List<ResponseItem> responseItemList) {
         this.responseItemList = responseItemList;
         this.mContext = mContext;
     }

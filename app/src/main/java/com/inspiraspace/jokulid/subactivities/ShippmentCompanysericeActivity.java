@@ -6,27 +6,34 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.ListView;
 
+import com.inspiraspace.jokulid.JokulidApplication;
 import com.inspiraspace.jokulid.R;
+import com.inspiraspace.jokulid.adapter.AdpLVSettingShippmentcompany;
+import com.inspiraspace.jokulid.utils.Constant;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class ShippmentCompanysericeActivity extends AppCompatActivity {
+    @BindView(R.id.lv_setting_shippmentcompany)
+    ListView lv_setting_shippmentcompany;
+    AdpLVSettingShippmentcompany adpLVSettingShippmentcompany;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shippment_companyserice);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        ButterKnife.bind(this);
+        adpLVSettingShippmentcompany = new AdpLVSettingShippmentcompany(Constant.LIST_SHIPPMENTCOMPANY, this);
+        lv_setting_shippmentcompany.setAdapter(adpLVSettingShippmentcompany);
     }
 
+    @OnClick(R.id.btn_setting_shippmentcompany_save)
+    public void saveShippmentcompany() {
+        JokulidApplication.getInstance().setShippmentCompany(adpLVSettingShippmentcompany.getSelectedCompany());
+        finish();
+    }
 }

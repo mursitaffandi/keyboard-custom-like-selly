@@ -1,114 +1,88 @@
-
 package com.inspiraspace.jokulid.model.transactions;
 
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.os.Parcelable.Creator;
-import com.google.gson.annotations.Expose;
+
 import com.google.gson.annotations.SerializedName;
 
-public class Log implements Parcelable
-{
+public class Log implements Parcelable {
 
-    @SerializedName("id")
-    @Expose
-    private String id;
-    @SerializedName("transaction_id")
-    @Expose
-    private String transactionId;
-    @SerializedName("createdat")
-    @Expose
-    private String createdat;
-    @SerializedName("description")
-    @Expose
-    private String description;
-    public final static Parcelable.Creator<Log> CREATOR = new Creator<Log>() {
+	@SerializedName("transaction_id")
+	private String transactionId;
 
+	@SerializedName("createdat")
+	private String createdat;
 
-        @SuppressWarnings({
-            "unchecked"
-        })
-        public Log createFromParcel(Parcel in) {
-            return new Log(in);
-        }
+	@SerializedName("description")
+	private String description;
 
-        public Log[] newArray(int size) {
-            return (new Log[size]);
-        }
+	@SerializedName("id")
+	private String id;
 
-    }
-    ;
+	public void setTransactionId(String transactionId){
+		this.transactionId = transactionId;
+	}
 
-    protected Log(Parcel in) {
-        this.id = ((String) in.readValue((String.class.getClassLoader())));
-        this.transactionId = ((String) in.readValue((String.class.getClassLoader())));
-        this.createdat = ((String) in.readValue((String.class.getClassLoader())));
-        this.description = ((String) in.readValue((String.class.getClassLoader())));
-    }
+	public String getTransactionId(){
+		return transactionId;
+	}
 
-    /**
-     * No args constructor for use in serialization
-     * 
-     */
-    public Log() {
-    }
+	public void setCreatedat(String createdat){
+		this.createdat = createdat;
+	}
 
-    /**
-     * 
-     * @param id
-     * @param transactionId
-     * @param description
-     * @param createdat
-     */
-    public Log(String id, String transactionId, String createdat, String description) {
-        super();
-        this.id = id;
-        this.transactionId = transactionId;
-        this.createdat = createdat;
-        this.description = description;
-    }
+	public String getCreatedat(){
+		return createdat;
+	}
 
-    public String getId() {
-        return id;
-    }
+	public void setDescription(String description){
+		this.description = description;
+	}
 
-    public void setId(String id) {
-        this.id = id;
-    }
+	public String getDescription(){
+		return description;
+	}
 
-    public String getTransactionId() {
-        return transactionId;
-    }
+	public void setId(String id){
+		this.id = id;
+	}
 
-    public void setTransactionId(String transactionId) {
-        this.transactionId = transactionId;
-    }
+	public String getId(){
+		return id;
+	}
 
-    public String getCreatedat() {
-        return createdat;
-    }
+	@Override
+	public int describeContents() {
+		return 0;
+	}
 
-    public void setCreatedat(String createdat) {
-        this.createdat = createdat;
-    }
+	@Override
+	public void writeToParcel(Parcel dest, int flags) {
+		dest.writeString(this.transactionId);
+		dest.writeString(this.createdat);
+		dest.writeString(this.description);
+		dest.writeString(this.id);
+	}
 
-    public String getDescription() {
-        return description;
-    }
+	public Log() {
+	}
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
+	protected Log(Parcel in) {
+		this.transactionId = in.readString();
+		this.createdat = in.readString();
+		this.description = in.readString();
+		this.id = in.readString();
+	}
 
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeValue(id);
-        dest.writeValue(transactionId);
-        dest.writeValue(createdat);
-        dest.writeValue(description);
-    }
+	public static final Parcelable.Creator<Log> CREATOR = new Parcelable.Creator<Log>() {
+		@Override
+		public Log createFromParcel(Parcel source) {
+			return new Log(source);
+		}
 
-    public int describeContents() {
-        return  0;
-    }
-
+		@Override
+		public Log[] newArray(int size) {
+			return new Log[size];
+		}
+	};
 }

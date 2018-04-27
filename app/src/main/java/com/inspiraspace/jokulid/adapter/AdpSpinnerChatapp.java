@@ -13,7 +13,6 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.inspiraspace.jokulid.BuildConfig;
 import com.inspiraspace.jokulid.R;
-import com.inspiraspace.jokulid.model.ListChatapp;
 import com.inspiraspace.jokulid.model.preaddtransaction.Chatapp;
 import com.inspiraspace.jokulid.utils.Constant;
 

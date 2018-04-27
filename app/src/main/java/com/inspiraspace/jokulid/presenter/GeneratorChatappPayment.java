@@ -14,13 +14,13 @@ import retrofit2.Callback;
  * Created by mursitaffandi on 4/7/18.
  */
 
-public class PresenterPreDetailTransaction {
+public class GeneratorChatappPayment {
     private ClientMainCall clientMainCall = new ClientMainCall();
     private Call<Premaketransaction> apiCall;
     private Response listTransaction = new Response();
     private PulsePreDetailTransaction pulsePreDetailTransaction;
 
-    public PresenterPreDetailTransaction(final PulsePreDetailTransaction pulsePreDetailTransaction) {
+    public GeneratorChatappPayment(final PulsePreDetailTransaction pulsePreDetailTransaction) {
         this.pulsePreDetailTransaction = pulsePreDetailTransaction;
 
         apiCall = clientMainCall.getService().getPreDetailTransaction(Constant.USER_ID);

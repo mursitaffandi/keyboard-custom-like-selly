@@ -4,7 +4,6 @@ package com.inspiraspace.jokulid.model.searchsubdistrict;
 import java.util.ArrayList;
 import java.util.List;
 import com.google.gson.annotations.SerializedName;
-import com.inspiraspace.jokulid.model.Response;
 
 @SuppressWarnings("unused")
 public class Findings {

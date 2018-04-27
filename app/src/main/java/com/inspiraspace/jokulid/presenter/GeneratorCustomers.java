@@ -14,12 +14,12 @@ import retrofit2.Callback;
  * Created by mursitaffandi on 4/19/18.
  */
 
-public class GenerateCustomers  {
+public class GeneratorCustomers {
     private PulseCustomer pulseMainServer;
     private ClientMainCall clientMainCall = new ClientMainCall();
     private Call<Customers> apiCall;
 
-    public GenerateCustomers(PulseCustomer pulseMainServer) {
+    public GeneratorCustomers(PulseCustomer pulseMainServer) {
         this.pulseMainServer = pulseMainServer;
     }
 

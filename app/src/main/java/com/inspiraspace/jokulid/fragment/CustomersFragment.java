@@ -9,13 +9,12 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 
 import com.inspiraspace.jokulid.R;
-import com.inspiraspace.jokulid.adapter.AdpCustomer;
+import com.inspiraspace.jokulid.adapter.AdapterCustomer;
 import com.inspiraspace.jokulid.model.customers.ResponseItem;
 import com.inspiraspace.jokulid.network.main.PulseCustomer;
-import com.inspiraspace.jokulid.presenter.GenerateCustomers;
+import com.inspiraspace.jokulid.presenter.GeneratorCustomers;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,8 +31,8 @@ public class CustomersFragment extends Fragment implements PulseCustomer {
     RecyclerView rv_frg_customers;
 
     Unbinder unbinder;
-    GenerateCustomers generateCustomers;
-    AdpCustomer adpCustomer;
+    GeneratorCustomers generatorCustomers;
+    AdapterCustomer adapterCustomer;
     List<ResponseItem> responseItemList = new ArrayList<>();
     Context mContext;
 
@@ -49,17 +48,17 @@ public class CustomersFragment extends Fragment implements PulseCustomer {
         // Inflate the layout for this fragment
         unbinder = ButterKnife.bind(this, v);
         mContext = v.getContext();
-        generateCustomers = new GenerateCustomers(this);
-        generateCustomers.getCustomers();
-        adpCustomer = new AdpCustomer(mContext, responseItemList);
+        generatorCustomers = new GeneratorCustomers(this);
+        generatorCustomers.getCustomers();
+        adapterCustomer = new AdapterCustomer(mContext, responseItemList);
         rv_frg_customers.setLayoutManager(new LinearLayoutManager(mContext));
-        rv_frg_customers.setAdapter(adpCustomer);
+        rv_frg_customers.setAdapter(adapterCustomer);
         return v;
     }
 
     @Override
     public void OnSuccesGetCustomers(List<ResponseItem> responseItems) {
-        adpCustomer.swapRefresh(responseItems);
+        adapterCustomer.swapRefresh(responseItems);
     }
 
     @Override

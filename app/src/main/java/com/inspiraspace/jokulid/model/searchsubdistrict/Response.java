@@ -1,5 +1,5 @@
 
-package com.inspiraspace.jokulid.model;
+package com.inspiraspace.jokulid.model.searchsubdistrict;
 
 import com.google.gson.annotations.SerializedName;
 

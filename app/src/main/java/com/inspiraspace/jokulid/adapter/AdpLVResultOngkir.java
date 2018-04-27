@@ -11,9 +11,7 @@ import android.widget.TextView;
 
 import com.inspiraspace.jokulid.R;
 import com.inspiraspace.jokulid.model.rajaongkir.Item_Ongkir;
-import com.inspiraspace.jokulid.model.transactions.Item;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -32,8 +30,6 @@ public class AdpLVResultOngkir extends BaseAdapter {
     public CheckBox ckb_item_ongkir;
     private Map<String, String> itemsOngkir_selected = new HashMap<>();
 
-    boolean checkAll_flag = false;
-    boolean checkItem_flag = false;
     public AdpLVResultOngkir(Context context, List<Item_Ongkir> arrDataOngkir) {
         this.mContext = context;
         this.mArrDataOngkir = arrDataOngkir;

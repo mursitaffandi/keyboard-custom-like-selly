@@ -8,8 +8,13 @@ import android.content.SharedPreferences;
 import com.facebook.stetho.Stetho;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.inspiraspace.jokulid.utils.Constant;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 /**
  * Created by mursitaffandi on 4/5/18.
@@ -28,10 +33,7 @@ public class JokulidApplication extends Application {
         Stetho.initializeWithDefaults(this);
         createGson();
         createPreference();
-        setShippmentCompany("jne:sicepat:pos:tiki:jnt:wahana");
     }
-
-
 
     public JokulidApplication() {
         instance = this;
@@ -83,7 +85,7 @@ public class JokulidApplication extends Application {
     /*
     * credentials KEY_SHIPPMENT
     * */
-    public static final String KEY_SHIPPMENT_COMPANY = "shippment_cs";
+    public static final String KEY_SET_SHIPPMENT_COMPANY = "key_shippmentcompany";
     public static final String KEY_SHIPPMENT_WEIGHT = "shippment_weight";
     public static final String KEY_SHIPPMENT_ORIGIN = "shippment_origin";
     public static final String KEY_SHIPPMENT_ORIGIN_ID = "shippment_origin_id";
@@ -122,7 +124,6 @@ public class JokulidApplication extends Application {
         editor.putString(KEY_TOKO_URL, toko_url);
         editor.commit();
     }
-
     public HashMap<String, String> getUserInfo() {
         HashMap<String, String> map = new HashMap<>();
         map.put(KEY_USER_NAME, session.getString(KEY_USER_NAME, "user0"));
@@ -147,22 +148,23 @@ public class JokulidApplication extends Application {
         editor.commit();
     }
 
-    public void setShippmentCompany(String companies) {
-        editor.putString(KEY_SHIPPMENT_COMPANY, companies);
+
+    /*
+    * https://stackoverflow.com/questions/7057845/save-arraylist-to-sharedpreferences
+    * */
+    public void setShippmentCompany(List<String> companies) {
+        Set<String> set = new HashSet<String>();
+        set.addAll(companies);
+        editor.putStringSet(KEY_SET_SHIPPMENT_COMPANY, set);
         editor.commit();
     }
 
-    public String getShippmentCompany() {
-        return session.getString(KEY_SHIPPMENT_COMPANY, "jne");
-    }
-
-    public void setShippmentWeight(String shippmentWeight) {
-        editor.putString(KEY_SHIPPMENT_WEIGHT, shippmentWeight);
-        editor.commit();
-    }
-
-    public String getShippmentWeight() {
-        return session.getString(KEY_SHIPPMENT_WEIGHT, "1000");
+    public List<String> getShippmentCompany() {
+        Set<String> tmp = new HashSet<String>();
+        tmp.add("jne");
+        Set<String> set = session.getStringSet(KEY_SET_SHIPPMENT_COMPANY, tmp);
+        List<String> resultlist = new ArrayList<String>(set);
+        return resultlist;
     }
 
     public void setShippmentOrigin(String shippment_origin, String shippment_origin_id) {
@@ -176,6 +178,15 @@ public class JokulidApplication extends Application {
         map.put(KEY_SHIPPMENT_ORIGIN, session.getString(KEY_SHIPPMENT_ORIGIN, "Gamping, Sleman, DI Yogyakarta"));
         map.put(KEY_SHIPPMENT_ORIGIN_ID, session.getString(KEY_SHIPPMENT_ORIGIN_ID, "5782"));
         return map;
+    }
+
+    public void setShippmentWeight(String shippmentWeight) {
+        editor.putString(KEY_SHIPPMENT_WEIGHT, shippmentWeight);
+        editor.commit();
+    }
+
+    public String getShippmentWeight() {
+        return session.getString(KEY_SHIPPMENT_WEIGHT, "1000");
     }
 
 }

@@ -34,6 +34,7 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.inspiraspace.jokulid.JokulidApplication;
 import com.inspiraspace.jokulid.MainActivity;
 import com.inspiraspace.jokulid.R;
 import com.inspiraspace.jokulid.adapter.AdpAutoTexts;
@@ -46,7 +47,7 @@ import com.inspiraspace.jokulid.network.main.PulseAutoText;
 import com.inspiraspace.jokulid.network.main.PulseMainServer;
 import com.inspiraspace.jokulid.presenter.GeneratorAutoTexts;
 import com.inspiraspace.jokulid.presenter.GeneratorTransactions;
-import com.inspiraspace.jokulid.subactivities.DetailAutoTextActivity;
+import com.inspiraspace.jokulid.subactivities.AddAutoTextActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -239,9 +240,8 @@ public class SoftKeyboard extends InputMethodService
                 break;
 
             case R.id.fab_autotext:
-                Intent i = new Intent(this, DetailAutoTextActivity.class);
+                Intent i = new Intent(this, AddAutoTextActivity.class);
                 i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                System.out.println("jvj");
                 startActivity(i);
                 break;
             default:
@@ -275,7 +275,6 @@ public class SoftKeyboard extends InputMethodService
 
         layout_candidatebar_main.setVisibility(View.GONE);
         tv_title_toobar_subcdt.setText(getString(R.string.title_subcdt_toolbar_createinvoice));
-
     }
 
     private void showSubShippmentfee() {
@@ -290,6 +289,10 @@ public class SoftKeyboard extends InputMethodService
         tv_title_toobar_subcdt.setText(getString(R.string.title_subcdt_toolbar_countshippmentfee));
 
         etItemWeight.requestFocus();
+        etItemWeight.setText(JokulidApplication.getInstance().getShippmentWeight());
+        etFrom.setText(JokulidApplication.getInstance().getShippmentOrigin().get(JokulidApplication.KEY_SHIPPMENT_ORIGIN ));
+//        idShippmentOrigin = JokulidApplication.getInstance().getShippmentOrigin().get(JokulidApplication.KEY_SHIPPMENT_ORIGIN_ID);
+
     }
 
     private void showSubAutotext() {

@@ -40,4 +40,8 @@
         <item name="android:textColor">#fff</item>
         <item name="android:textStyle">normal</item>
     </style>
+
+    <style name="HeaderBar">
+        <item name="android:background">#4b5352</item>
+    </style>
 </resources>

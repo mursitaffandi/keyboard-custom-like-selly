@@ -54,7 +54,7 @@
             android:id="@+id/layout_subcdt_createinvoice"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:visibility="gone">\
+            android:visibility="gone">
             <include
                 layout="@layout/subcdt_createinvoice" />
         </ScrollView>

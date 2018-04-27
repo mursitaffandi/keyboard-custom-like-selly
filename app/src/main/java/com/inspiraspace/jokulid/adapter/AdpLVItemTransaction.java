@@ -9,7 +9,6 @@ import android.widget.TextView;
 
 import com.inspiraspace.jokulid.R;
 import com.inspiraspace.jokulid.model.transactions.Item;
-import com.inspiraspace.jokulid.model.transactions.Log;
 
 import java.util.List;
 

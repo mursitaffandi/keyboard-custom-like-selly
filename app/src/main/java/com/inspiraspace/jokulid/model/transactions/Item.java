@@ -1,129 +1,101 @@
-
 package com.inspiraspace.jokulid.model.transactions;
 
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.os.Parcelable.Creator;
-import com.google.gson.annotations.Expose;
+
 import com.google.gson.annotations.SerializedName;
 
-public class Item implements Parcelable
-{
+public class Item implements Parcelable {
 
-    @SerializedName("id")
-    @Expose
-    private String id;
-    @SerializedName("name")
-    @Expose
-    private String name;
-    @SerializedName("price")
-    @Expose
-    private String price;
-    @SerializedName("qty")
-    @Expose
-    private String qty;
-    @SerializedName("transaction_id")
-    @Expose
-    private String transactionId;
-    public final static Parcelable.Creator<Item> CREATOR = new Creator<Item>() {
+	@SerializedName("transaction_id")
+	private String transactionId;
 
+	@SerializedName("price")
+	private String price;
 
-        @SuppressWarnings({
-            "unchecked"
-        })
-        public Item createFromParcel(Parcel in) {
-            return new Item(in);
-        }
+	@SerializedName("qty")
+	private String qty;
 
-        public Item[] newArray(int size) {
-            return (new Item[size]);
-        }
+	@SerializedName("name")
+	private String name;
 
-    }
-    ;
+	@SerializedName("id")
+	private String id;
 
-    protected Item(Parcel in) {
-        this.id = ((String) in.readValue((String.class.getClassLoader())));
-        this.name = ((String) in.readValue((String.class.getClassLoader())));
-        this.price = ((String) in.readValue((String.class.getClassLoader())));
-        this.qty = ((String) in.readValue((String.class.getClassLoader())));
-        this.transactionId = ((String) in.readValue((String.class.getClassLoader())));
-    }
+	public void setTransactionId(String transactionId){
+		this.transactionId = transactionId;
+	}
 
-    /**
-     * No args constructor for use in serialization
-     * 
-     */
-    public Item() {
-    }
+	public String getTransactionId(){
+		return transactionId;
+	}
 
-    /**
-     * 
-     * @param id
-     * @param transactionId
-     * @param price
-     * @param name
-     * @param qty
-     */
-    public Item(String id, String name, String price, String qty, String transactionId) {
-        super();
-        this.id = id;
-        this.name = name;
-        this.price = price;
-        this.qty = qty;
-        this.transactionId = transactionId;
-    }
+	public void setPrice(String price){
+		this.price = price;
+	}
 
-    public String getId() {
-        return id;
-    }
+	public String getPrice(){
+		return price;
+	}
 
-    public void setId(String id) {
-        this.id = id;
-    }
+	public void setQty(String qty){
+		this.qty = qty;
+	}
 
-    public String getName() {
-        return name;
-    }
+	public String getQty(){
+		return qty;
+	}
 
-    public void setName(String name) {
-        this.name = name;
-    }
+	public void setName(String name){
+		this.name = name;
+	}
 
-    public String getPrice() {
-        return price;
-    }
+	public String getName(){
+		return name;
+	}
 
-    public void setPrice(String price) {
-        this.price = price;
-    }
+	public void setId(String id){
+		this.id = id;
+	}
 
-    public String getQty() {
-        return qty;
-    }
+	public String getId(){
+		return id;
+	}
 
-    public void setQty(String qty) {
-        this.qty = qty;
-    }
+	@Override
+	public int describeContents() {
+		return 0;
+	}
 
-    public String getTransactionId() {
-        return transactionId;
-    }
+	@Override
+	public void writeToParcel(Parcel dest, int flags) {
+		dest.writeString(this.transactionId);
+		dest.writeString(this.price);
+		dest.writeString(this.qty);
+		dest.writeString(this.name);
+		dest.writeString(this.id);
+	}
 
-    public void setTransactionId(String transactionId) {
-        this.transactionId = transactionId;
-    }
+	public Item() {
+	}
 
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeValue(id);
-        dest.writeValue(name);
-        dest.writeValue(price);
-        dest.writeValue(qty);
-        dest.writeValue(transactionId);
-    }
+	protected Item(Parcel in) {
+		this.transactionId = in.readString();
+		this.price = in.readString();
+		this.qty = in.readString();
+		this.name = in.readString();
+		this.id = in.readString();
+	}
 
-    public int describeContents() {
-        return  0;
-    }
+	public static final Parcelable.Creator<Item> CREATOR = new Parcelable.Creator<Item>() {
+		@Override
+		public Item createFromParcel(Parcel source) {
+			return new Item(source);
+		}
 
+		@Override
+		public Item[] newArray(int size) {
+			return new Item[size];
+		}
+	};
 }

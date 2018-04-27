@@ -45,67 +45,55 @@
             android:name=".subactivities.DetailTransaction"
             android:label="@string/title_activity_detail_transaction"
             android:parentActivityName=".MainActivity"
-            android:theme="@style/AppTheme.NoActionBar"/>
-
+            android:theme="@style/AppTheme" />
         <activity
-            android:name=".subactivities.CreateTransactionActivity"
+            android:name=".subactivities.AddTransactionActivity"
             android:label="@string/title_activity_create_transaction"
-            android:theme="@style/AppTheme.NoActionBar"/>
-
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".subactivities.TemplateActivity"
             android:label="@string/title_activity_template"
-            android:theme="@style/AppTheme.NoActionBar"/>
-
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".subactivities.AutoTextActivity"
             android:label="@string/title_activity_auto_text"
-            android:theme="@style/AppTheme.NoActionBar"/>
-
-        <activity android:name=".subactivities.DetailAutoTextActivity" />
-
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".subactivities.AddAutoTextActivity" />
         <activity
             android:name=".subactivities.DetailShopActivity"
             android:label="@string/title_activity_detail_shop"
-            android:theme="@style/AppTheme.NoActionBar"/>
-
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".subactivities.DetailUserActivity"
             android:label="@string/title_activity_detail_user"
             android:theme="@style/AppTheme.NoActionBar" />
-
         <activity
             android:name=".subactivities.PaymentActivity"
             android:label="@string/title_activity_payment"
-            android:theme="@style/AppTheme.NoActionBar"/>
-
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".subactivities.DefaultShippmentOriginActivity"
             android:label="@string/title_activity_default_shippment_origin"
-            android:theme="@style/AppTheme.NoActionBar"/>
-
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".subactivities.ShippmentCompanysericeActivity"
             android:label="@string/title_activity_shippment_companyserice"
-            android:theme="@style/AppTheme.NoActionBar"/>
-
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".subactivities.DefaultShippmentWeightActivity"
             android:label="@string/title_activity_default_shippment_weight"
-            android:theme="@style/AppTheme.NoActionBar"/>
-
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".subactivities.ScheduleDailyreminderActivity"
             android:label="@string/title_activity_schedule_dailyreminder"
-            android:theme="@style/AppTheme.NoActionBar"/>
-
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".preenter.PreloadActivity" />
-
         <activity android:name=".preenter.RegisterActivity" />
-
         <activity
             android:name=".preenter.LoginActivity"
-            android:label="@string/title_activity_login"/>
+            android:label="@string/title_activity_login" />
+        <activity android:name=".subactivities.AddPaymentActivity" />
+        <activity android:name=".subactivities.SearchActivity"></activity>
     </application>
 
 </manifest>
