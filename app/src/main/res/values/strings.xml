@@ -162,4 +162,5 @@
     <string name="toolbar_detailtr_changestatus_done">Done</string>
     <string name="toolbar_detailtr_changestatus_cancel">Cancel</string>
     <string name="label_menu_search">Search Transaction</string>
+    <string name="label_button_remaindtopay">Remain Customer To Pay</string>
 </resources>

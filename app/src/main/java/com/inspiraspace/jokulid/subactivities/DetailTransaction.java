@@ -8,7 +8,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -112,6 +111,10 @@ public class DetailTransaction extends AppCompatActivity implements GeneratorCha
     TextView tvDetailPaymentName;
     @BindView(R.id.tv_detail_payment_number)
     TextView tvDetailPaymentNumber;
+    @BindView(R.id.btn_detailtr_sendresi)
+    Button btnDetailtrSendresi;
+    @BindView(R.id.btn_detailtr_remaindtopay)
+    Button btnDetailtrRemaindtopay;
 
     private ArrayList<Chatapp> dataChatapps;
     private ArrayList<Payment> dataPayments;
@@ -123,13 +126,14 @@ public class DetailTransaction extends AppCompatActivity implements GeneratorCha
     AdpLVItemTransaction adpLVItemTransaction;
 
     PostTransactionStatus postTransactionStatus;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_transaction);
 
         ButterKnife.bind(this);
-postTransactionStatus = new PostTransactionStatus(this);
+        postTransactionStatus = new PostTransactionStatus(this);
         new GeneratorChatappPayment(this);
         rc_transaction = getIntent();
         setupViewFromIntent();
@@ -148,8 +152,16 @@ postTransactionStatus = new PostTransactionStatus(this);
         return true;
     }
 
+    String idTransaction, transactionStatus, newtransactionStatus = "", appPackage, appName;
+    Response item_transaction;
+
     private void setupViewFromIntent() {
-        Response item_transaction = rc_transaction.getParcelableExtra(Constant.TAG_TRANSACTION);
+        item_transaction = rc_transaction.getParcelableExtra(Constant.TAG_TRANSACTION);
+        idTransaction = item_transaction.getTransactionId();
+        transactionStatus = item_transaction.getTransactionStatus();
+        appPackage = item_transaction.getChatappPackage();
+        appName = item_transaction.getChatappName();
+
         customer_name = item_transaction.getCustomerCustomerName();
         customer_addr = item_transaction.getShipmentAddrDestination();
         customer_totalitemplprice = item_transaction.getTotal();
@@ -183,6 +195,11 @@ postTransactionStatus = new PostTransactionStatus(this);
 
         adpLVItemTransaction = new AdpLVItemTransaction(item_transaction.getItem(), this);
         lv_detailtr_ety_customeritem.setAdapter(adpLVItemTransaction);
+
+        if (transactionStatus.equals("2"))
+            btnDetailtrSendresi.setVisibility(View.VISIBLE);
+        if (transactionStatus.equals("0"))
+            btnDetailtrRemaindtopay.setVisibility(View.VISIBLE);
     }
 
 
@@ -199,12 +216,10 @@ postTransactionStatus = new PostTransactionStatus(this);
         target.setFocusable(true);*/
     }
 
-    public void openChatapp(int id_chat) {
+    public void openChatapp() {
         Intent i;
-        --id_chat;
-        String appPackage = dataChatapps.get(id_chat).getPackage();
-        String appName = dataChatapps.get(id_chat).getName();
-        if (id_chat == 0) {
+
+        if (item_transaction.getCustomerCustomerChatappId().equals("1")) {
             i = new Intent(Intent.ACTION_VIEW);
 //            customer_number =
             String url = Constant.URL_WA_DIRECTCHAT + customer_number;
@@ -219,26 +234,6 @@ postTransactionStatus = new PostTransactionStatus(this);
             Toast.makeText(this, appName + " Not Installed", Toast.LENGTH_SHORT).show();
             System.out.println(e.getMessage());
         }
-    }
-
-    public void shareTextToChatapp(int id_chat, String text_chat) {
-        String appPackage = dataChatapps.get(id_chat).getPackage();
-        String appName = dataChatapps.get(id_chat).getName();
-        PackageManager pm = getPackageManager();
-        try {
-            PackageInfo info = pm.getPackageInfo(appPackage, PackageManager.GET_META_DATA);
-
-            Intent sendIntent = new Intent();
-            sendIntent.setAction(Intent.ACTION_SEND);
-
-            sendIntent.setPackage(appPackage);
-            sendIntent.putExtra(Intent.EXTRA_TEXT, text_chat);
-            sendIntent.setType("text/plain");
-            startActivity(sendIntent);
-        } catch (PackageManager.NameNotFoundException e) {
-            Toast.makeText(this, appName + " Not Installed", Toast.LENGTH_SHORT).show();
-        }
-
     }
 
     @Override
@@ -262,6 +257,24 @@ postTransactionStatus = new PostTransactionStatus(this);
 
     @Override
     public void onFailure(String message) {
+
+    }
+
+    public void shareTextToChatapp(String text_chat) {
+        PackageManager pm = getPackageManager();
+        try {
+            PackageInfo info = pm.getPackageInfo(appPackage, PackageManager.GET_META_DATA);
+
+            Intent sendIntent = new Intent();
+            sendIntent.setAction(Intent.ACTION_SEND);
+
+            sendIntent.setPackage(appPackage);
+            sendIntent.putExtra(Intent.EXTRA_TEXT, text_chat);
+            sendIntent.setType("text/plain");
+            startActivity(sendIntent);
+        } catch (PackageManager.NameNotFoundException e) {
+            Toast.makeText(this, appName + " Not Installed", Toast.LENGTH_SHORT).show();
+        }
 
     }
 
@@ -297,50 +310,52 @@ postTransactionStatus = new PostTransactionStatus(this);
         switch (item.getItemId()) {
             // action with ID action_refresh was selected
             case R.id.toolbar_detailtr_chatting:
-                Toast.makeText(this, "toolbar_detailtr_chatting", Toast.LENGTH_SHORT)
-                        .show();
+                openChatapp();
                 break;
             case R.id.toolbar_detailtr_sendinvoice:
-                Toast.makeText(this, "toolbar_detailtr_sendinvoice", Toast.LENGTH_SHORT)
-                        .show();
+                shareTextToChatapp("invoice");
                 break;
             case R.id.toolbar_detailtr_changestatus_pending:
-                Toast.makeText(this, "toolbar_detailtr_changestatus_pending", Toast.LENGTH_SHORT)
-                        .show();
+                newtransactionStatus = "9";
                 break;
             case R.id.toolbar_detailtr_changestatus_paid:
-                Toast.makeText(this, "toolbar_detailtr_changestatus_paid", Toast.LENGTH_SHORT)
-                        .show();
+                newtransactionStatus = "1";
                 break;
             case R.id.toolbar_detailtr_changestatus_shipped:
-                Toast.makeText(this, "toolbar_detailtr_changestatus_shipped", Toast.LENGTH_SHORT)
-                        .show();
+                newtransactionStatus = "2";
                 break;
             case R.id.toolbar_detailtr_changestatus_done:
-                Toast.makeText(this, "toolbar_detailtr_changestatus_done", Toast.LENGTH_SHORT)
-                        .show();
+                newtransactionStatus = "11";
                 break;
             case R.id.toolbar_detailtr_changestatus_cancel:
-                Toast.makeText(this, "toolbar_detailtr_changestatus_cancel", Toast.LENGTH_SHORT)
-                        .show();
+                newtransactionStatus = "12";
                 break;
-
+            case R.id.home:
+                System.out.println("back pressed");
+                break;
             default:
                 break;
         }
 
+        changeStatusTransaction();
+
         return true;
     }
-private void changeStatusTransaction(){
 
-}
+    private void changeStatusTransaction() {
+        if (!newtransactionStatus.equals(""))
+            postTransactionStatus.updateTransactionStatus(idTransaction, newtransactionStatus);
+    }
+
+
     @Override
     public void OnSuccessUpdateTransactionStatus() {
-
+        finish();
     }
 
     @Override
     public void OnErrorUpdateTransactionStatus(String errmsg) {
 
     }
+
 }

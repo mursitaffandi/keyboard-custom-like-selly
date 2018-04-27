@@ -57,8 +57,7 @@ public class ListTransactionFragment extends Fragment implements PulseMainServer
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        page = getArguments().getInt(ARG_PAGE);
-        presenterTransactions = new GeneratorTransactions(this);
+
     }
 
     @Override
@@ -72,13 +71,22 @@ public class ListTransactionFragment extends Fragment implements PulseMainServer
         adapter = new AdapterTransactions(context);
         rv_main.setLayoutManager(new LinearLayoutManager(context));
         rv_main.setAdapter(adapter);
-        if (savedInstanceState == null)
-            presenterTransactions.getTransactios(page);
-        else  {
-            responses = savedInstanceState.getParcelableArrayList(TRANSACTION_LIST_STATE);
-            adapter.swipeLoadTransactions(responses);
-        }
+
         return view;
+    }
+
+    @Override
+    public void setMenuVisibility(boolean menuVisible) {
+        super.setMenuVisibility(menuVisible);
+        page = getArguments().getInt(ARG_PAGE);
+        presenterTransactions = new GeneratorTransactions(this);
+
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        presenterTransactions.getTransactios(page);
     }
 
     @Override
@@ -94,8 +102,8 @@ public class ListTransactionFragment extends Fragment implements PulseMainServer
 
     @Override
     public void onDestroyView() {
-        super.onDestroyView();
         unbinder.unbind();
+        super.onDestroyView();
     }
 
     @Override
