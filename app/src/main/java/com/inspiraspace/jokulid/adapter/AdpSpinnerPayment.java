@@ -1,6 +1,7 @@
 package com.inspiraspace.jokulid.adapter;
 
 import android.app.Activity;
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,13 +23,13 @@ import java.util.ArrayList;
 
 public class AdpSpinnerPayment extends ArrayAdapter<Payment> {
 
-    private Activity activity;
+    private Context activity;
     private ArrayList<Payment> data;
     Payment tempValues=null;
     LayoutInflater inflater;
 
     public AdpSpinnerPayment(
-            Activity activitySpinner,
+            Context activitySpinner,
             int textViewResourceId,
             ArrayList<Payment> objects
     )

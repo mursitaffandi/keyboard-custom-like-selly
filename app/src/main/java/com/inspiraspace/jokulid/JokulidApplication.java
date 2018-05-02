@@ -76,9 +76,9 @@ public class JokulidApplication extends Application {
     /*
     * credentials KEY_TOKO
     * */
-
+    public static final String KEY_TOKO_ID = "toko_id";
     public static final String KEY_TOKO_NAME = "toko_name";
-    public static final String KEY_TOKO_NOHP = "toko_hohp";
+    public static final String KEY_TOKO_NOHP = "toko_nohp";
     public static final String KEY_TOKO_URL = "toko_url";
 
 
@@ -89,6 +89,13 @@ public class JokulidApplication extends Application {
     public static final String KEY_SHIPPMENT_WEIGHT = "shippment_weight";
     public static final String KEY_SHIPPMENT_ORIGIN = "shippment_origin";
     public static final String KEY_SHIPPMENT_ORIGIN_ID = "shippment_origin_id";
+
+    /*
+    * Template KEY_TEMPLATE
+    * */
+    /*public static final String KEY_TEMPLATE_SENDRESI = "template_sendresi";
+    public static final String KEY_TEMPLATE_AFTERPAID = "template_afterpaid";
+    public static final String KEY_TEMPLATE_REMAINDTOPAY = "template_remaindtopay";*/
 
     // @session = for getting info from Preferences
     SharedPreferences session;
@@ -110,36 +117,65 @@ public class JokulidApplication extends Application {
             String user_email,
             String user_token,
             String user_uid,
-            String toko_name,
-            String toko_nohp,
-            String toko_url
-    ) {
+            String toko_id,
+            String shippment_origin,
+            String shippment_origin_id,
+            String shippmentWeight,
+            String toko_name, String toko_nohp, String toko_url) {
         editor.putString(KEY_USER_NAME, user_name);
         editor.putString(KEY_USER_ID, user_id);
         editor.putString(KEY_USER_EMAIL, user_email);
         editor.putString(KEY_USER_TOKEN, user_token);
         editor.putString(KEY_USER_UID, user_uid);
+        editor.putString(KEY_TOKO_ID, toko_id);
         editor.putString(KEY_TOKO_NAME, toko_name);
         editor.putString(KEY_TOKO_NOHP, toko_nohp);
         editor.putString(KEY_TOKO_URL, toko_url);
         editor.commit();
+
+        setShippmentOrigin(shippment_origin, shippment_origin_id);
+        setShippmentWeight(shippmentWeight);
+
+    }
+
+    public void setLoginInfo(
+            String user_name,
+            String user_id,
+            String user_email,
+            String user_token,
+            String user_uid,
+            String toko_id,
+            String toko_name, String toko_nohp, String toko_url) {
+        editor.putString(KEY_USER_NAME, user_name);
+        editor.putString(KEY_USER_ID, user_id);
+        editor.putString(KEY_USER_EMAIL, user_email);
+        editor.putString(KEY_USER_TOKEN, user_token);
+        editor.putString(KEY_USER_UID, user_uid);
+        editor.putString(KEY_TOKO_ID, toko_id);
+        editor.putString(KEY_TOKO_NAME, toko_name);
+        editor.putString(KEY_TOKO_NOHP, toko_nohp);
+        editor.putString(KEY_TOKO_URL, toko_url);
+
+        editor.commit();
     }
     public HashMap<String, String> getUserInfo() {
+
         HashMap<String, String> map = new HashMap<>();
         map.put(KEY_USER_NAME, session.getString(KEY_USER_NAME, "user0"));
         map.put(KEY_USER_ID, session.getString(KEY_USER_ID, "1"));
         map.put(KEY_USER_EMAIL, session.getString(KEY_USER_EMAIL, "user0@user.com"));
         map.put(KEY_USER_TOKEN, session.getString(KEY_USER_TOKEN, ""));
         map.put(KEY_USER_UID, session.getString(KEY_USER_UID, ""));
+        map.put(KEY_TOKO_ID, session.getString(KEY_TOKO_ID, "1"));
+        map.put(KEY_TOKO_NAME, session.getString(KEY_TOKO_NAME, "OL Shop"));
+        map.put(KEY_TOKO_NOHP, session.getString(KEY_TOKO_NOHP, "08111111"));
+        map.put(KEY_TOKO_URL, session.getString(KEY_TOKO_URL, "http://fb.me"));
+
         return map;
     }
 
-    public HashMap<String, String> getTokoInfo() {
-        HashMap<String, String> map = new HashMap<>();
-        map.put(KEY_TOKO_NAME, session.getString(KEY_TOKO_NAME, ""));
-        map.put(KEY_TOKO_NOHP, session.getString(KEY_TOKO_NOHP, ""));
-        map.put(KEY_TOKO_URL, session.getString(KEY_TOKO_URL, ""));
-        return map;
+    public String getTokoId() {
+        return session.getString(KEY_TOKO_ID, "1");
     }
 
 
@@ -187,6 +223,15 @@ public class JokulidApplication extends Application {
 
     public String getShippmentWeight() {
         return session.getString(KEY_SHIPPMENT_WEIGHT, "1000");
+    }
+
+    public void setTemplate(String template, String template_sendresi){
+        editor.putString(template, template_sendresi);
+        editor.commit();
+    }
+
+    public String getTemplate(String template){
+        return session.getString(template,Constant.DEFAULT_TEMPLATE);
     }
 
 }

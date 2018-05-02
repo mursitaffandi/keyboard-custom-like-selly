@@ -32,21 +32,35 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.inspiraspace.jokulid.JokulidApplication;
 import com.inspiraspace.jokulid.MainActivity;
 import com.inspiraspace.jokulid.R;
 import com.inspiraspace.jokulid.adapter.AdpAutoTexts;
+import com.inspiraspace.jokulid.adapter.AdpAutocomplateAddress;
+import com.inspiraspace.jokulid.adapter.AdpLVResultOngkir;
+import com.inspiraspace.jokulid.adapter.AdpSpinnerChatapp;
+import com.inspiraspace.jokulid.adapter.AdpSpinnerPayment;
 import com.inspiraspace.jokulid.adapter.AdpSubcdtPendings;
 import com.inspiraspace.jokulid.keylogger.Emoji.EmojiHelper.EmojiconGridView;
 import com.inspiraspace.jokulid.keylogger.Emoji.EmojiHelper.EmojiconsPopup;
 import com.inspiraspace.jokulid.keylogger.Emoji.Emojicon;
+import com.inspiraspace.jokulid.model.preaddtransaction.Chatapp;
+import com.inspiraspace.jokulid.model.preaddtransaction.Payment;
+import com.inspiraspace.jokulid.model.rajaongkir.Item_Ongkir;
+import com.inspiraspace.jokulid.model.searchsubdistrict.Datum;
 import com.inspiraspace.jokulid.model.transactions.Response;
 import com.inspiraspace.jokulid.network.main.PulseAutoText;
 import com.inspiraspace.jokulid.network.main.PulseMainServer;
 import com.inspiraspace.jokulid.presenter.GeneratorAutoTexts;
 import com.inspiraspace.jokulid.presenter.GeneratorTransactions;
+import com.inspiraspace.jokulid.presenter.newTransaction.OnViewAddTransaction;
+import com.inspiraspace.jokulid.presenter.newTransaction.PAddTransaction;
+import com.inspiraspace.jokulid.presenter.shippmentfare.OnViewShippmentfare;
+import com.inspiraspace.jokulid.presenter.shippmentfare.PShippmentFare;
 import com.inspiraspace.jokulid.subactivities.AddAutoTextActivity;
 
 import java.util.ArrayList;
@@ -61,9 +75,10 @@ import java.util.List;
  * be fleshed out as appropriate.
  */
 public class SoftKeyboard extends InputMethodService
-        implements KeyboardView.OnKeyboardActionListener, View.OnClickListener, View.OnFocusChangeListener, TextWatcher, PulseMainServer, PulseAutoText {
+        implements KeyboardView.OnKeyboardActionListener, View.OnClickListener, View.OnFocusChangeListener, TextWatcher, PulseMainServer, PulseAutoText, OnViewShippmentfare, OnViewAddTransaction {
 
     static final boolean DEBUG = false;
+    private Context mContext;
 
     /**
      * This boolean indicates the optional example code for performing
@@ -98,41 +113,100 @@ public class SoftKeyboard extends InputMethodService
 
     private String mWordSeparators;
 
-    LinearLayout layout_candidatebar_main;
+/*
+* start candidateview
+* */
     LinearLayout layout_subcdt_content;
+    TextView tv_title_toobar_subcdt;
+
+    LinearLayout layout_candidatebar_main;
 
     View layout_subcdt_createinvoice;
     View layout_subcdt_shippmentFee;
     View layout_subcdt_autotext;
     View layout_subcdt_pending;
+    /*
+    * end candidateview
+    * */
 
+    /*
+    * start shippment fee
+    * */
     TextInputEditText etItemWeight;
-    AutoCompleteTextView etFrom;
-    AutoCompleteTextView etDestination;
-    Button btn_count_shippmentfee;
+    AutoCompleteTextView etFrom ,etDestination;
+    ArrayList<Datum> arrSubdistrict;
+    AdpAutocomplateAddress autoTextAdapter;
+
     ListView listOngkir;
+    AdpLVResultOngkir adpResultOngkir;
+    List<Item_Ongkir> resultOngkir = new ArrayList<>();
+
     Button btn_shippmentfee_copytoclipboard;
+    Button btn_count_shippmentfee;
+    private String idShippmentOrigin = null, idShippmentDestination = null, weightShippment = null;
 
-    TextView tv_title_toobar_subcdt;
+    private PShippmentFare onPresentShippmentfare;
+    /*
+    * end shippment fee
+    * */
 
-    ListView lv_subcdt_pending;
+    /*Pending*/
     List<Response> responseTransactionList = new ArrayList<>();
     AdpSubcdtPendings adpSubcdtPendings;
+    ListView lv_subcdt_pending;
     GeneratorTransactions generatorTransactions;
 
-    EditText edt_subcdt_autotext_search;
+        /*end Pending*/
+
+        /*Autotext*/
     Button btn_subcdt_autotext_search;
     ListView lv_subcdt_autotext_search;
+
+
     FloatingActionButton btn_add_autotext;
     GeneratorAutoTexts generatorAutoTexts;
     List<com.inspiraspace.jokulid.model.autotext.Response> autotextList = new ArrayList<>();
     AdpAutoTexts adpAutoTexts;
+    EditText edt_subcdt_autotext_search;
+    /*End Autotext*/
 
+    /*Make Invoice*/
+    TextInputEditText edt_add_transaction_customername;
+    TextInputEditText edt_add_transaction_customernohp;
+    AutoCompleteTextView edt_add_transaction_customeraddress;
+    TextInputEditText edt_add_transaction_transactionongkir;
+    Spinner sp_add_transaction_bankaccount;
+    Spinner sp_add_transaction_chatapp;
+    TextInputEditText edt_add_transaction_item_qty;
+    TextInputEditText edt_add_transaction_item_name;
+    TextInputEditText edt_add_transaction_item_price;
+    TextInputEditText edt_add_transaction_transactionnote;
+    Button btn_add_transaction_done;
+
+    PAddTransaction pAddTransaction;
+
+    private AdpSpinnerChatapp adpSpinnerChatapp;
+    private AdpSpinnerPayment adpSpinnerPayment;
+
+    private ArrayList<Payment> dataPayments;
+    private ArrayList<Chatapp> dataChatapps;
+    /*End Make Invoice*/
+
+//    TODO : Put all editable view here
     private EditText[] getAllEditableField() {
         return new EditText[]{
                 etItemWeight,
                 etFrom,
-                etDestination
+                etDestination,
+                /*editable make invoice*/
+                edt_add_transaction_customername,
+                edt_add_transaction_customernohp,
+                edt_add_transaction_customeraddress,
+                edt_add_transaction_transactionongkir,
+                edt_add_transaction_item_qty,
+                edt_add_transaction_item_name,
+                edt_add_transaction_item_price,
+                edt_add_transaction_transactionnote
         };
     }
 
@@ -244,6 +318,29 @@ public class SoftKeyboard extends InputMethodService
                 i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(i);
                 break;
+
+            case R.id.btn_shippmentfee_copytoclipboard:
+                onPresentShippmentfare.OnClickCopyOngkir(adpResultOngkir.getItemsOngkir_selected());
+                break;
+
+            case R.id.btn_count_shippmentfee:
+                weightShippment = etItemWeight.getText().toString();
+                onPresentShippmentfare.OnCount(weightShippment, idShippmentOrigin, idShippmentDestination);
+                break;
+            case R.id.btn_add_transaction_done:
+                pAddTransaction.OnAddTransaction(
+                        edt_add_transaction_customername.getText().toString(),
+                        edt_add_transaction_customernohp.getText().toString(),
+                        edt_add_transaction_customeraddress.getText().toString(),
+                        edt_add_transaction_transactionnote.getText().toString(),
+                        edt_add_transaction_transactionongkir.getText().toString(),
+                        dataPayments.get(sp_add_transaction_bankaccount.getSelectedItemPosition()).getBankAccountBankId(),
+                        dataChatapps.get(sp_add_transaction_chatapp.getSelectedItemPosition()).getId(),
+                        edt_add_transaction_item_qty.getText().toString(),
+                        edt_add_transaction_item_name.getText().toString(),
+                        edt_add_transaction_item_price.getText().toString()
+                        );
+                break;
             default:
                 break;
         }
@@ -275,6 +372,20 @@ public class SoftKeyboard extends InputMethodService
 
         layout_candidatebar_main.setVisibility(View.GONE);
         tv_title_toobar_subcdt.setText(getString(R.string.title_subcdt_toolbar_createinvoice));
+
+        btn_add_transaction_done.setOnClickListener(this);
+
+        edt_add_transaction_customername.setOnFocusChangeListener(this);
+        edt_add_transaction_customernohp.setOnFocusChangeListener(this);
+        edt_add_transaction_customeraddress.setOnFocusChangeListener(this);
+        edt_add_transaction_transactionongkir.setOnFocusChangeListener(this);
+        edt_add_transaction_item_qty.setOnFocusChangeListener(this);
+        edt_add_transaction_item_name.setOnFocusChangeListener(this);
+        edt_add_transaction_item_price.setOnFocusChangeListener(this);
+        edt_add_transaction_transactionnote.setOnFocusChangeListener(this);
+
+        sp_add_transaction_chatapp.setOnFocusChangeListener(this);
+
     }
 
     private void showSubShippmentfee() {
@@ -288,11 +399,60 @@ public class SoftKeyboard extends InputMethodService
         layout_candidatebar_main.setVisibility(View.GONE);
         tv_title_toobar_subcdt.setText(getString(R.string.title_subcdt_toolbar_countshippmentfee));
 
-        etItemWeight.requestFocus();
-        etItemWeight.setText(JokulidApplication.getInstance().getShippmentWeight());
-        etFrom.setText(JokulidApplication.getInstance().getShippmentOrigin().get(JokulidApplication.KEY_SHIPPMENT_ORIGIN ));
-//        idShippmentOrigin = JokulidApplication.getInstance().getShippmentOrigin().get(JokulidApplication.KEY_SHIPPMENT_ORIGIN_ID);
+        adpResultOngkir = new AdpLVResultOngkir(mContext, resultOngkir);
+        listOngkir.setAdapter(adpResultOngkir);
 
+        etFrom.setThreshold(3);
+        etDestination.setThreshold(3);
+
+        etItemWeight.setOnFocusChangeListener(this);
+        etFrom.setOnFocusChangeListener(this);
+        etDestination.setOnFocusChangeListener(this);
+
+        etFrom.addTextChangedListener(this);
+        etDestination.addTextChangedListener(this);
+
+        etFrom.setOnItemClickListener(
+                new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        idShippmentOrigin = arrSubdistrict.get(position).getSubdistrictId();
+                    }
+                }
+        );
+
+        etDestination.setOnItemClickListener(
+                new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        idShippmentDestination = arrSubdistrict.get(position).getSubdistrictId();
+                    }
+                }
+        );
+
+        idShippmentOrigin = JokulidApplication.getInstance().getShippmentOrigin().get(JokulidApplication.KEY_SHIPPMENT_ORIGIN_ID);
+        weightShippment = JokulidApplication.getInstance().getShippmentWeight();
+
+        etItemWeight.setText(weightShippment);
+        etFrom.setText(JokulidApplication.getInstance().getShippmentOrigin().get(JokulidApplication.KEY_SHIPPMENT_ORIGIN ));
+
+        etDestination.requestFocus();
+        btn_count_shippmentfee.setOnClickListener(this);
+        btn_shippmentfee_copytoclipboard.setOnClickListener(this);
+    }
+
+    public void searchSubdistrict(String keyword, AutoCompleteTextView field) {
+        onPresentShippmentfare.OnSearchAddress(keyword, field);
+    }
+
+    private void showAutocomplateDropdown(AutoCompleteTextView field, ArrayList<Datum> listAddress) {
+        autoTextAdapter = new AdpAutocomplateAddress(mContext, R.layout.item_subdistrict, listAddress);
+        autoTextAdapter.setDropDownViewResource(R.layout.item_subdistrict);
+
+        field.setAdapter(autoTextAdapter);
+        if (field.getText().length() >= field.getThreshold() && !autoTextAdapter.isEmpty()) {
+            field.showDropDown();
+        }
     }
 
     private void showSubAutotext() {
@@ -342,6 +502,8 @@ public void sendTextToFieldText(String text){
      */
     @Override
     public View onCreateCandidatesView() {
+        this.mContext = this;
+
         LayoutInflater li = (LayoutInflater) getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View wordBar = li.inflate(R.layout.candidatebar, null);
 
@@ -364,10 +526,11 @@ public void sendTextToFieldText(String text){
         adpSubcdtPendings = new AdpSubcdtPendings(responseTransactionList, this);
         lv_subcdt_pending.setAdapter(adpSubcdtPendings);
         generatorTransactions = new GeneratorTransactions(this);
-
+/*menu autotext */
         edt_subcdt_autotext_search = wordBar.findViewById(R.id.edt_subcdt_autotext_search);
         btn_subcdt_autotext_search = wordBar.findViewById(R.id.btn_subcdt_autotext_search);
         lv_subcdt_autotext_search = wordBar.findViewById(R.id.lv_subcdt_autotext_search);
+
         lv_subcdt_autotext_search.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -379,19 +542,32 @@ public void sendTextToFieldText(String text){
         btn_add_autotext = wordBar.findViewById(R.id.fab_autotext);
         btn_cdt_autotext.setOnClickListener(this);
         generatorAutoTexts = new GeneratorAutoTexts(this);
-
-
-
+/*end menu autotext */
+/*menu shippment fare*/
+        onPresentShippmentfare = new PShippmentFare(mContext, this);
         etItemWeight = wordBar.findViewById(R.id.etItemWeight);
         etFrom = wordBar.findViewById(R.id.etFrom);
         etDestination = wordBar.findViewById(R.id.etDestination);
         btn_count_shippmentfee = wordBar.findViewById(R.id.btn_count_shippmentfee);
         listOngkir = wordBar.findViewById(R.id.listOngkir);
         btn_shippmentfee_copytoclipboard = wordBar.findViewById(R.id.btn_shippmentfee_copytoclipboard);
+/*end menu shippment fare*/
+/*menu Make Invoice*/
+        edt_add_transaction_customername = wordBar.findViewById(R.id.edt_add_transaction_customername);
+        edt_add_transaction_customernohp = wordBar.findViewById(R.id.edt_add_transaction_customernohp);
+        edt_add_transaction_customeraddress = wordBar.findViewById(R.id.edt_add_transaction_customeraddress);
+        edt_add_transaction_transactionongkir = wordBar.findViewById(R.id.edt_add_transaction_transactionongkir);
+        sp_add_transaction_bankaccount = wordBar.findViewById(R.id.sp_add_transaction_bankaccount);
+        sp_add_transaction_chatapp = wordBar.findViewById(R.id.sp_add_transaction_chatapp);
+        edt_add_transaction_item_qty = wordBar.findViewById(R.id.edt_add_transaction_item_qty);
+        edt_add_transaction_item_name = wordBar.findViewById(R.id.edt_add_transaction_item_name);
+        edt_add_transaction_item_price = wordBar.findViewById(R.id.edt_add_transaction_item_price);
+        edt_add_transaction_transactionnote = wordBar.findViewById(R.id.edt_add_transaction_transactionnote);
+        btn_add_transaction_done = wordBar.findViewById(R.id.btn_add_transaction_done);
 
-        etItemWeight.setOnFocusChangeListener(this);
-        etFrom.setOnFocusChangeListener(this);
-        etDestination.setOnFocusChangeListener(this);
+        pAddTransaction = new PAddTransaction(this);
+/*end menu Make Invoice*/
+
 
         btntoolbar_back_subcdt_content.setOnClickListener(this);
         btn_cdt_makeinvoice.setOnClickListener(this);
@@ -803,6 +979,29 @@ public void sendTextToFieldText(String text){
             onInputCustomKeyboard(primaryCode, etDestination);
         } else if (etFrom.isFocused()) {
             onInputCustomKeyboard(primaryCode, etFrom);
+        }else if (edt_add_transaction_customername.isFocused()) {
+            onInputCustomKeyboard(primaryCode, edt_add_transaction_customername);
+        }
+        else if (edt_add_transaction_customernohp.isFocused()) {
+            onInputCustomKeyboard(primaryCode, edt_add_transaction_customernohp);
+        }
+        else if (edt_add_transaction_customeraddress.isFocused()) {
+            onInputCustomKeyboard(primaryCode, edt_add_transaction_customeraddress);
+        }
+        else if (edt_add_transaction_transactionongkir.isFocused()) {
+            onInputCustomKeyboard(primaryCode, edt_add_transaction_transactionongkir);
+        }
+        else if (edt_add_transaction_item_qty.isFocused()) {
+            onInputCustomKeyboard(primaryCode, edt_add_transaction_item_qty);
+        }
+        else if (edt_add_transaction_item_name.isFocused()) {
+            onInputCustomKeyboard(primaryCode, edt_add_transaction_item_name);
+        }
+        else if (edt_add_transaction_item_price.isFocused()) {
+            onInputCustomKeyboard(primaryCode, edt_add_transaction_item_price);
+        }
+        else if (edt_add_transaction_transactionnote.isFocused()) {
+            onInputCustomKeyboard(primaryCode, edt_add_transaction_transactionnote);
         } else {
             if (isWordSeparator(primaryCode)) {
                 // Handle separator
@@ -879,6 +1078,7 @@ public void sendTextToFieldText(String text){
         }
     }
 
+    @Override
     public void onText(CharSequence text) {
         InputConnection ic = getCurrentInputConnection();
         if (ic == null) return;
@@ -1062,7 +1262,17 @@ public void sendTextToFieldText(String text){
 
     @Override
     public void afterTextChanged(Editable s) {
-
+        if (etFrom.isFocused()) {
+            idShippmentOrigin = null;
+            if (s.length() >= etFrom.getThreshold()) {
+                searchSubdistrict(etFrom.getText().toString(), etFrom);
+            }
+        } else if (etDestination.isFocused()) {
+            idShippmentDestination = null;
+            if (s.length() >= etDestination.getThreshold()) {
+                searchSubdistrict(etDestination.getText().toString(), etDestination);
+            }
+        }
     }
 
     @Override
@@ -1085,7 +1295,6 @@ public void sendTextToFieldText(String text){
         if (etItemWeight.isFocused()) {
             if (mInputView.getVisibility() == View.GONE) {
                 mInputView.setVisibility(View.VISIBLE);
-
             }
 
         } else if (etFrom.isFocused()) {
@@ -1099,6 +1308,7 @@ public void sendTextToFieldText(String text){
             }
         }
     }
+            /*end View.OnFocusChangeListener*/
 
     @Override
     public void onSuccessGetTransactions(List<Response> transaction) {
@@ -1120,6 +1330,44 @@ public void sendTextToFieldText(String text){
     public void onError(String msgerror) {
 
     }
-            /*end View.OnFocusChangeListener*/
 
+    @Override
+    public void OnSuccessFindingsAddress(ArrayList<Datum> datumListAddress, AutoCompleteTextView field) {
+        arrSubdistrict = datumListAddress;
+        showAutocomplateDropdown(field, datumListAddress);
+    }
+
+    @Override
+    public void OnSuccessShippmentfare(List<Item_Ongkir> resultListOngkir) {
+        listOngkir.setVisibility(View.VISIBLE);
+        this.resultOngkir = resultListOngkir;
+        adpResultOngkir.swipeRefresh(resultOngkir);
+        adpResultOngkir.notifyDataSetChanged();
+        if (resultListOngkir.size() > 0)
+            btn_shippmentfee_copytoclipboard.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void OnSuccessLoadPaymentChattapp(ArrayList<Payment> dataPayments, ArrayList<Chatapp> dataChatapps) {
+        this.dataChatapps = dataChatapps;
+        this.dataPayments = dataPayments;
+
+        adpSpinnerChatapp = new AdpSpinnerChatapp(this, R.id.tv_item_chatapp, dataChatapps);
+        sp_add_transaction_chatapp.setAdapter(adpSpinnerChatapp);
+
+        adpSpinnerPayment = new AdpSpinnerPayment(this, R.id.tv_item_payment, dataPayments);
+        sp_add_transaction_bankaccount.setAdapter(adpSpinnerPayment);
+    }
+
+    @Override
+    public void OnSuccessAddTransaction() {
+        Toast.makeText(this, "New Pending Transaction Added", Toast.LENGTH_SHORT).show();
+        normalizeKeyboard();
+    }
+
+    @Override
+    public void OnErrorAddTransaction(String message) {
+        System.out.println(message);
+        Toast.makeText(this, "Fail Added Transaction", Toast.LENGTH_SHORT).show();
+    }
 }

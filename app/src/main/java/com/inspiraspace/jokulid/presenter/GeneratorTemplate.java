@@ -1,6 +1,5 @@
 package com.inspiraspace.jokulid.presenter;
 
-import com.inspiraspace.jokulid.model.autotext.Mautotext;
 import com.inspiraspace.jokulid.model.template.Template;
 import com.inspiraspace.jokulid.network.main.ClientMainCall;
 import com.inspiraspace.jokulid.network.main.PulseTemplate;
@@ -25,7 +24,7 @@ public class GeneratorTemplate {
     }
 
     public void getTemplate(String template){
-        apiCall = clientMainCall.getService().getTemplate(Constant.USER_ID, template);
+        apiCall = clientMainCall.getService().getTemplate(Constant.SESSION_USER_ID, template);
         apiCall.enqueue(new Callback<Template>() {
             @Override
             public void onResponse(Call<Template> call, retrofit2.Response<Template> response) {
@@ -40,7 +39,7 @@ public class GeneratorTemplate {
     }
 
     public void updateTemplate(String template, String new_content){
-        apiUpdate = clientMainCall.getService().updateTemplate(Constant.USER_ID,template,new_content);
+        apiUpdate = clientMainCall.getService().updateTemplate(Constant.SESSION_USER_ID,template,new_content);
         apiUpdate.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {

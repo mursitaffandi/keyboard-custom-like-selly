@@ -5,8 +5,6 @@ import com.inspiraspace.jokulid.model.preaddtransaction.Response;
 import com.inspiraspace.jokulid.network.main.ClientMainCall;
 import com.inspiraspace.jokulid.utils.Constant;
 
-import java.util.List;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 
@@ -23,25 +21,25 @@ public class GeneratorChatappPayment {
     public GeneratorChatappPayment(final PulsePreDetailTransaction pulsePreDetailTransaction) {
         this.pulsePreDetailTransaction = pulsePreDetailTransaction;
 
-        apiCall = clientMainCall.getService().getPreDetailTransaction(Constant.USER_ID);
+        apiCall = clientMainCall.getService().getPreDetailTransaction(Constant.SESSION_USER_ID);
         apiCall.enqueue(new Callback<Premaketransaction>() {
 
             @Override
             public void onResponse(Call<Premaketransaction> call, retrofit2.Response<Premaketransaction> response) {
                 listTransaction = response.body().getResponse();
-                pulsePreDetailTransaction.onSuccesPayment(listTransaction);
+                pulsePreDetailTransaction.onSuccesPaymentChatapp(listTransaction);
             }
 
             @Override
             public void onFailure(Call<Premaketransaction> call, Throwable t) {
-                pulsePreDetailTransaction.onFailure(t.getMessage());
+                pulsePreDetailTransaction.onFailurePaymentChatapp(t.getMessage());
             }
         });
     }
 
 
     public interface PulsePreDetailTransaction{
-        void onSuccesPayment(Response payments);
-        void onFailure(String message);
+        void onSuccesPaymentChatapp(Response payments);
+        void onFailurePaymentChatapp(String message);
     }
 }

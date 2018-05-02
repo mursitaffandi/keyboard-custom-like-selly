@@ -2,15 +2,12 @@ package com.inspiraspace.jokulid.subactivities;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.inspiraspace.jokulid.R;
 import com.inspiraspace.jokulid.network.main.PulsePostAutotext;
 import com.inspiraspace.jokulid.presenter.PostAutotext;
-import com.inspiraspace.jokulid.presenter.PostBankAccount;
 import com.inspiraspace.jokulid.utils.Constant;
 
 import butterknife.BindView;
@@ -37,7 +34,7 @@ String shortcut, content;
     public void onViewClicked() {
         shortcut = edtAddautotextTitle.getText().toString();
         content = edtAddautotextContent.getText().toString();
-        new PostAutotext(this, Constant.USER_ID,shortcut,content);
+        new PostAutotext(this, Constant.SESSION_USER_ID,shortcut,content);
     }
 
     @Override

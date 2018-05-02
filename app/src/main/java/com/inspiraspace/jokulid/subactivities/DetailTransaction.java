@@ -22,6 +22,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.inspiraspace.jokulid.BuildConfig;
+import com.inspiraspace.jokulid.JokulidApplication;
 import com.inspiraspace.jokulid.R;
 import com.inspiraspace.jokulid.adapter.AdpLVItemTransaction;
 import com.inspiraspace.jokulid.adapter.AdpLVLogTransaction;
@@ -34,10 +35,13 @@ import com.inspiraspace.jokulid.model.transactions.Log;
 import com.inspiraspace.jokulid.model.transactions.Response;
 import com.inspiraspace.jokulid.network.main.PulseTransactionStatus;
 import com.inspiraspace.jokulid.presenter.GeneratorChatappPayment;
+import com.inspiraspace.jokulid.presenter.GeneratorTemplate;
 import com.inspiraspace.jokulid.presenter.PostTransactionStatus;
 import com.inspiraspace.jokulid.utils.Constant;
+import com.inspiraspace.jokulid.utils.UtilTemplate;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import butterknife.BindView;
@@ -126,6 +130,10 @@ public class DetailTransaction extends AppCompatActivity implements GeneratorCha
     AdpLVItemTransaction adpLVItemTransaction;
 
     PostTransactionStatus postTransactionStatus;
+    String templateSendResi = "";
+    String templateAfterpaid = "";
+    String templateRemaindtopay = "";
+    UtilTemplate utilTemplate = new UtilTemplate();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -200,8 +208,42 @@ public class DetailTransaction extends AppCompatActivity implements GeneratorCha
             btnDetailtrSendresi.setVisibility(View.VISIBLE);
         if (transactionStatus.equals("0"))
             btnDetailtrRemaindtopay.setVisibility(View.VISIBLE);
+
+//        HashMap<String, String> userInfo = JokulidApplication.getInstance().getUserInfo();
+        utilTemplate.setAccount_name(Constant.SESSION_USER_NAME);
+        utilTemplate.setAccount_number(Constant.SESSION_TOKO_NOHP);
+        utilTemplate.setAmount(customer_totalitemplprice);
+        utilTemplate.setBank_name(item_transaction.getBankBankName());
+        utilTemplate.setBank_address(item_transaction.getBankAccountBankAccountNumber());
+        utilTemplate.setCustomer_address(customer_addr);
+        utilTemplate.setCustomer_contact(customer_number);
+        utilTemplate.setCustomer_name(customer_name);
+        utilTemplate.setInvoice_id(item_transaction.getTransactionId());
+        utilTemplate.setNotes(customer_note);
+
+        String itemBuys = "";
+        for (Item i : item_transaction.getItem())
+            itemBuys = i.getName() + " " + i.getQty() + " " + i.getPrice() + "\n";
+
+        utilTemplate.setProduct_list(itemBuys);
+        utilTemplate.setShipping_cost(customer_shippmentfee);
+        utilTemplate.setStore_name(Constant.SESSION_TOKO_NAME);
+        utilTemplate.setTotal_amount(String.valueOf(Integer.parseInt(customer_shippmentfee) + Integer.parseInt(customer_totalitemplprice)));
+        utilTemplate.setShipping_provider(item_transaction.getCourierCompany());
+        utilTemplate.setResi_number(item_transaction.getShipmentResi());
     }
 
+    public String getTemplateSendResi() {
+        return JokulidApplication.getInstance().getTemplate(Constant.KEY_TEMPLATE_SENDRESI);
+    }
+
+    public String getTemplateRemaindopay() {
+        return JokulidApplication.getInstance().getTemplate(Constant.KEY_TEMPLATE_REMINDERTOPAY);
+    }
+
+    public String getTemplateAfterpaid() {
+        return JokulidApplication.getInstance().getTemplate(Constant.KEY_TEMPLATE_AFTERPAID);
+    }
 
     public void disableEdittext(EditText target) {
         target.setEnabled(false);
@@ -237,7 +279,7 @@ public class DetailTransaction extends AppCompatActivity implements GeneratorCha
     }
 
     @Override
-    public void onSuccesPayment(com.inspiraspace.jokulid.model.preaddtransaction.Response payments) {
+    public void onSuccesPaymentChatapp(com.inspiraspace.jokulid.model.preaddtransaction.Response payments) {
         dataPayments = payments.getArrPayment();
         dataChatapps = payments.getArrChatapp();
 
@@ -256,7 +298,7 @@ public class DetailTransaction extends AppCompatActivity implements GeneratorCha
     }
 
     @Override
-    public void onFailure(String message) {
+    public void onFailurePaymentChatapp(String message) {
 
     }
 
@@ -278,6 +320,12 @@ public class DetailTransaction extends AppCompatActivity implements GeneratorCha
 
     }
 
+    @OnClick(R.id.btn_detailtr_remaindtopay)
+    public void remaindCustomertopay() {
+        String remaindertopay = utilTemplate.convertTemplate(getTemplateRemaindopay());
+        shareTextToChatapp(remaindertopay);
+    }
+
     @OnClick(R.id.btn_detailtr_sendresi)
     public void onViewClicked() {
         // custom dialog
@@ -285,11 +333,11 @@ public class DetailTransaction extends AppCompatActivity implements GeneratorCha
         dialog.setContentView(R.layout.dialog_sendresi);
 
 //        TODO: why this not visible??
-        dialog.setTitle("jgujg");
+        dialog.setTitle("Create Resi");
 
         // set the custom dialog components - text, image and button
-        TextInputEditText edt_sendresi_number = dialog.findViewById(R.id.edt_sendresi_number);
-        Spinner sp_sendresi_shippmentcompany = dialog.findViewById(R.id.sp_sendresi_shippmentcompany);
+        final TextInputEditText edt_sendresi_number = dialog.findViewById(R.id.edt_sendresi_number);
+        final Spinner sp_sendresi_shippmentcompany = dialog.findViewById(R.id.sp_sendresi_shippmentcompany);
         Button btn_sendresi_send = dialog.findViewById(R.id.btn_sendresi_send);
 
         sp_sendresi_shippmentcompany.setAdapter(new
@@ -298,6 +346,12 @@ public class DetailTransaction extends AppCompatActivity implements GeneratorCha
         btn_sendresi_send.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String companyselected = (String) sp_sendresi_shippmentcompany.getSelectedItem();
+                String trackingNumber = edt_sendresi_number.getText().toString();
+                utilTemplate.setResi_number(trackingNumber);
+                utilTemplate.setShipping_provider(companyselected);
+                String sendResi = utilTemplate.convertTemplate(getTemplateSendResi());
+                shareTextToChatapp(sendResi);
                 dialog.dismiss();
             }
         });
@@ -313,7 +367,8 @@ public class DetailTransaction extends AppCompatActivity implements GeneratorCha
                 openChatapp();
                 break;
             case R.id.toolbar_detailtr_sendinvoice:
-                shareTextToChatapp("invoice");
+                String invoice = utilTemplate.convertTemplate(getTemplateAfterpaid());
+                shareTextToChatapp(invoice);
                 break;
             case R.id.toolbar_detailtr_changestatus_pending:
                 newtransactionStatus = "9";

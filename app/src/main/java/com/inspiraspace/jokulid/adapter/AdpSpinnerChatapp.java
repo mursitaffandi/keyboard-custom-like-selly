@@ -1,6 +1,7 @@
 package com.inspiraspace.jokulid.adapter;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.res.Resources;
 import android.media.Image;
 import android.view.LayoutInflater;
@@ -25,13 +26,13 @@ import java.util.List;
 
 public class AdpSpinnerChatapp extends ArrayAdapter<String>{
 
-    private Activity activity;
+    private Context activity;
     private ArrayList data;
     Chatapp tempValues =null;
     LayoutInflater inflater;
 
     public AdpSpinnerChatapp(
-            Activity activitySpinner,
+            Context activitySpinner,
             int textViewResourceId,
             ArrayList objects
     )

@@ -11,7 +11,7 @@ import android.widget.Toast;
  * Created by mursitaffandi on 4/19/18.
  */
 
-public class Clipboard_Utils {
+public class UtilClipboard {
 
     /**
      * Copy Data to Clipboard Methods

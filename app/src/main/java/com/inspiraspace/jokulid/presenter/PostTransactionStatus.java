@@ -22,7 +22,7 @@ public class PostTransactionStatus {
     }
 
     public void updateTransactionStatus(String transaction_id, String new_status){
-        apiCall = clientMainCall.getService().updateTransactionStatus(Constant.USER_ID, transaction_id,new_status);
+        apiCall = clientMainCall.getService().updateTransactionStatus(Constant.SESSION_USER_ID, transaction_id,new_status);
         apiCall.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {

@@ -3,6 +3,7 @@ package com.inspiraspace.jokulid.network.main;
 import com.inspiraspace.jokulid.model.autotext.Mautotext;
 import com.inspiraspace.jokulid.model.bank.Bank;
 import com.inspiraspace.jokulid.model.customers.Customers;
+import com.inspiraspace.jokulid.model.login.ResponseLogin;
 import com.inspiraspace.jokulid.model.preaddtransaction.Premaketransaction;
 import com.inspiraspace.jokulid.model.shop.ResponseShop;
 import com.inspiraspace.jokulid.model.template.Template;
@@ -76,18 +77,18 @@ public interface UrlMainServer {
     );
 
     @FormUrlEncoded
-    @POST("create_transaction.php")
+    @POST("add_transaction.php")
     Call<Void>  setNewTransaction(
-            @Field("customername") String strsend_customername,
-            @Field("customernohp") String strsend_customernohp,
-            @Field("customeraddress") String strsend_customeraddress,
-            @Field("transactionnote") String strsend_transactionnote,
-            @Field("transactionongkir") String strsend_transactionongkir,
-            @Field("id_bankaccount") String strsend_id_bankaccount,
-            @Field("id_chatapp") String strsend_id_chatapp,
-            @Field("item_qty") String strsend_item_qty,
-            @Field("item_name") String strsend_item_name,
-            @Field("item_price") String strsend_item_price,
+            @Field("customer_name") String customer_name,
+            @Field("customer_nohp") String customer_nohp,
+            @Field("customer_address") String customer_address,
+            @Field("transaction_note") String transaction_note,
+            @Field("transaction_ongkir") String transaction_ongkir,
+            @Field("bank_account_id") String bank_account_id,
+            @Field("chatapp_id") String chatapp_id,
+            @Field("item_qty") String item_qty,
+            @Field("item_name") String item_name,
+            @Field("item_price") String item_price,
             @Field("user_id") String user_id,
             @Field("toko_id") String toko_id
     );
@@ -118,12 +119,28 @@ public interface UrlMainServer {
     );
 
     @FormUrlEncoded
+    @POST("login.php")
+    Call<ResponseLogin> login(
+            @Field("email") String email,
+            @Field("password") String password
+    );
+
+    @FormUrlEncoded
     @POST("update_transaction_status.php")
     Call<Void>  updateTransactionStatus(
             @Field("user_id") String user_id,
-@Field("transaction_id") String transaction_id,
-        @Field("new_status") String new_status
+            @Field("transaction_id") String transaction_id,
+            @Field("new_status") String new_status
     );
 
-
+    @FormUrlEncoded
+    @POST("add_user.php")
+    Call<Void>  setNewUser(
+            @Field("user_email") String user_email,
+            @Field("user_password") String user_password,
+            @Field("user_name") String user_name,
+            @Field("toko_name") String toko_name,
+            @Field("toko_nohp") String toko_nohp,
+            @Field("toko_url") String toko_url
+    );
 }

@@ -11,7 +11,7 @@ import com.inspiraspace.jokulid.network.inspiralocal.PulseFindingsSubdistrict;
 import com.inspiraspace.jokulid.network.ongkir.PulseOngkir;
 import com.inspiraspace.jokulid.presenter.GeneratorFindings;
 import com.inspiraspace.jokulid.presenter.GeneratorOngkir;
-import com.inspiraspace.jokulid.utils.Clipboard_Utils;
+import com.inspiraspace.jokulid.utils.UtilClipboard;
 import com.inspiraspace.jokulid.utils.Constant;
 
 import org.apache.commons.lang3.StringUtils;
@@ -67,7 +67,7 @@ public class PShippmentFare implements OnPresentShippmentfare, PulseOngkir, Puls
             for (Map.Entry<String, String> entry : item.entrySet()) {
                 toClipboard.append(entry.getValue()).append("\n");
             }
-            Clipboard_Utils.copyToClipboard(mContext, toClipboard.toString());
+            UtilClipboard.copyToClipboard(mContext, toClipboard.toString());
         }
     }
 

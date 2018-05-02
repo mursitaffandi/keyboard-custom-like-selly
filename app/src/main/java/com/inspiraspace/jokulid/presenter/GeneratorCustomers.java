@@ -1,9 +1,7 @@
 package com.inspiraspace.jokulid.presenter;
 
-import com.inspiraspace.jokulid.model.autotext.Mautotext;
 import com.inspiraspace.jokulid.model.customers.Customers;
 import com.inspiraspace.jokulid.network.main.ClientMainCall;
-import com.inspiraspace.jokulid.network.main.PulseAutoText;
 import com.inspiraspace.jokulid.network.main.PulseCustomer;
 import com.inspiraspace.jokulid.utils.Constant;
 
@@ -24,7 +22,7 @@ public class GeneratorCustomers {
     }
 
     public void getCustomers() {
-        apiCall = clientMainCall.getService().getCustomers(Constant.USER_ID);
+        apiCall = clientMainCall.getService().getCustomers(Constant.SESSION_USER_ID);
         apiCall.enqueue(new Callback<Customers>() {
             @Override
             public void onResponse(Call<Customers> call, retrofit2.Response<Customers> response) {

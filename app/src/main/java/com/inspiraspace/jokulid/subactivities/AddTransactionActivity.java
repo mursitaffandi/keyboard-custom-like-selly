@@ -5,6 +5,7 @@ import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.AutoCompleteTextView;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.inspiraspace.jokulid.R;
 import com.inspiraspace.jokulid.adapter.AdpSpinnerChatapp;
@@ -12,7 +13,11 @@ import com.inspiraspace.jokulid.adapter.AdpSpinnerPayment;
 import com.inspiraspace.jokulid.model.preaddtransaction.Chatapp;
 import com.inspiraspace.jokulid.model.preaddtransaction.Payment;
 import com.inspiraspace.jokulid.model.preaddtransaction.Response;
+import com.inspiraspace.jokulid.network.main.PulsePostTransaction;
 import com.inspiraspace.jokulid.presenter.GeneratorChatappPayment;
+import com.inspiraspace.jokulid.presenter.PostTransaction;
+import com.inspiraspace.jokulid.presenter.newTransaction.OnViewAddTransaction;
+import com.inspiraspace.jokulid.presenter.newTransaction.PAddTransaction;
 
 import java.util.ArrayList;
 
@@ -21,7 +26,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 
-public class AddTransactionActivity extends AppCompatActivity implements GeneratorChatappPayment.PulsePreDetailTransaction{
+public class AddTransactionActivity extends AppCompatActivity implements OnViewAddTransaction{
     @BindView(R.id.edt_add_transaction_customername)
     TextInputEditText edt_add_transaction_customername;
 
@@ -53,10 +58,11 @@ public class AddTransactionActivity extends AppCompatActivity implements Generat
     TextInputEditText edt_add_transaction_transactionnote;
 
     Unbinder unbinder;
+    PAddTransaction pAddTransaction;
 
-    GeneratorChatappPayment loaderChatappPayment;
     private ArrayList<Payment> dataPayments;
     private ArrayList<Chatapp> dataChatapps;
+
     private AdpSpinnerChatapp adpSpinnerChatapp;
     private AdpSpinnerPayment adpSpinnerPayment;
 
@@ -75,13 +81,8 @@ public class AddTransactionActivity extends AppCompatActivity implements Generat
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.subcdt_createinvoice);
-
         unbinder = ButterKnife.bind(this);
-        sp_add_transaction_chatapp = findViewById(R.id.sp_add_transaction_chatapp);
-        sp_add_transaction_bankaccount = findViewById(R.id.sp_add_transaction_bankaccount);
-
-        loaderChatappPayment = new GeneratorChatappPayment(this);
-
+        pAddTransaction = new PAddTransaction(this);
     }
 
     @Override
@@ -90,18 +91,6 @@ public class AddTransactionActivity extends AppCompatActivity implements Generat
         super.onDestroy();
     }
 
-    @Override
-    public void onSuccesPayment(Response payments) {
-        dataPayments = payments.getArrPayment();
-        dataChatapps = payments.getArrChatapp();
-
-        setupViewFromIntent();
-    }
-
-    @Override
-    public void onFailure(String message) {
-
-    }
 
     private void setupViewFromIntent() {
         adpSpinnerChatapp = new AdpSpinnerChatapp(this, R.id.tv_item_chatapp, dataChatapps);
@@ -134,5 +123,28 @@ public class AddTransactionActivity extends AppCompatActivity implements Generat
         strsend_item_price =
                 edt_add_transaction_item_price.getText().toString();
 
+        pAddTransaction.OnAddTransaction(strsend_customername,strsend_customernohp,strsend_customeraddress,strsend_transactionnote,strsend_transactionongkir,
+                strsend_id_bankaccount,strsend_id_chatapp,strsend_item_qty,strsend_item_name,strsend_item_price);
+    }
+
+
+    @Override
+    public void OnSuccessLoadPaymentChattapp(ArrayList<Payment> dataPayments, ArrayList<Chatapp> dataChatapps) {
+        this.dataPayments = dataPayments;
+        this.dataChatapps = dataChatapps;
+
+        setupViewFromIntent();
+    }
+
+    @Override
+    public void OnSuccessAddTransaction() {
+        Toast.makeText(this, "New Pending Transaction Added", Toast.LENGTH_SHORT).show();
+        finish();
+    }
+
+    @Override
+    public void OnErrorAddTransaction(String message) {
+        System.out.println(message);
+        Toast.makeText(this, "Fail Added Transaction", Toast.LENGTH_SHORT).show();
     }
 }

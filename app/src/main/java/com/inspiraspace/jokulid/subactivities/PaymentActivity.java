@@ -4,11 +4,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.inspiraspace.jokulid.R;
 import com.inspiraspace.jokulid.adapter.AdpSettingPayment;
-import com.inspiraspace.jokulid.adapter.AdpSpinnerPayment;
 import com.inspiraspace.jokulid.model.preaddtransaction.Payment;
 import com.inspiraspace.jokulid.model.preaddtransaction.Response;
 import com.inspiraspace.jokulid.presenter.GeneratorChatappPayment;
@@ -28,7 +26,7 @@ public class PaymentActivity extends AppCompatActivity implements GeneratorChata
         startActivity(new Intent(this, AddPaymentActivity.class));
     }
 
-    ArrayList<Payment> paymentsActivity = new ArrayList<>();
+    ArrayList<Payment> paymentsList = new ArrayList<>();
     AdpSettingPayment adpSpinnerPayment;
 
     @Override
@@ -48,13 +46,13 @@ public class PaymentActivity extends AppCompatActivity implements GeneratorChata
     }
 
     @Override
-    public void onSuccesPayment(Response payments) {
-        paymentsActivity = payments.getArrPayment();
-        adpSpinnerPayment.swapRefresh(paymentsActivity);
+    public void onSuccesPaymentChatapp(Response payments) {
+        paymentsList = payments.getArrPayment();
+        adpSpinnerPayment.swapRefresh(paymentsList);
     }
 
     @Override
-    public void onFailure(String message) {
+    public void onFailurePaymentChatapp(String message) {
 
     }
 }

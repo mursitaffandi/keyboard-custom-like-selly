@@ -28,19 +28,19 @@ public class GeneratorTransactions {
     public void getTransactios(int code_status_transaction) {
         switch (code_status_transaction) {
             case 0:
-                apiCall = clientMainCall.getService().getTransaction_pendings(Constant.USER_ID);
+                apiCall = clientMainCall.getService().getTransaction_pendings(Constant.SESSION_USER_ID);
                 break;
             case 1:
-                apiCall = clientMainCall.getService().getTransaction_paids(Constant.USER_ID);
+                apiCall = clientMainCall.getService().getTransaction_paids(Constant.SESSION_USER_ID);
                 break;
             case 2:
-                apiCall = clientMainCall.getService().getTransaction_shippeds(Constant.USER_ID);
+                apiCall = clientMainCall.getService().getTransaction_shippeds(Constant.SESSION_USER_ID);
                 break;
             case 3:
-                apiCall = clientMainCall.getService().getTransaction_done(Constant.USER_ID);
+                apiCall = clientMainCall.getService().getTransaction_done(Constant.SESSION_USER_ID);
                 break;
             case 4:
-                apiCall = clientMainCall.getService().getTransaction_cancel(Constant.USER_ID);
+                apiCall = clientMainCall.getService().getTransaction_cancel(Constant.SESSION_USER_ID);
                 break;
             default:
                 return;

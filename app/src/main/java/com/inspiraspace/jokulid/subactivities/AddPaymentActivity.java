@@ -3,7 +3,6 @@ package com.inspiraspace.jokulid.subactivities;
 import android.os.Bundle;
 import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
-import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -62,7 +61,7 @@ public class AddPaymentActivity extends AppCompatActivity implements PulseBank, 
         selectedBankId = responseItem.getBankId();
         settedAccountName = edt_addpayment_account_name.getText().toString();
         settedAccountNumber = edt_addpayment_account_number.getText().toString();
-        new PostBankAccount(this, Constant.USER_ID,selectedBankId,settedAccountNumber,settedAccountName);
+        new PostBankAccount(this, Constant.SESSION_USER_ID,selectedBankId,settedAccountNumber,settedAccountName);
     }
 
     @Override

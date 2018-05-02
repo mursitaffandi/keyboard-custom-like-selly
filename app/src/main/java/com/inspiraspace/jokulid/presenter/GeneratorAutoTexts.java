@@ -1,12 +1,9 @@
 package com.inspiraspace.jokulid.presenter;
 
 import com.inspiraspace.jokulid.model.autotext.Mautotext;
-import com.inspiraspace.jokulid.model.autotext.Response;
 import com.inspiraspace.jokulid.network.main.ClientMainCall;
 import com.inspiraspace.jokulid.network.main.PulseAutoText;
 import com.inspiraspace.jokulid.utils.Constant;
-
-import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -26,7 +23,7 @@ public class GeneratorAutoTexts {
 
     public void getAutoText(String keyword) {
         if (keyword=="") keyword="a";
-        apiCall = clientMainCall.getService().getAutoText(Constant.USER_ID, keyword);
+        apiCall = clientMainCall.getService().getAutoText(Constant.SESSION_USER_ID, keyword);
         apiCall.enqueue(new Callback<Mautotext>() {
             @Override
             public void onResponse(Call<Mautotext> call, retrofit2.Response<Mautotext> response) {

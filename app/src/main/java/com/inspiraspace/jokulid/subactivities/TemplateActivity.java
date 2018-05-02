@@ -13,6 +13,7 @@ import android.widget.MultiAutoCompleteTextView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.inspiraspace.jokulid.JokulidApplication;
 import com.inspiraspace.jokulid.R;
 import com.inspiraspace.jokulid.model.template.ResponseTemplate;
 import com.inspiraspace.jokulid.network.main.PulseTemplate;
@@ -74,6 +75,7 @@ public class TemplateActivity extends AppCompatActivity implements PulseTemplate
     @OnClick(R.id.btn_template_refresh_preview)
     public void saveTemplate() {
         generatorTemplate.updateTemplate(template, editTemplate);
+        JokulidApplication.getInstance().setTemplate(template,editTemplate);
     }
 
     private void setMapTemplate() {
@@ -99,6 +101,7 @@ public class TemplateActivity extends AppCompatActivity implements PulseTemplate
     @Override
     public void OnSuccessTemplate(ResponseTemplate responseTemplates) {
         editTemplate = responseTemplates.getTemplate();
+        JokulidApplication.getInstance().setTemplate(template, editTemplate);
         edt_template_content.setText(editTemplate);
     }
 

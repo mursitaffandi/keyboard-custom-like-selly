@@ -117,7 +117,7 @@
         completions."
     </string>
     <string name="frg_report">There\'s No Report For This Application</string>
-    <string name="frg_gratis">There\'s No Gratis in This World</string>
+    <string name="frg_gratis">There\'s No Gratis For This Application</string>
     <string name="frg_help">Mailto Developer</string>
     <string name="frg_help_anyquestion">Any Question?</string>
     <string name="frg_help_app_version">0.1.3</string>

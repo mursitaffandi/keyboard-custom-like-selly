@@ -20,14 +20,11 @@ import com.inspiraspace.jokulid.R;
 import com.inspiraspace.jokulid.adapter.AdpAutocomplateAddress;
 import com.inspiraspace.jokulid.adapter.AdpLVResultOngkir;
 import com.inspiraspace.jokulid.model.rajaongkir.Item_Ongkir;
-import com.inspiraspace.jokulid.model.rajaongkir.Result;
 import com.inspiraspace.jokulid.model.searchsubdistrict.Datum;
 import com.inspiraspace.jokulid.presenter.shippmentfare.OnViewShippmentfare;
 import com.inspiraspace.jokulid.presenter.shippmentfare.PShippmentFare;
-import com.inspiraspace.jokulid.utils.Clipboard_Utils;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import butterknife.BindView;
@@ -59,6 +56,7 @@ public class ShippmentFeeFragment extends Fragment implements TextWatcher, OnVie
     Unbinder unbinder;
     AdpAutocomplateAddress autoTextAdapter;
     AdpLVResultOngkir adpResultOngkir;
+
     ArrayList<Datum> arrSubdistrict;
     List<Item_Ongkir> resultOngkir = new ArrayList<>();
 
@@ -188,6 +186,7 @@ public class ShippmentFeeFragment extends Fragment implements TextWatcher, OnVie
                 break;
 
             case R.id.btn_count_shippmentfee:
+                weightShippment = etItemWeight.getText().toString();
                 onPresentShippmentfare.OnCount(weightShippment, idShippmentOrigin, idShippmentDestination);
                 break;
         }
