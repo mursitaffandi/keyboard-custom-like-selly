@@ -52,18 +52,19 @@ public class LoginActivity extends AppCompatActivity implements PulseLogin {
 
     @Override
     public void OnSuccessLogin(Response responseLogin) {
-        JokulidApplication.getInstance().setLoginInfo(
-                responseLogin.getUserName(),
-                responseLogin.getUserId(),
-                responseLogin.getUserEmail(),
-                "",
-                "",
-                responseLogin.getTokoId(),
-                responseLogin.getTokoName(),
-                responseLogin.getTokoNoHp(),
-                responseLogin.getTokoUrl());
-        startActivity(new Intent(this, MainActivity.class));
-        finish();
+            JokulidApplication.getInstance().setLoginInfo(
+                    responseLogin.getUserName(),
+                    responseLogin.getUserId(),
+                    responseLogin.getUserEmail(),
+                    "",
+                    "",
+                    responseLogin.getTokoId(),
+                    responseLogin.getTokoName(),
+                    responseLogin.getTokoNoHp(),
+                    responseLogin.getTokoUrl());
+            startActivity(new Intent(this, MainActivity.class));
+            finish();
+
     }
 
     @Override

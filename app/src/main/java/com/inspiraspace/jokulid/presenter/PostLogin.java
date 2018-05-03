@@ -1,5 +1,7 @@
 package com.inspiraspace.jokulid.presenter;
 
+import android.text.TextUtils;
+
 import com.inspiraspace.jokulid.model.login.ResponseLogin;
 import com.inspiraspace.jokulid.network.main.ClientMainCall;
 import com.inspiraspace.jokulid.network.main.PulseLogin;
@@ -25,7 +27,10 @@ public class PostLogin {
         apiCall.enqueue(new Callback<ResponseLogin>() {
             @Override
             public void onResponse(Call<ResponseLogin> call, Response<ResponseLogin> response) {
-                ppostLogin.OnSuccessLogin(response.body().getResponse());
+if (!TextUtils.isEmpty(
+                response.body().getResponse().getUserId()))
+    ppostLogin.OnSuccessLogin(response.body().getResponse());
+else ppostLogin.OnErrorLogin("invalid credentials");
             }
 
             @Override
