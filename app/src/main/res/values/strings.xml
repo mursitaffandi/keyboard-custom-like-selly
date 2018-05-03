@@ -173,7 +173,7 @@
     <string name="register_email">Valid Email</string>
     <string name="register_toko_name">Shop Name</string>
     <string name="register_toko_hohp">Shop Phone Number</string>
-    <string name="register_toko_url">Shop Website (optional)</string>
+    <string name="register_toko_url">Shop Website </string>
     <string name="register_password">Password</string>
     <string name="register_button_submit">Register</string>
     <string name="login_email">Email</string>
