@@ -13,6 +13,7 @@ import com.inspiraspace.jokulid.network.main.PulseBank;
 import com.inspiraspace.jokulid.network.main.PulsePostBankAccount;
 import com.inspiraspace.jokulid.presenter.GeneratorBank;
 import com.inspiraspace.jokulid.presenter.PostBankAccount;
+import com.inspiraspace.jokulid.utils.BaseAuthActivity;
 import com.inspiraspace.jokulid.utils.Constant;
 
 import java.util.List;
@@ -21,7 +22,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class AddPaymentActivity extends AppCompatActivity implements PulseBank, PulsePostBankAccount {
+public class AddPaymentActivity extends BaseAuthActivity implements PulseBank, PulsePostBankAccount {
     @BindView(R.id.sp_addpayment)
     Spinner sp_addpayment;
 

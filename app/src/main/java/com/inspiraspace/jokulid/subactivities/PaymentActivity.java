@@ -10,6 +10,7 @@ import com.inspiraspace.jokulid.adapter.AdpSettingPayment;
 import com.inspiraspace.jokulid.model.preaddtransaction.Payment;
 import com.inspiraspace.jokulid.model.preaddtransaction.Response;
 import com.inspiraspace.jokulid.presenter.GeneratorChatappPayment;
+import com.inspiraspace.jokulid.utils.BaseAuthActivity;
 
 import java.util.ArrayList;
 
@@ -17,7 +18,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class PaymentActivity extends AppCompatActivity implements GeneratorChatappPayment.PulsePreDetailTransaction {
+public class PaymentActivity extends BaseAuthActivity implements GeneratorChatappPayment.PulsePreDetailTransaction {
     @BindView(R.id.lv_payment)
     ListView lv_payment;
 

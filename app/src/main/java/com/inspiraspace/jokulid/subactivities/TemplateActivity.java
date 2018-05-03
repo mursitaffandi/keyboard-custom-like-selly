@@ -19,6 +19,7 @@ import com.inspiraspace.jokulid.R;
 import com.inspiraspace.jokulid.model.template.ResponseTemplate;
 import com.inspiraspace.jokulid.network.main.PulseTemplate;
 import com.inspiraspace.jokulid.presenter.GeneratorTemplate;
+import com.inspiraspace.jokulid.utils.BaseAuthActivity;
 import com.inspiraspace.jokulid.utils.Constant;
 import com.inspiraspace.jokulid.utils.UtilValidation;
 
@@ -28,7 +29,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class TemplateActivity extends AppCompatActivity implements PulseTemplate, TextWatcher {
+public class TemplateActivity extends BaseAuthActivity implements PulseTemplate, TextWatcher {
     @BindView(R.id.edt_template_content)
     MultiAutoCompleteTextView edt_template_content;
     private String template;

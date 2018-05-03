@@ -113,19 +113,15 @@
             android:parentActivityName=".MainActivity"
             android:theme="@style/AppTheme" />
 
-        <activity android:name=".preenter.PreloadActivity" />
-
         <activity
             android:name=".preenter.RegisterActivity"
             android:label="@string/title_activity_register"
-            android:parentActivityName=".MainActivity"
-            android:theme="@style/AppTheme" />
+            android:theme="@style/Theme.AppCompat" />
 
         <activity
             android:name=".preenter.LoginActivity"
             android:label="@string/title_activity_login"
-            android:parentActivityName=".MainActivity"
-            android:theme="@style/AppTheme" />
+            android:theme="@style/Theme.AppCompat" />
 
         <activity
             android:name=".subactivities.AddPaymentActivity"

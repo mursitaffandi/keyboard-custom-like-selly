@@ -38,6 +38,7 @@ import com.inspiraspace.jokulid.network.main.PulseTransactionStatus;
 import com.inspiraspace.jokulid.presenter.GeneratorChatappPayment;
 import com.inspiraspace.jokulid.presenter.GeneratorTemplate;
 import com.inspiraspace.jokulid.presenter.PostTransactionStatus;
+import com.inspiraspace.jokulid.utils.BaseAuthActivity;
 import com.inspiraspace.jokulid.utils.Constant;
 import com.inspiraspace.jokulid.utils.UtilTemplate;
 import com.inspiraspace.jokulid.utils.UtilValidation;
@@ -50,7 +51,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class DetailTransaction extends AppCompatActivity implements GeneratorChatappPayment.PulsePreDetailTransaction, PulseTransactionStatus {
+public class DetailTransaction extends BaseAuthActivity implements GeneratorChatappPayment.PulsePreDetailTransaction, PulseTransactionStatus {
 
 
     @BindView(R.id.edt_detailtr_ety_customername)

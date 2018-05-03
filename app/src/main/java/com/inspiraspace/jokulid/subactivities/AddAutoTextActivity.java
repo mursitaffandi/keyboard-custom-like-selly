@@ -8,6 +8,7 @@ import android.widget.Toast;
 import com.inspiraspace.jokulid.R;
 import com.inspiraspace.jokulid.network.main.PulsePostAutotext;
 import com.inspiraspace.jokulid.presenter.PostAutotext;
+import com.inspiraspace.jokulid.utils.BaseAuthActivity;
 import com.inspiraspace.jokulid.utils.Constant;
 import com.inspiraspace.jokulid.utils.UtilValidation;
 
@@ -15,7 +16,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class AddAutoTextActivity extends AppCompatActivity implements PulsePostAutotext {
+public class AddAutoTextActivity extends BaseAuthActivity implements PulsePostAutotext {
 
 
     @BindView(R.id.edt_addautotext_title)

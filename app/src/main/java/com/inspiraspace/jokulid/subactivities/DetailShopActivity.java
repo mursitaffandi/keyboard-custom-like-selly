@@ -10,13 +10,14 @@ import com.inspiraspace.jokulid.R;
 import com.inspiraspace.jokulid.model.shop.Response;
 import com.inspiraspace.jokulid.network.main.PulseShop;
 import com.inspiraspace.jokulid.presenter.GeneratorShop;
+import com.inspiraspace.jokulid.utils.BaseAuthActivity;
 import com.inspiraspace.jokulid.utils.UtilValidation;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class DetailShopActivity extends AppCompatActivity implements PulseShop{
+public class DetailShopActivity extends BaseAuthActivity implements PulseShop{
 
     @BindView(R.id.etd_shop_name)
     TextInputEditText etdShopName;

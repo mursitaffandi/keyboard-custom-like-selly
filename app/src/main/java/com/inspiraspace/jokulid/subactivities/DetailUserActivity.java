@@ -10,13 +10,14 @@ import com.inspiraspace.jokulid.R;
 import com.inspiraspace.jokulid.model.user.Response;
 import com.inspiraspace.jokulid.network.main.PulseUser;
 import com.inspiraspace.jokulid.presenter.GeneratorUser;
+import com.inspiraspace.jokulid.utils.BaseAuthActivity;
 import com.inspiraspace.jokulid.utils.UtilValidation;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class DetailUserActivity extends AppCompatActivity implements PulseUser {
+public class DetailUserActivity extends BaseAuthActivity implements PulseUser {
 
     @BindView(R.id.edt_user_name)
     TextInputEditText edtUserName;

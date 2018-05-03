@@ -11,6 +11,7 @@ import com.inspiraspace.jokulid.adapter.AdapterTransactions;
 import com.inspiraspace.jokulid.model.transactions.Response;
 import com.inspiraspace.jokulid.network.main.PulseMainServer;
 import com.inspiraspace.jokulid.presenter.GeneratorTransactions;
+import com.inspiraspace.jokulid.utils.BaseAuthActivity;
 import com.inspiraspace.jokulid.utils.Constant;
 
 import java.util.List;
@@ -18,7 +19,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class SearchActivity extends AppCompatActivity implements PulseMainServer {
+public class SearchActivity extends BaseAuthActivity implements PulseMainServer {
     private AdapterTransactions adapter;
     List<Response> responses;
     @BindView(R.id.rv_transactions)

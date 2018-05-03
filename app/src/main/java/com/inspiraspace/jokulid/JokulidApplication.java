@@ -72,6 +72,7 @@ public class JokulidApplication extends Application {
     public static final String KEY_USER_EMAIL = "user_email";
     public static final String KEY_USER_TOKEN = "user_token";
     public static final String KEY_USER_UID = "user_uid";
+    public static final String KEY_USER_ISAUTHED = "user_isauthed";
 
     /*
     * credentials KEY_TOKO
@@ -108,7 +109,7 @@ public class JokulidApplication extends Application {
     }
 
     public String getLoginToken() {
-        return session.getString(KEY_USER_TOKEN, "");
+        return session.getString(KEY_USER_TOKEN, null);
     }
 
     public void setLoginInfo(
@@ -131,11 +132,17 @@ public class JokulidApplication extends Application {
         editor.putString(KEY_TOKO_NAME, toko_name);
         editor.putString(KEY_TOKO_NOHP, toko_nohp);
         editor.putString(KEY_TOKO_URL, toko_url);
+
+        editor.putBoolean(KEY_USER_ISAUTHED, true);
         editor.commit();
 
         setShippmentOrigin(shippment_origin, shippment_origin_id);
         setShippmentWeight(shippmentWeight);
 
+    }
+
+    public boolean getStatusUserIsauthed() {
+        return session.getBoolean(KEY_USER_ISAUTHED,false);
     }
 
     public void setLoginInfo(
@@ -156,30 +163,33 @@ public class JokulidApplication extends Application {
         editor.putString(KEY_TOKO_NOHP, toko_nohp);
         editor.putString(KEY_TOKO_URL, toko_url);
 
+        editor.putBoolean(KEY_USER_ISAUTHED, true);
         editor.commit();
     }
-    public HashMap<String, String> getUserInfo() {
 
+
+    public HashMap<String, String> getUserInfo() {
         HashMap<String, String> map = new HashMap<>();
-        map.put(KEY_USER_NAME, session.getString(KEY_USER_NAME, "user0"));
-        map.put(KEY_USER_ID, session.getString(KEY_USER_ID, "1"));
-        map.put(KEY_USER_EMAIL, session.getString(KEY_USER_EMAIL, "user0@user.com"));
-        map.put(KEY_USER_TOKEN, session.getString(KEY_USER_TOKEN, ""));
-        map.put(KEY_USER_UID, session.getString(KEY_USER_UID, ""));
-        map.put(KEY_TOKO_ID, session.getString(KEY_TOKO_ID, "1"));
-        map.put(KEY_TOKO_NAME, session.getString(KEY_TOKO_NAME, "OL Shop"));
-        map.put(KEY_TOKO_NOHP, session.getString(KEY_TOKO_NOHP, "08111111"));
-        map.put(KEY_TOKO_URL, session.getString(KEY_TOKO_URL, "http://fb.me"));
+        map.put(KEY_USER_NAME, session.getString(KEY_USER_NAME, null));
+        map.put(KEY_USER_ID, session.getString(KEY_USER_ID, null));
+        map.put(KEY_USER_EMAIL, session.getString(KEY_USER_EMAIL, null));
+        map.put(KEY_USER_TOKEN, session.getString(KEY_USER_TOKEN, null));
+        map.put(KEY_USER_UID, session.getString(KEY_USER_UID, null));
+        map.put(KEY_TOKO_ID, session.getString(KEY_TOKO_ID, null));
+        map.put(KEY_TOKO_NAME, session.getString(KEY_TOKO_NAME, null));
+        map.put(KEY_TOKO_NOHP, session.getString(KEY_TOKO_NOHP, null));
+        map.put(KEY_TOKO_URL, session.getString(KEY_TOKO_URL, null));
 
         return map;
     }
 
     public String getTokoId() {
-        return session.getString(KEY_TOKO_ID, "1");
+        return session.getString(KEY_TOKO_ID, null);
     }
 
 
     public void clearLoginInfo() {
+        editor.putBoolean(KEY_USER_ISAUTHED, false);
         editor.clear();
         editor.commit();
     }

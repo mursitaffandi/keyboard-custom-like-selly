@@ -16,6 +16,7 @@ import com.inspiraspace.jokulid.model.rajaongkir.Item_Ongkir;
 import com.inspiraspace.jokulid.model.searchsubdistrict.Datum;
 import com.inspiraspace.jokulid.presenter.shippmentfare.OnViewShippmentfare;
 import com.inspiraspace.jokulid.presenter.shippmentfare.PShippmentFare;
+import com.inspiraspace.jokulid.utils.BaseAuthActivity;
 import com.inspiraspace.jokulid.utils.UtilValidation;
 
 import java.util.ArrayList;
@@ -25,7 +26,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class DefaultShippmentOriginActivity extends AppCompatActivity implements OnViewShippmentfare {
+public class DefaultShippmentOriginActivity extends BaseAuthActivity implements OnViewShippmentfare {
 
     @BindView(R.id.edt_defaultweight_origin)
     AutoCompleteTextView edtDefaultweightOrigin;

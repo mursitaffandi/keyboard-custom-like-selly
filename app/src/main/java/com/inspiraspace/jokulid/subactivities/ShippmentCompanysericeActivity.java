@@ -12,13 +12,14 @@ import android.widget.Toast;
 import com.inspiraspace.jokulid.JokulidApplication;
 import com.inspiraspace.jokulid.R;
 import com.inspiraspace.jokulid.adapter.AdpLVSettingShippmentcompany;
+import com.inspiraspace.jokulid.utils.BaseAuthActivity;
 import com.inspiraspace.jokulid.utils.Constant;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class ShippmentCompanysericeActivity extends AppCompatActivity {
+public class ShippmentCompanysericeActivity extends BaseAuthActivity {
     @BindView(R.id.lv_setting_shippmentcompany)
     ListView lv_setting_shippmentcompany;
     AdpLVSettingShippmentcompany adpLVSettingShippmentcompany;

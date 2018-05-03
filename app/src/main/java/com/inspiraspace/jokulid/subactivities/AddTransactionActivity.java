@@ -20,6 +20,7 @@ import com.inspiraspace.jokulid.presenter.GeneratorChatappPayment;
 import com.inspiraspace.jokulid.presenter.PostTransaction;
 import com.inspiraspace.jokulid.presenter.newTransaction.OnViewAddTransaction;
 import com.inspiraspace.jokulid.presenter.newTransaction.PAddTransaction;
+import com.inspiraspace.jokulid.utils.BaseAuthActivity;
 import com.inspiraspace.jokulid.utils.UtilValidation;
 
 import java.util.ArrayList;
@@ -29,7 +30,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 
-public class AddTransactionActivity extends AppCompatActivity implements OnViewAddTransaction{
+public class AddTransactionActivity extends BaseAuthActivity implements OnViewAddTransaction{
     @BindView(R.id.edt_add_transaction_customername)
     TextInputEditText edt_add_transaction_customername;
 

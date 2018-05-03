@@ -14,6 +14,7 @@ import com.inspiraspace.jokulid.adapter.AdpAutoTexts;
 import com.inspiraspace.jokulid.model.autotext.Response;
 import com.inspiraspace.jokulid.network.main.PulseAutoText;
 import com.inspiraspace.jokulid.presenter.GeneratorAutoTexts;
+import com.inspiraspace.jokulid.utils.BaseAuthActivity;
 
 import java.util.List;
 
@@ -21,7 +22,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class AutoTextActivity extends AppCompatActivity implements PulseAutoText {
+public class AutoTextActivity extends BaseAuthActivity implements PulseAutoText {
 
     @BindView(R.id.edt_subcdt_autotext_search)
     EditText

@@ -3,6 +3,7 @@ package com.inspiraspace.jokulid.presenter;
 import com.inspiraspace.jokulid.model.login.ResponseLogin;
 import com.inspiraspace.jokulid.network.main.ClientMainCall;
 import com.inspiraspace.jokulid.network.main.PulseLogin;
+import com.inspiraspace.jokulid.preenter.LoginActivity;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -33,4 +34,5 @@ public class PostLogin {
             }
         });
     }
+
 }

@@ -6,13 +6,14 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.inspiraspace.jokulid.JokulidApplication;
 import com.inspiraspace.jokulid.R;
+import com.inspiraspace.jokulid.utils.BaseAuthActivity;
 import com.inspiraspace.jokulid.utils.UtilValidation;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class DefaultShippmentWeightActivity extends AppCompatActivity {
+public class DefaultShippmentWeightActivity extends BaseAuthActivity {
 
     @BindView(R.id.edt_defaultweight_weight)
     TextInputEditText edtDefaultweightWeight;

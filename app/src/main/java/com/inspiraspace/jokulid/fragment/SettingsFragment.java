@@ -10,7 +10,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import com.inspiraspace.jokulid.JokulidApplication;
 import com.inspiraspace.jokulid.R;
+import com.inspiraspace.jokulid.preenter.LoginActivity;
 import com.inspiraspace.jokulid.subactivities.AutoTextActivity;
 import com.inspiraspace.jokulid.subactivities.DefaultShippmentOriginActivity;
 import com.inspiraspace.jokulid.subactivities.DefaultShippmentWeightActivity;
@@ -24,6 +26,8 @@ import com.inspiraspace.jokulid.utils.Constant;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
+import butterknife.Unbinder;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -62,12 +66,11 @@ public class SettingsFragment extends Fragment implements View.OnClickListener {
     @BindView(R.id.btn_main_setting_dailyreminder)
     Button btn_main_setting_dailyreminder;
 
-   /* @BindView(R.id.btn_main_setting_logout)
-    Button btn_main_setting_logout;*/
 
     private Intent intent = null;
     private Class<?> cls = null;
     private Context activity;
+Unbinder unbinder;
     public SettingsFragment() {
         // Required empty public constructor
     }
@@ -78,7 +81,7 @@ public class SettingsFragment extends Fragment implements View.OnClickListener {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_settings, container, false);
-        ButterKnife.bind(this, view);
+        unbinder = ButterKnife.bind(this, view);
         activity = getActivity();
         btn_main_setting_detailshop.setOnClickListener(this);
         btn_main_setting_detailuser.setOnClickListener(this);
@@ -91,7 +94,6 @@ public class SettingsFragment extends Fragment implements View.OnClickListener {
         btn_main_setting_shippment_companyservice.setOnClickListener(this);
         btn_main_setting_shippment_weigth.setOnClickListener(this);
         btn_main_setting_dailyreminder.setOnClickListener(this);
-        /*btn_main_setting_logout.setOnClickListener(this);*/
 
         return view;
     }
@@ -132,14 +134,25 @@ public class SettingsFragment extends Fragment implements View.OnClickListener {
             case R.id.btn_main_setting_dailyreminder:
                 cls = ScheduleDailyreminderActivity.class;
                 break;
-            /*case R.id.btn_main_setting_logout:
-                break;*/
             default:
                 break;
         }
-        intent.setClass(activity,cls);
+        intent.setClass(activity, cls);
         if (cls != null)
             startActivity(intent);
         else return;
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        unbinder.unbind();
+    }
+
+    @OnClick(R.id.btn_main_setting_logout)
+    public void onViewClicked() {
+        JokulidApplication.getInstance().clearLoginInfo();
+        startActivityForResult(new Intent(activity, LoginActivity.class),1);
+        getActivity().finish();
     }
 }
