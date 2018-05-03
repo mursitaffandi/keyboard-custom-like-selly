@@ -7,6 +7,7 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AutoCompleteTextView;
+import android.widget.EditText;
 
 import com.inspiraspace.jokulid.JokulidApplication;
 import com.inspiraspace.jokulid.R;
@@ -15,6 +16,7 @@ import com.inspiraspace.jokulid.model.rajaongkir.Item_Ongkir;
 import com.inspiraspace.jokulid.model.searchsubdistrict.Datum;
 import com.inspiraspace.jokulid.presenter.shippmentfare.OnViewShippmentfare;
 import com.inspiraspace.jokulid.presenter.shippmentfare.PShippmentFare;
+import com.inspiraspace.jokulid.utils.UtilValidation;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -90,8 +92,13 @@ public class DefaultShippmentOriginActivity extends AppCompatActivity implements
     }
     @OnClick(R.id.btn_defaultweight_save)
     public void onViewClicked() {
+        boolean isAllFieldValid = false;
+
+            isAllFieldValid = UtilValidation.autocomplateValidation(idShippmentOrigin, edtDefaultweightOrigin);
+
+        if (isAllFieldValid){
         JokulidApplication.getInstance().setShippmentOrigin(settedDefaultShippmentOrigin,idShippmentOrigin);
-        finish();
+        finish();}
     }
 
     @Override

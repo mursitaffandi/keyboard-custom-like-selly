@@ -9,6 +9,7 @@ import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.MultiAutoCompleteTextView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -19,6 +20,7 @@ import com.inspiraspace.jokulid.model.template.ResponseTemplate;
 import com.inspiraspace.jokulid.network.main.PulseTemplate;
 import com.inspiraspace.jokulid.presenter.GeneratorTemplate;
 import com.inspiraspace.jokulid.utils.Constant;
+import com.inspiraspace.jokulid.utils.UtilValidation;
 
 import java.util.HashMap;
 
@@ -74,6 +76,11 @@ public class TemplateActivity extends AppCompatActivity implements PulseTemplate
 
     @OnClick(R.id.btn_template_refresh_preview)
     public void saveTemplate() {
+        boolean isAllFieldValid = false;
+
+        isAllFieldValid = UtilValidation.edittextValidation(edt_template_content);
+
+        if (isAllFieldValid)
         generatorTemplate.updateTemplate(template, editTemplate);
         JokulidApplication.getInstance().setTemplate(template,editTemplate);
     }

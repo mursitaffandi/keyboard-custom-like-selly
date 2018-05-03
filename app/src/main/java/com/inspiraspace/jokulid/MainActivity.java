@@ -25,13 +25,13 @@ import com.inspiraspace.jokulid.fragment.ReportFragment;
 import com.inspiraspace.jokulid.fragment.SettingsFragment;
 import com.inspiraspace.jokulid.fragment.ShippmentFeeFragment;
 import com.inspiraspace.jokulid.subactivities.SearchActivity;
-import com.inspiraspace.jokulid.utils.BaseAuthedActivity;
+import com.inspiraspace.jokulid.utils.BaseAuthActivity;
 import com.inspiraspace.jokulid.utils.Constant;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class MainActivity extends BaseAuthedActivity
+public class MainActivity extends BaseAuthActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     private Fragment fragment;
     private FragmentManager fragmentManager;

@@ -9,6 +9,7 @@ import com.inspiraspace.jokulid.R;
 import com.inspiraspace.jokulid.network.main.PulsePostAutotext;
 import com.inspiraspace.jokulid.presenter.PostAutotext;
 import com.inspiraspace.jokulid.utils.Constant;
+import com.inspiraspace.jokulid.utils.UtilValidation;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -22,7 +23,8 @@ public class AddAutoTextActivity extends AppCompatActivity implements PulsePostA
 
     @BindView(R.id.edt_addautotext_content)
     EditText edtAddautotextContent;
-String shortcut, content;
+    String shortcut, content;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,6 +36,12 @@ String shortcut, content;
     public void onViewClicked() {
         shortcut = edtAddautotextTitle.getText().toString();
         content = edtAddautotextContent.getText().toString();
+        boolean isAllFieldValid = false;
+
+        for (EditText edt : getAllEditableField())
+            isAllFieldValid = UtilValidation.edittextValidation(edt);
+
+        if (isAllFieldValid)
         new PostAutotext(this, Constant.SESSION_USER_ID,shortcut,content);
     }
 
@@ -46,5 +54,11 @@ String shortcut, content;
     @Override
     public void OnErrorPostBankAccount() {
         Toast.makeText(this, "Fail Create new Autotext", Toast.LENGTH_SHORT).show();
+    }
+    private EditText[] getAllEditableField() {
+        return new EditText[]{
+                edtAddautotextTitle,
+                edtAddautotextContent
+        };
     }
 }

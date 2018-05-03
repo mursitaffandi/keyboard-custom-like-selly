@@ -1,12 +1,11 @@
 package com.inspiraspace.jokulid.preenter;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 
 import com.inspiraspace.jokulid.R;
-import com.inspiraspace.jokulid.utils.BaseAuthedActivity;
+import com.inspiraspace.jokulid.utils.BaseAuthActivity;
 
-public class PreloadActivity extends BaseAuthedActivity {
+public class PreloadActivity extends BaseAuthActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

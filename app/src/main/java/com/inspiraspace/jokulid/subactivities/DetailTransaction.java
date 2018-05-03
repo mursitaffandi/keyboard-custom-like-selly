@@ -8,6 +8,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -39,6 +40,7 @@ import com.inspiraspace.jokulid.presenter.GeneratorTemplate;
 import com.inspiraspace.jokulid.presenter.PostTransactionStatus;
 import com.inspiraspace.jokulid.utils.Constant;
 import com.inspiraspace.jokulid.utils.UtilTemplate;
+import com.inspiraspace.jokulid.utils.UtilValidation;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -350,8 +352,9 @@ public class DetailTransaction extends AppCompatActivity implements GeneratorCha
                 utilTemplate.setResi_number(trackingNumber);
                 utilTemplate.setShipping_provider(companyselected);
                 String sendResi = utilTemplate.convertTemplate(getTemplateSendResi());
-                shareTextToChatapp(sendResi);
-                dialog.dismiss();
+                if (UtilValidation.edittextValidation(edt_sendresi_number))
+                {shareTextToChatapp(sendResi);
+                dialog.dismiss();}
             }
         });
 

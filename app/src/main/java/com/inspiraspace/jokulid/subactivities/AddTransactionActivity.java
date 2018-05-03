@@ -5,6 +5,7 @@ import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -19,6 +20,7 @@ import com.inspiraspace.jokulid.presenter.GeneratorChatappPayment;
 import com.inspiraspace.jokulid.presenter.PostTransaction;
 import com.inspiraspace.jokulid.presenter.newTransaction.OnViewAddTransaction;
 import com.inspiraspace.jokulid.presenter.newTransaction.PAddTransaction;
+import com.inspiraspace.jokulid.utils.UtilValidation;
 
 import java.util.ArrayList;
 
@@ -127,9 +129,28 @@ public class AddTransactionActivity extends AppCompatActivity implements OnViewA
                 edt_add_transaction_item_name.getText().toString();
         strsend_item_price =
                 edt_add_transaction_item_price.getText().toString();
+boolean isAllFieldValid = false;
 
+for (EditText edt : getAllEditableField())
+        isAllFieldValid = UtilValidation.edittextValidation(edt);
+
+if (isAllFieldValid)
         pAddTransaction.OnAddTransaction(strsend_customername,strsend_customernohp,strsend_customeraddress,strsend_transactionnote,strsend_transactionongkir,
                 strsend_id_bankaccount,strsend_id_chatapp,strsend_item_qty,strsend_item_name,strsend_item_price);
+    }
+
+    //    TODO : Put all editable view here
+    private EditText[] getAllEditableField() {
+        return new EditText[]{
+                edt_add_transaction_customername,
+                edt_add_transaction_customernohp,
+                edt_add_transaction_customeraddress,
+                edt_add_transaction_transactionnote,
+                edt_add_transaction_transactionongkir,
+                edt_add_transaction_item_qty,
+                edt_add_transaction_item_name,
+                edt_add_transaction_item_price
+        };
     }
 
 

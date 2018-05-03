@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.inspiraspace.jokulid.JokulidApplication;
 import com.inspiraspace.jokulid.R;
@@ -33,7 +34,10 @@ public class ShippmentCompanysericeActivity extends AppCompatActivity {
 
     @OnClick(R.id.btn_setting_shippmentcompany_save)
     public void saveShippmentcompany() {
+        if (adpLVSettingShippmentcompany.getSelectedCompany().size()<1)
+            Toast.makeText(this, "At least select one company service", Toast.LENGTH_SHORT).show();
+        else {
         JokulidApplication.getInstance().setShippmentCompany(adpLVSettingShippmentcompany.getSelectedCompany());
-        finish();
+        finish();}
     }
 }

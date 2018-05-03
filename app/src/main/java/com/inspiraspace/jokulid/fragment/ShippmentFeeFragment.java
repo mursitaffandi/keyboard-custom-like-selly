@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 
 import com.inspiraspace.jokulid.JokulidApplication;
@@ -23,6 +24,7 @@ import com.inspiraspace.jokulid.model.rajaongkir.Item_Ongkir;
 import com.inspiraspace.jokulid.model.searchsubdistrict.Datum;
 import com.inspiraspace.jokulid.presenter.shippmentfare.OnViewShippmentfare;
 import com.inspiraspace.jokulid.presenter.shippmentfare.PShippmentFare;
+import com.inspiraspace.jokulid.utils.UtilValidation;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -187,8 +189,34 @@ public class ShippmentFeeFragment extends Fragment implements TextWatcher, OnVie
 
             case R.id.btn_count_shippmentfee:
                 weightShippment = etItemWeight.getText().toString();
+                boolean isAllFieldValid = false;
+
+                for (EditText edt : getAllEditableField())
+                    isAllFieldValid = UtilValidation.edittextValidation(edt);
+
+                for (String s : getAllStringField())
+                    isAllFieldValid = UtilValidation.stringValidation(s);
+
+                if (isAllFieldValid)
                 onPresentShippmentfare.OnCount(weightShippment, idShippmentOrigin, idShippmentDestination);
                 break;
         }
     }
+
+    //    TODO : Put all editable view here
+    private EditText[] getAllEditableField() {
+        return new EditText[]{
+                etItemWeight,
+                etFrom,
+                etDestination
+        };
+    }
+
+    private String[] getAllStringField() {
+        return new String[]{
+                weightShippment, idShippmentOrigin, idShippmentDestination
+        };
+    }
+
+
 }

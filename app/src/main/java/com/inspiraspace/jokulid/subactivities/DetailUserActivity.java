@@ -3,12 +3,14 @@ package com.inspiraspace.jokulid.subactivities;
 import android.os.Bundle;
 import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.inspiraspace.jokulid.R;
 import com.inspiraspace.jokulid.model.user.Response;
 import com.inspiraspace.jokulid.network.main.PulseUser;
 import com.inspiraspace.jokulid.presenter.GeneratorUser;
+import com.inspiraspace.jokulid.utils.UtilValidation;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -46,6 +48,13 @@ public class DetailUserActivity extends AppCompatActivity implements PulseUser {
         name = edtUserName.getText().toString();
         email = edtUserEmail.getText().toString();
         password = edtUserPassword.getText().toString();
+
+        boolean isAllFieldValid = false;
+
+        for (EditText edt : getAllEditableField())
+            isAllFieldValid = UtilValidation.edittextValidation(edt);
+
+        if (isAllFieldValid)
         generatorUser.updateUser(name, email, password);
     }
 
@@ -71,5 +80,12 @@ public class DetailUserActivity extends AppCompatActivity implements PulseUser {
     @Override
     public void OnErrorUpdateUser(String errmsg) {
         Toast.makeText(this, "Fail Update User Info", Toast.LENGTH_SHORT).show();
+    }
+    private EditText[] getAllEditableField() {
+        return new EditText[]{
+                edtUserName,
+                edtUserEmail,
+                edtUserPassword
+        };
     }
 }

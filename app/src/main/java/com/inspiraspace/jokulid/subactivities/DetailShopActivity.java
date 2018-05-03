@@ -3,12 +3,14 @@ package com.inspiraspace.jokulid.subactivities;
 import android.os.Bundle;
 import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.inspiraspace.jokulid.R;
 import com.inspiraspace.jokulid.model.shop.Response;
 import com.inspiraspace.jokulid.network.main.PulseShop;
 import com.inspiraspace.jokulid.presenter.GeneratorShop;
+import com.inspiraspace.jokulid.utils.UtilValidation;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -40,7 +42,21 @@ generatorShop.getShop();
         shopNohp = edtShopNohp.getText().toString();
         shopUrl = edtShopUrl.getText().toString();
 
+        boolean isAllFieldValid = false;
+
+        for (EditText edt : getAllEditableField())
+            isAllFieldValid = UtilValidation.edittextValidation(edt);
+
+        if (isAllFieldValid)
         generatorShop.updateShop(shopName, shopNohp,shopUrl);
+    }
+
+    private EditText[] getAllEditableField() {
+        return new EditText[]{
+                etdShopName,
+                edtShopUrl,
+                edtShopNohp
+        };
     }
 
     @Override

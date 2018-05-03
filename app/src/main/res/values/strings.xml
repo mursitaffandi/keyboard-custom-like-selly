@@ -167,4 +167,6 @@
     <string name="label_button_remaindtopay">Remain Customer To Pay</string>
     <string name="title_activity_register">Register</string>
     <string name="title_activity_search">Search Transaction</string>
+    <string name="field_empty">Field must not empty</string>
+    <string name="field_autocomplate_empty">must select item from autocomplate list</string>
 </resources>

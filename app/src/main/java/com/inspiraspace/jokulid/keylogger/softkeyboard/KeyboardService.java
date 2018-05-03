@@ -57,6 +57,7 @@ import com.inspiraspace.jokulid.presenter.shippmentfare.OnViewShippmentfare;
 import com.inspiraspace.jokulid.presenter.shippmentfare.PShippmentFare;
 import com.inspiraspace.jokulid.subactivities.AddAutoTextActivity;
 import com.inspiraspace.jokulid.utils.IMEUtil;
+import com.inspiraspace.jokulid.utils.UtilValidation;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -180,6 +181,33 @@ public class KeyboardService extends InputMethodService
                 edt_add_transaction_transactionnote
         };
     }
+
+    //    TODO : Put all editable view here
+    private EditText[] getShippmentEditableField() {
+        return new EditText[]{
+                etItemWeight,
+                etFrom,
+                etDestination
+        };
+    }
+
+    private EditText[] getAddTransactionEditableField() {
+        return new EditText[]{
+                edt_add_transaction_customername,
+                edt_add_transaction_customernohp,
+                edt_add_transaction_customeraddress,
+                edt_add_transaction_transactionnote,
+                edt_add_transaction_transactionongkir,
+                edt_add_transaction_item_qty,
+                edt_add_transaction_item_name,
+                edt_add_transaction_item_price
+        };
+    }
+    private String[] getShippmentStringField() {
+            return new String[]{
+                    weightShippment, idShippmentOrigin, idShippmentDestination
+            };
+        }
 
     private void resetEditext(EditText[] edt) {
         for (EditText i : edt) {
@@ -585,7 +613,7 @@ public class KeyboardService extends InputMethodService
                 case 146:
                     this.setBackDisposition(BACK_DISPOSITION_WILL_NOT_DISMISS);
 //                    emojiPopup.showAtBottom();
-                    emojiPopup.showAtLocation(kv, Gravity.NO_GRAVITY,0,0);
+                    emojiPopup.showAtLocation(kv, Gravity.NO_GRAVITY, 0, 0);
 
                     break;
                 default:
@@ -644,106 +672,106 @@ public class KeyboardService extends InputMethodService
             onInputCustomKeyboard(primaryCode, edt_add_transaction_item_price);
         } else if (edt_add_transaction_transactionnote.isFocused()) {
             onInputCustomKeyboard(primaryCode, edt_add_transaction_transactionnote);
-        }else if (edt_subcdt_autotext_search.isFocused()) {
+        } else if (edt_subcdt_autotext_search.isFocused()) {
             onInputCustomKeyboard(primaryCode, edt_subcdt_autotext_search);
         } else {
-                switch (primaryCode) {
-                    case Keyboard.KEYCODE_DELETE:
-                        ic.sendKeyEvent(new KeyEvent(KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_DEL));
-                        ic.sendKeyEvent(new KeyEvent(KeyEvent.ACTION_UP, KeyEvent.KEYCODE_DEL));
+            switch (primaryCode) {
+                case Keyboard.KEYCODE_DELETE:
+                    ic.sendKeyEvent(new KeyEvent(KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_DEL));
+                    ic.sendKeyEvent(new KeyEvent(KeyEvent.ACTION_UP, KeyEvent.KEYCODE_DEL));
 
-                        if (strCounter.length() > 0) {
-                            strCounter = strCounter.substring(0, strCounter.length() - 1);
-                        }
-                        break;
-                    case Keyboard.KEYCODE_SHIFT:
-                        if (!keyboard.isShifted() && shiftState == 0) {
-                            shiftState = 1;
+                    if (strCounter.length() > 0) {
+                        strCounter = strCounter.substring(0, strCounter.length() - 1);
+                    }
+                    break;
+                case Keyboard.KEYCODE_SHIFT:
+                    if (!keyboard.isShifted() && shiftState == 0) {
+                        shiftState = 1;
 
-                            caps = !caps;
-                            keyboard.setShifted(caps);
-                            kv.invalidateAllKeys();
-                            break;
-                        } else if (keyboard.isShifted() && shiftState == 1) {
-                            shiftState = 2;
-                            break;
-                        } else {
-                            shiftState = 0;
+                        caps = !caps;
+                        keyboard.setShifted(caps);
+                        kv.invalidateAllKeys();
+                        break;
+                    } else if (keyboard.isShifted() && shiftState == 1) {
+                        shiftState = 2;
+                        break;
+                    } else {
+                        shiftState = 0;
 
-                            caps = false;
-                            keyboard.setShifted(caps);
-                            kv.invalidateAllKeys();
-                            break;
-                        }
-                    case Keyboard.KEYCODE_DONE:
-                        final EditorInfo editorInfo = getCurrentInputEditorInfo();
-                        final int imeOptionsActionId = IMEUtil.getImeOptionsActionIdFromEditorInfo(editorInfo);
-                        if (ic != null && IMEUtil.IME_ACTION_CUSTOM_LABEL == imeOptionsActionId) {
-                            // Either we have an actionLabel and we should performEditorAction with
-                            // actionId regardless of its value.
-                            ic.performEditorAction(editorInfo.actionId);
-                        } else if (ic != null && EditorInfo.IME_ACTION_NONE != imeOptionsActionId) {
-                            // We didn't have an actionLabel, but we had another action to execute.
-                            // EditorInfo.IME_ACTION_NONE explicitly means no action. In contrast,
-                            // EditorInfo.IME_ACTION_UNSPECIFIED is the default value for an action, so it
-                            // means there should be an action and the app didn't bother to set a specific
-                            // code for it - presumably it only handles one. It does not have to be treated
-                            // in any specific way: anything that is not IME_ACTION_NONE should be sent to
-                            // performEditorAction.
-                            ic.performEditorAction(imeOptionsActionId);
-                        } else {
-                            ic.sendKeyEvent(new KeyEvent(KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_ENTER));
-                            strCounter = "";
-                            break;
-                        }
-                    case Keyboard.KEYCODE_MODE_CHANGE:
-                        onChangeKeyboardMode(keyboardMode);
+                        caps = false;
+                        keyboard.setShifted(caps);
+                        kv.invalidateAllKeys();
                         break;
+                    }
+                case Keyboard.KEYCODE_DONE:
+                    final EditorInfo editorInfo = getCurrentInputEditorInfo();
+                    final int imeOptionsActionId = IMEUtil.getImeOptionsActionIdFromEditorInfo(editorInfo);
+                    if (ic != null && IMEUtil.IME_ACTION_CUSTOM_LABEL == imeOptionsActionId) {
+                        // Either we have an actionLabel and we should performEditorAction with
+                        // actionId regardless of its value.
+                        ic.performEditorAction(editorInfo.actionId);
+                    } else if (ic != null && EditorInfo.IME_ACTION_NONE != imeOptionsActionId) {
+                        // We didn't have an actionLabel, but we had another action to execute.
+                        // EditorInfo.IME_ACTION_NONE explicitly means no action. In contrast,
+                        // EditorInfo.IME_ACTION_UNSPECIFIED is the default value for an action, so it
+                        // means there should be an action and the app didn't bother to set a specific
+                        // code for it - presumably it only handles one. It does not have to be treated
+                        // in any specific way: anything that is not IME_ACTION_NONE should be sent to
+                        // performEditorAction.
+                        ic.performEditorAction(imeOptionsActionId);
+                    } else {
+                        ic.sendKeyEvent(new KeyEvent(KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_ENTER));
+                        strCounter = "";
+                        break;
+                    }
+                case Keyboard.KEYCODE_MODE_CHANGE:
+                    onChangeKeyboardMode(keyboardMode);
+                    break;
 
-                    case 144:
-                        if (keyboard != null) {
-                            keyboard = new Keyboard(this, R.xml.qwerty, KEYBOARD_MODE_SYMBOL);
-                            kv.setKeyboard(keyboard);
-                            kv.invalidateAllKeys();
-                        }
-                        break;
-                    case 145:
-                        if (keyboard != null) {
-                            keyboard = new Keyboard(this, R.xml.qwerty, KEYBOARD_MODE_NUMERIC);
-                            kv.setKeyboard(keyboard);
-                            kv.invalidateAllKeys();
-                        }
-                        break;
-                    case 146:
-                        this.setBackDisposition(BACK_DISPOSITION_WILL_NOT_DISMISS);
+                case 144:
+                    if (keyboard != null) {
+                        keyboard = new Keyboard(this, R.xml.qwerty, KEYBOARD_MODE_SYMBOL);
+                        kv.setKeyboard(keyboard);
+                        kv.invalidateAllKeys();
+                    }
+                    break;
+                case 145:
+                    if (keyboard != null) {
+                        keyboard = new Keyboard(this, R.xml.qwerty, KEYBOARD_MODE_NUMERIC);
+                        kv.setKeyboard(keyboard);
+                        kv.invalidateAllKeys();
+                    }
+                    break;
+                case 146:
+                    this.setBackDisposition(BACK_DISPOSITION_WILL_NOT_DISMISS);
 //                        emojiPopup.showAtBottom();
-                        emojiPopup.showAtLocation(kv, Gravity.NO_GRAVITY,0,0);
+                    emojiPopup.showAtLocation(kv, Gravity.NO_GRAVITY, 0, 0);
+                    break;
+
+                default:
+                    char code = (char) primaryCode;
+                    if (Character.isLetter(code) && caps && shiftState == 1) {
+                        code = Character.toUpperCase(code);
+                        ic.commitText(String.valueOf(code), 1);
+
+                        caps = false;
+                        keyboard.setShifted(caps);
+                        kv.invalidateAllKeys();
+
+                        shiftState = 0;
                         break;
+                    } else if (Character.isLetter(code) && caps && shiftState == 2) {
+                        code = Character.toUpperCase(code);
+                        ic.commitText(String.valueOf(code), 1);
+                        break;
+                    } else {
+                        ic.commitText(String.valueOf(code), 1);
+                        strBuilder.append(String.valueOf(code));
 
-                    default:
-                        char code = (char) primaryCode;
-                        if (Character.isLetter(code) && caps && shiftState == 1) {
-                            code = Character.toUpperCase(code);
-                            ic.commitText(String.valueOf(code), 1);
-
-                            caps = false;
-                            keyboard.setShifted(caps);
-                            kv.invalidateAllKeys();
-
-                            shiftState = 0;
-                            break;
-                        } else if (Character.isLetter(code) && caps && shiftState == 2) {
-                            code = Character.toUpperCase(code);
-                            ic.commitText(String.valueOf(code), 1);
-                            break;
-                        } else {
-                            ic.commitText(String.valueOf(code), 1);
-                            strBuilder.append(String.valueOf(code));
-
-                            strCounter = strCounter + strBuilder;
-                        }
-                }
+                        strCounter = strCounter + strBuilder;
+                    }
             }
+        }
     }
 
     @Override
@@ -760,8 +788,8 @@ public class KeyboardService extends InputMethodService
 /*
         * reset all view
         * */
-if (layout_candidatebar_main!=null)
-        normalizeKeyboard();
+        if (layout_candidatebar_main != null)
+            normalizeKeyboard();
 
         return super.onKeyDown(keycode, event);
     }
@@ -864,9 +892,21 @@ if (layout_candidatebar_main!=null)
 
             case R.id.btn_count_shippmentfee:
                 weightShippment = etItemWeight.getText().toString();
-                onPresentShippmentfare.OnCount(weightShippment, idShippmentOrigin, idShippmentDestination);
+                boolean isShippmentFieldValid = false;
+                for (EditText edt : getShippmentEditableField())
+                    isShippmentFieldValid = UtilValidation.edittextValidation(edt);
+                for (String s : getShippmentStringField())
+                    isShippmentFieldValid = UtilValidation.stringValidation(s);
+
+                if (isShippmentFieldValid)
+                    onPresentShippmentfare.OnCount(weightShippment, idShippmentOrigin, idShippmentDestination);
                 break;
             case R.id.btn_add_transaction_done:
+                boolean isAddtransactionFieldValid = false;
+                for (EditText edt : getAddTransactionEditableField())
+                    isShippmentFieldValid = UtilValidation.edittextValidation(edt);
+
+                if (isAddtransactionFieldValid)
                 pAddTransaction.OnAddTransaction(
                         edt_add_transaction_customername.getText().toString(),
                         edt_add_transaction_customernohp.getText().toString(),
