@@ -11,8 +11,6 @@ android {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         buildConfigField "String", "BASE_URL_MAIN", "\"http://jokul.inspiralocal.id/\""
         buildConfigField "String", "BASE_URL_MAIN_IMAGE_PAYMENT", "\"http://jokul.inspiralocal.id/image/\""
-//        buildConfigField "String", "BASE_URL_MAIN", "\"http://192.168.43.196/jokul_id/\""
-//        buildConfigField "String", "BASE_URL_MAIN_IMAGE_PAYMENT", "\"http://192.168.43.196/jokul_id/image/\""
         buildConfigField "String", "BASE_URL_INSPIRALOCAL", "\"https://inspiralocal.id:3000\""
         buildConfigField "String", "BASE_URL_RAJAONGKIR", "\"https://pro.rajaongkir.com\""
 
