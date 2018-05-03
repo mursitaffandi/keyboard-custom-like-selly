@@ -12,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.inspiraspace.jokulid.JokulidApplication;
+import com.inspiraspace.jokulid.MainActivity;
 import com.inspiraspace.jokulid.R;
 import com.inspiraspace.jokulid.model.login.Response;
 import com.inspiraspace.jokulid.network.main.PulseLogin;
@@ -61,6 +62,7 @@ public class LoginActivity extends AppCompatActivity implements PulseLogin {
                 responseLogin.getTokoName(),
                 responseLogin.getTokoNoHp(),
                 responseLogin.getTokoUrl());
+        startActivity(new Intent(this, MainActivity.class));
         finish();
     }
 

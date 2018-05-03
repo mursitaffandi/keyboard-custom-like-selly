@@ -20,9 +20,8 @@ public class BaseAuthActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         if (!JokulidApplication.getInstance().getStatusUserIsauthed()) {
             startActivity(new Intent(this, LoginActivity.class));
+            finish();
         }
 
     }
-
-
 }
