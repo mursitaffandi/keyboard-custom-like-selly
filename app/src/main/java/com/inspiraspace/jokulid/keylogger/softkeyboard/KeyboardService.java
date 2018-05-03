@@ -328,7 +328,7 @@ public class KeyboardService extends InputMethodService
         layout_candidatebar_main.setVisibility(View.GONE);
         tv_title_toobar_subcdt.setText(getString(R.string.title_subcdt_toolbar_pending));
 
-        generatorTransactions.getTransactios(0);
+        generatorTransactions.getTransaction(0);
 
     }
 

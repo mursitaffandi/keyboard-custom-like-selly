@@ -275,26 +275,27 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/btn_detailtr_add_customerlog" />
+
+            <Button
+                android:id="@+id/btn_detailtr_sendresi"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_above="@+id/btn_detailtr_remaindtopay"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentBottom="true"
+                android:visibility="gone"
+                android:text="@string/label_button_sendresi" />
+
+            <Button
+                android:id="@+id/btn_detailtr_remaindtopay"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentStart="true"
+                android:visibility="gone"
+                android:text="@string/label_button_remaindtopay" />
         </RelativeLayout>
     </ScrollView>
 
-    <Button
-        android:id="@+id/btn_detailtr_sendresi"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_below="@+id/scrollView2"
-        android:layout_toEndOf="@+id/scrollView2"
-        android:text="@string/label_button_sendresi"
-        android:visibility="gone" />
 
-    <Button
-        android:id="@+id/btn_detailtr_remaindtopay"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/scrollView2"
-        android:text="@string/label_button_remaindtopay"
-        android:visibility="gone" />
 </RelativeLayout>

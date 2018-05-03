@@ -143,4 +143,10 @@ public interface UrlMainServer {
             @Field("toko_nohp") String toko_nohp,
             @Field("toko_url") String toko_url
     );
+
+    @GET("find_transaction.php")
+    Call<Transaction>  findTransaction(
+            @Query("user_id") String user_id,
+            @Query("keyword") String keyword
+    );
 }

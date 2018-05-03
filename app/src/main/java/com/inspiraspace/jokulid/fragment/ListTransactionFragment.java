@@ -86,7 +86,7 @@ public class ListTransactionFragment extends Fragment implements PulseMainServer
     @Override
     public void onResume() {
         super.onResume();
-        presenterTransactions.getTransactios(page);
+        presenterTransactions.getTransaction(page);
     }
 
     @Override

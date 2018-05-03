@@ -25,7 +25,7 @@ public class GeneratorTransactions {
        this.pulseMainServer = pulseMainServer;
     }
 
-    public void getTransactios(int code_status_transaction) {
+    public void getTransaction(int code_status_transaction) {
         switch (code_status_transaction) {
             case 0:
                 apiCall = clientMainCall.getService().getTransaction_pendings(Constant.SESSION_USER_ID);
@@ -42,9 +42,29 @@ public class GeneratorTransactions {
             case 4:
                 apiCall = clientMainCall.getService().getTransaction_cancel(Constant.SESSION_USER_ID);
                 break;
+
+            case 9:
+                apiCall = clientMainCall.getService().getTransaction_cancel(Constant.SESSION_USER_ID);
+                break;
             default:
                 return;
         }
+        apiCall.enqueue(new Callback<Transaction>() {
+            @Override
+            public void onResponse(Call<Transaction> call, Response<Transaction> response) {
+                listTransaction = response.body().getResponse();
+                pulseMainServer.onSuccessGetTransactions(listTransaction);
+            }
+
+            @Override
+            public void onFailure(Call<Transaction> call, Throwable t) {
+                pulseMainServer.onFailOccureTransactions(t.getMessage());
+            }
+        });
+    }
+
+    public void getTransaction(String keyword){
+        apiCall = clientMainCall.getService().findTransaction(Constant.SESSION_USER_ID, keyword);
         apiCall.enqueue(new Callback<Transaction>() {
             @Override
             public void onResponse(Call<Transaction> call, Response<Transaction> response) {

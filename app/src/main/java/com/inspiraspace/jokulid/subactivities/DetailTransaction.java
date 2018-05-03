@@ -209,7 +209,6 @@ public class DetailTransaction extends AppCompatActivity implements GeneratorCha
         if (transactionStatus.equals("0"))
             btnDetailtrRemaindtopay.setVisibility(View.VISIBLE);
 
-//        HashMap<String, String> userInfo = JokulidApplication.getInstance().getUserInfo();
         utilTemplate.setAccount_name(Constant.SESSION_USER_NAME);
         utilTemplate.setAccount_number(Constant.SESSION_TOKO_NOHP);
         utilTemplate.setAmount(customer_totalitemplprice);
@@ -383,7 +382,7 @@ public class DetailTransaction extends AppCompatActivity implements GeneratorCha
                 newtransactionStatus = "11";
                 break;
             case R.id.toolbar_detailtr_changestatus_cancel:
-                newtransactionStatus = "12";
+                newtransactionStatus = "10";
                 break;
             case R.id.home:
                 System.out.println("back pressed");

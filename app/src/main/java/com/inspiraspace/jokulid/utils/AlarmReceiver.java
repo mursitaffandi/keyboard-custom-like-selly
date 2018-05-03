@@ -35,7 +35,7 @@ public class AlarmReceiver extends BroadcastReceiver implements PulseMainServer 
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        generatorTransactions.getTransactios(Constant.CODE_TRANSACTION_PENDING);
+        generatorTransactions.getTransaction(Constant.CODE_TRANSACTION_PENDING);
         this.title = context.getResources().getString(R.string.app_name);
         this.notifId = NOTIF_ID_REPEATING;
         this.mContex = context;
