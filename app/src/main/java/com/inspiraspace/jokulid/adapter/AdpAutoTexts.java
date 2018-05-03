@@ -33,7 +33,6 @@ public class AdpAutoTexts extends BaseAdapter {
     public void swapLogs(List<Response> logs) {
         this.autotextList = logs;
         notifyDataSetChanged();
-
     }
 
 
@@ -68,7 +67,6 @@ public class AdpAutoTexts extends BaseAdapter {
         // get the TextView for item name and item description
         viewHolder.tv_item_autotext_title.setText(itemAutotext.getShortcut());
         viewHolder.tv_item_autotext_content.setText(itemAutotext.getContent());
-
         return convertView;
     }
 

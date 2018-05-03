@@ -17,7 +17,7 @@ public class UtilClipboard {
      * Copy Data to Clipboard Methods
      **/
 
-    //First Check SDK version because SDK below honeycomb has different method and above honeycomb is different
+    //First Check SDK version because SDK below honeycomb has different soft_method and above honeycomb is different
     public static void copyToClipboard(Context mContext,
                                        String data) {
 
@@ -54,7 +54,7 @@ public class UtilClipboard {
      * Get Data from Clipboard Methods
      **/
 
-    //First Check SDK version because SDK below honeycomb has different method and above honeycomb is different
+    //First Check SDK version because SDK below honeycomb has different soft_method and above honeycomb is different
     public static String getDataFromClipboard(Context mContext) {
         String text = "";
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB) {

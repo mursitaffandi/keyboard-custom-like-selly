@@ -304,7 +304,7 @@ public class CandidateView extends View {
     }
     
     /**
-     * For flick through from keyboard, call this method with the x coordinate of the flick 
+     * For flick through from keyboard, call this soft_method with the x coordinate of the flick
      * gesture.
      * @param x
      */

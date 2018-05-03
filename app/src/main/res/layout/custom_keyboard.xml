@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_alignParentBottom="true"
+    android:background="#000000"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    android:orientation="vertical"
+    android:theme="@style/AppTheme">
+
+    <LinearLayout
+        android:id="@+id/ln_subcdt_content"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:visibility="gone"
+        android:background="@color/colorWhite"
+        android:orientation="vertical">
+
+        <android.support.design.widget.AppBarLayout
+            android:id="@+id/appBarLayoutOngkir"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:theme="@style/AppTheme.AppBarOverlay">
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbarOngkir"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="?attr/colorPrimary"
+                app:popupTheme="@style/AppTheme.PopupOverlay">
+
+                <ImageButton
+                    android:id="@+id/btn_toolbar_back_subcdt_content"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:background="@android:color/transparent"
+                    android:src="@drawable/ic_navigate_before_white_24dp" />
+
+                <TextView
+                    android:id="@+id/tv_title_toobar_subcdt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="@style/TextAppearance.AppCompat"
+                    android:textColor="@color/colorWhite" />
+
+            </android.support.v7.widget.Toolbar>
+
+        </android.support.design.widget.AppBarLayout>
+
+        <ScrollView
+            android:id="@+id/layout_subcdt_createinvoice"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone">
+            <include
+                layout="@layout/subcdt_createinvoice" />
+        </ScrollView>
+
+        <ScrollView
+            android:id="@+id/layout_subcdt_shipmentfee"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone">
+
+            <include
+                layout="@layout/subcdt_shippmentfee" />
+        </ScrollView>
+
+
+        <include
+            android:id="@+id/layout_subcdt_autotext"
+            layout="@layout/subcdt_autotext"
+            android:visibility="gone" />
+
+        <include
+            android:id="@+id/layout_subcdt_pending"
+            layout="@layout/subcdt_pending"
+            android:visibility="gone" />
+    </LinearLayout>
+    <!--start menu candidatebar-->
+    <LinearLayout
+        android:id="@+id/ln_candidatebar_main"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@color/colorBlack"
+        android:orientation="horizontal">
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.2">
+
+            <ImageButton
+                android:id="@+id/btn_cdt_createinvoice"
+                style="@style/Base.TextAppearance.AppCompat.Widget.Button.Borderless.Colored"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true"
+                android:background="@color/colorBlack"
+                android:src="@drawable/emoji_1f4c4"
+                android:textColor="#ffffff" />
+
+            <TextView
+                android:id="@+id/tvBtnProductText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@id/btn_cdt_createinvoice"
+                android:layout_centerInParent="true"
+                android:layout_marginBottom="@dimen/text_and_pict_spacing"
+                android:gravity="center"
+                android:text="@string/cdt_invoice"
+                android:textColor="#ffffff"
+                android:textSize="@dimen/btn_action_array_text_size" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.2">
+
+            <ImageButton
+                android:id="@+id/btn_cdt_cekongkir"
+                style="@style/Base.TextAppearance.AppCompat.Widget.Button.Borderless.Colored"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true"
+                android:background="@color/colorBlack"
+                android:src="@drawable/emoji_1f69b"
+                android:text="@string/cdt_cekongkir"
+                android:textColor="#ffffff"
+                android:textSize="@dimen/btn_action_array_text_size" />
+
+            <TextView
+                android:id="@+id/tvBtnChecklistText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@id/btn_cdt_cekongkir"
+                android:layout_centerInParent="true"
+                android:layout_marginBottom="@dimen/text_and_pict_spacing"
+                android:gravity="center"
+                android:text="@string/cdt_cekongkir"
+                android:textColor="#ffffff"
+                android:textSize="@dimen/btn_action_array_text_size" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.2">
+
+            <ImageButton
+                android:id="@+id/btn_cdt_autotext"
+                style="@style/Base.TextAppearance.AppCompat.Widget.Button.Borderless.Colored"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true"
+                android:background="@color/colorBlack"
+                android:src="@drawable/ic_checklist_white_24"
+                android:text="@string/cdt_autotext"
+                android:textColor="#ffffff"
+                android:textSize="@dimen/btn_action_array_text_size" />
+
+            <TextView
+                android:id="@+id/tvBtnOngkirText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@id/btn_cdt_autotext"
+                android:layout_centerInParent="true"
+                android:layout_marginBottom="@dimen/text_and_pict_spacing"
+                android:gravity="center"
+                android:text="@string/cdt_autotext"
+                android:textColor="#ffffff"
+                android:textSize="@dimen/btn_action_array_text_size" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.2">
+
+            <ImageButton
+                android:id="@+id/btn_cdt_pending"
+                style="@style/Base.TextAppearance.AppCompat.Widget.Button.Borderless.Colored"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true"
+                android:background="@color/colorBlack"
+                android:src="@drawable/emoji_1f55f"
+                android:text="@string/cdt_pending"
+                android:textColor="#ffffff"
+                android:textSize="@dimen/btn_action_array_text_size" />
+
+            <TextView
+                android:id="@+id/tvBtnParseText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@id/btn_cdt_pending"
+                android:layout_centerInParent="true"
+                android:layout_marginBottom="@dimen/text_and_pict_spacing"
+                android:gravity="center"
+                android:text="@string/cdt_pending"
+                android:textColor="#ffffff"
+                android:textSize="@dimen/btn_action_array_text_size" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.2">
+
+            <ImageButton
+                android:id="@+id/btn_cdt_dashboard"
+                style="@style/Base.TextAppearance.AppCompat.Widget.Button.Borderless.Colored"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true"
+                android:background="@color/colorBlack"
+                android:src="@android:drawable/ic_menu_agenda"
+                android:text="@string/cdt_dashboard"
+                android:textColor="#ffffff"
+                android:textSize="@dimen/btn_action_array_text_size" />
+
+            <TextView
+                android:id="@+id/tvBtnDashboardText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@id/btn_cdt_dashboard"
+                android:layout_centerInParent="true"
+                android:layout_marginBottom="@dimen/text_and_pict_spacing"
+                android:gravity="center"
+                android:text="@string/cdt_dashboard"
+                android:textColor="#ffffff"
+                android:textSize="@dimen/btn_action_array_text_size" />
+        </RelativeLayout>
+    </LinearLayout>
+
+    <android.inputmethodservice.KeyboardView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/keyboard"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginBottom="10dp"
+        android:background="@color/colorBlack"
+        android:keyBackground="@color/colorBlack"
+        android:keyPreviewLayout="@layout/keyboard_key_popup"
+        android:keyTextColor="@color/colorWhite"
+        android:theme="@style/AppTheme" />
+</LinearLayout>

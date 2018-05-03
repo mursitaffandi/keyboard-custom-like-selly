@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.AutoCompleteTextView;
+import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -57,6 +58,9 @@ public class AddTransactionActivity extends AppCompatActivity implements OnViewA
     @BindView(R.id.edt_add_transaction_transactionnote)
     TextInputEditText edt_add_transaction_transactionnote;
 
+    @BindView(R.id.btn_add_transaction_done)
+    Button btn_add_transaction_done;
+
     Unbinder unbinder;
     PAddTransaction pAddTransaction;
 
@@ -83,6 +87,7 @@ public class AddTransactionActivity extends AppCompatActivity implements OnViewA
         setContentView(R.layout.subcdt_createinvoice);
         unbinder = ButterKnife.bind(this);
         pAddTransaction = new PAddTransaction(this);
+
     }
 
     @Override

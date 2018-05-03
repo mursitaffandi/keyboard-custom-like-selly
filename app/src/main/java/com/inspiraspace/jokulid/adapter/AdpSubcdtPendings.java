@@ -50,7 +50,7 @@ public class AdpSubcdtPendings extends BaseAdapter {
 
     @Override
     public long getItemId(int position) {
-        return Long.getLong(transactionList.get(position).getTransactionId());
+        return 1L;
     }
 
     @Override

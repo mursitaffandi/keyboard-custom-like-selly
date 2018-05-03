@@ -23,7 +23,8 @@ public class Constant {
     public static final String SESSION_TOKO_NOHP = userInfo.get(JokulidApplication.KEY_TOKO_NOHP);
     public static final String SESSION_TOKO_URL = userInfo.get(JokulidApplication.KEY_TOKO_URL);
 
-    public static final String URI_KEYBOARD_JOKULID = "com.inspiraspace.jokulid/.keylogger.softkeyboard.SoftKeyboard";
+//    public static final String URI_KEYBOARD_JOKULID = "com.inspiraspace.jokulid/.keylogger.softkeyboard.SoftKeyboard";
+    public static final String URI_KEYBOARD_JOKULID = "com.inspiraspace.jokulid/.keylogger.softkeyboard.KeyboardService";
     public static final String TAG_ID_DETAIL_TRANSACTION = "id_transaction";
     public static final String TAG_TRANSACTION = "transaction";
     public static final String HEADER_AUTHONRIZATION_KEY = "Authorization";

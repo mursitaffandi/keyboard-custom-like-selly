@@ -155,7 +155,7 @@ public class LatinKeyboard extends Keyboard {
         }
         
         /**
-         * Overriding this method so that we can reduce the target area for the key that
+         * Overriding this soft_method so that we can reduce the target area for the key that
          * closes the keyboard. 
          */
         @Override

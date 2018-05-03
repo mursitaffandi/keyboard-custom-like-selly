@@ -68,10 +68,10 @@ import java.util.List;
 
 
 /**
- * Example of writing an input method for a soft keyboard.  This code is
+ * Example of writing an soft_input soft_method for a soft keyboard.  This code is
  * focused on simplicity over completeness, so it should in no way be considered
  * to be a complete soft keyboard implementation.  Its purpose is to provide
- * a basic example for how you would get started writing an input method, to
+ * a basic example for how you would get started writing an soft_input soft_method, to
  * be fleshed out as appropriate.
  */
 public class SoftKeyboard extends InputMethodService
@@ -83,9 +83,9 @@ public class SoftKeyboard extends InputMethodService
     /**
      * This boolean indicates the optional example code for performing
      * processing of hard keys in addition to regular text generation
-     * from on-screen interaction.  It would be used for input methods that
+     * from on-screen interaction.  It would be used for soft_input methods that
      * perform language translations (such as converting text entered on
-     * a QWERTY keyboard to Chinese), but may not be used for input methods
+     * a QWERTY keyboard to Chinese), but may not be used for soft_input methods
      * that are primarily intended to be used for on-screen text entry.
      */
     static final boolean PROCESS_HARD_KEYS = true;
@@ -113,9 +113,9 @@ public class SoftKeyboard extends InputMethodService
 
     private String mWordSeparators;
 
-/*
-* start candidateview
-* */
+    /*
+    * start candidateview
+    * */
     LinearLayout layout_subcdt_content;
     TextView tv_title_toobar_subcdt;
 
@@ -133,7 +133,7 @@ public class SoftKeyboard extends InputMethodService
     * start shippment fee
     * */
     TextInputEditText etItemWeight;
-    AutoCompleteTextView etFrom ,etDestination;
+    AutoCompleteTextView etFrom, etDestination;
     ArrayList<Datum> arrSubdistrict;
     AdpAutocomplateAddress autoTextAdapter;
 
@@ -158,7 +158,7 @@ public class SoftKeyboard extends InputMethodService
 
         /*end Pending*/
 
-        /*Autotext*/
+    /*Autotext*/
     Button btn_subcdt_autotext_search;
     ListView lv_subcdt_autotext_search;
 
@@ -192,7 +192,7 @@ public class SoftKeyboard extends InputMethodService
     private ArrayList<Chatapp> dataChatapps;
     /*End Make Invoice*/
 
-//    TODO : Put all editable view here
+    //    TODO : Put all editable view here
     private EditText[] getAllEditableField() {
         return new EditText[]{
                 etItemWeight,
@@ -218,7 +218,7 @@ public class SoftKeyboard extends InputMethodService
     }
 
     /**
-     * Main initialization of the input method component.  Be sure to call
+     * Main initialization of the soft_input soft_method component.  Be sure to call
      * to super class.
      */
     @Override
@@ -242,21 +242,21 @@ public class SoftKeyboard extends InputMethodService
             if (displayWidth == mLastDisplayWidth) return;
             mLastDisplayWidth = displayWidth;
         }
-        mQwertyKeyboard = new LatinKeyboard(this, R.xml.qwerty);
+        mQwertyKeyboard = new LatinKeyboard(this, R.xml.soft_qwerty);
         mSymbolsKeyboard = new LatinKeyboard(this, R.xml.symbols);
         mSymbolsShiftedKeyboard = new LatinKeyboard(this, R.xml.symbols_shift);
     }
 
     /**
-     * Called by the framework when your view for creating input needs to
-     * be generated.  This will be called the first time your input method
+     * Called by the framework when your view for creating soft_input needs to
+     * be generated.  This will be called the first time your soft_input soft_method
      * is displayed, and every time it needs to be re-created such as due to
      * a configuration change.
      */
     @Override
     public View onCreateInputView() {
         mInputView = (LatinKeyboardView) getLayoutInflater().inflate(
-                R.layout.input, null);
+                R.layout.soft_input, null);
         mInputView.setOnKeyboardActionListener(this);
         setLatinKeyboard(mQwertyKeyboard);
 
@@ -339,7 +339,7 @@ public class SoftKeyboard extends InputMethodService
                         edt_add_transaction_item_qty.getText().toString(),
                         edt_add_transaction_item_name.getText().toString(),
                         edt_add_transaction_item_price.getText().toString()
-                        );
+                );
                 break;
             default:
                 break;
@@ -434,7 +434,7 @@ public class SoftKeyboard extends InputMethodService
         weightShippment = JokulidApplication.getInstance().getShippmentWeight();
 
         etItemWeight.setText(weightShippment);
-        etFrom.setText(JokulidApplication.getInstance().getShippmentOrigin().get(JokulidApplication.KEY_SHIPPMENT_ORIGIN ));
+        etFrom.setText(JokulidApplication.getInstance().getShippmentOrigin().get(JokulidApplication.KEY_SHIPPMENT_ORIGIN));
 
         etDestination.requestFocus();
         btn_count_shippmentfee.setOnClickListener(this);
@@ -468,10 +468,11 @@ public class SoftKeyboard extends InputMethodService
         generatorAutoTexts.getAutoText("");
 
     }
+
     //send text to current field keyboad
-public void sendTextToFieldText(String text){
-    getCurrentInputConnection().commitText(text, 0);
-}
+    public void sendTextToFieldText(String text) {
+        getCurrentInputConnection().commitText(text, 0);
+    }
 
 
     private void showSubPending() {
@@ -593,7 +594,7 @@ public void sendTextToFieldText(String text){
     }
 
     /**
-     * This is the main point where we do our initialization of the input method
+     * This is the main point where we do our initialization of the soft_input soft_method
      * to begin operating on an application.  At this point we have been
      * bound to the client, and are now receiving all of the detailed information
      * about the target of our edits.
@@ -675,7 +676,7 @@ public void sendTextToFieldText(String text){
                 break;
 
             default:
-                // For all unknown input types, default to the alphabetic
+                // For all unknown soft_input types, default to the alphabetic
                 // keyboard with no special features.
                 mCurKeyboard = mQwertyKeyboard;
                 updateShiftKeyState(attribute);
@@ -698,7 +699,7 @@ public void sendTextToFieldText(String text){
         mComposing.setLength(0);
 //        updateCandidates();
 
-        // We only hide the candidates window when finishing input on
+        // We only hide the candidates window when finishing soft_input on
         // a particular editor, to avoid popping the underlying application
         // up and down if the user is entering text into the bottom of
         // its window.
@@ -715,7 +716,7 @@ public void sendTextToFieldText(String text){
     @Override
     public void onStartInputView(EditorInfo attribute, boolean restarting) {
         super.onStartInputView(attribute, restarting);
-        // Apply the selected keyboard to the input view.
+        // Apply the selected keyboard to the soft_input view.
         setLatinKeyboard(mCurKeyboard);
         mInputView.closing();
         final InputMethodSubtype subtype = mInputMethodManager.getCurrentInputMethodSubtype();
@@ -821,7 +822,7 @@ public void sendTextToFieldText(String text){
         switch (keyCode) {
             case KeyEvent.KEYCODE_BACK:
                 // The InputMethodService already takes care of the back
-                // key for us, to dismiss the input method if it is shown.
+                // key for us, to dismiss the soft_input soft_method if it is shown.
                 // However, our keyboard could be showing a pop-up window
                 // that back should dismiss, so we first allow it to do that.
                 if (event.getRepeatCount() == 0 && mInputView != null) {
@@ -852,7 +853,7 @@ public void sendTextToFieldText(String text){
                 if (PROCESS_HARD_KEYS) {
                     if (keyCode == KeyEvent.KEYCODE_SPACE
                             && (event.getMetaState() & KeyEvent.META_ALT_ON) != 0) {
-                        // A silly example: in our input method, Alt+Space
+                        // A silly example: in our soft_input soft_method, Alt+Space
                         // is a shortcut for 'android' in lower case.
                         InputConnection ic = getCurrentInputConnection();
                         if (ic != null) {
@@ -979,28 +980,21 @@ public void sendTextToFieldText(String text){
             onInputCustomKeyboard(primaryCode, etDestination);
         } else if (etFrom.isFocused()) {
             onInputCustomKeyboard(primaryCode, etFrom);
-        }else if (edt_add_transaction_customername.isFocused()) {
+        } else if (edt_add_transaction_customername.isFocused()) {
             onInputCustomKeyboard(primaryCode, edt_add_transaction_customername);
-        }
-        else if (edt_add_transaction_customernohp.isFocused()) {
+        } else if (edt_add_transaction_customernohp.isFocused()) {
             onInputCustomKeyboard(primaryCode, edt_add_transaction_customernohp);
-        }
-        else if (edt_add_transaction_customeraddress.isFocused()) {
+        } else if (edt_add_transaction_customeraddress.isFocused()) {
             onInputCustomKeyboard(primaryCode, edt_add_transaction_customeraddress);
-        }
-        else if (edt_add_transaction_transactionongkir.isFocused()) {
+        } else if (edt_add_transaction_transactionongkir.isFocused()) {
             onInputCustomKeyboard(primaryCode, edt_add_transaction_transactionongkir);
-        }
-        else if (edt_add_transaction_item_qty.isFocused()) {
+        } else if (edt_add_transaction_item_qty.isFocused()) {
             onInputCustomKeyboard(primaryCode, edt_add_transaction_item_qty);
-        }
-        else if (edt_add_transaction_item_name.isFocused()) {
+        } else if (edt_add_transaction_item_name.isFocused()) {
             onInputCustomKeyboard(primaryCode, edt_add_transaction_item_name);
-        }
-        else if (edt_add_transaction_item_price.isFocused()) {
+        } else if (edt_add_transaction_item_price.isFocused()) {
             onInputCustomKeyboard(primaryCode, edt_add_transaction_item_price);
-        }
-        else if (edt_add_transaction_transactionnote.isFocused()) {
+        } else if (edt_add_transaction_transactionnote.isFocused()) {
             onInputCustomKeyboard(primaryCode, edt_add_transaction_transactionnote);
         } else {
             if (isWordSeparator(primaryCode)) {
@@ -1034,6 +1028,7 @@ public void sendTextToFieldText(String text){
             } else if (primaryCode == 146) {
                 this.setBackDisposition(BACK_DISPOSITION_WILL_NOT_DISMISS);
                 emojiPopup.showAtBottom();
+
             } else {
                 handleCharacter(primaryCode, keyCodes);
             }
