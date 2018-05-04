@@ -4,10 +4,10 @@ android {
     compileSdkVersion 27
     defaultConfig {
         applicationId "com.inspiraspace.jokulid"
-        minSdkVersion 19
+        minSdkVersion 16
         targetSdkVersion 23
-        versionCode 3
-        versionName "1.0"
+        versionCode 4
+        versionName "1.4"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         buildConfigField "String", "BASE_URL_MAIN", "\"http://jokul.inspiralocal.id/\""
         buildConfigField "String", "BASE_URL_MAIN_IMAGE_PAYMENT", "\"http://jokul.inspiralocal.id/image/\""
